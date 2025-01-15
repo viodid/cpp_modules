@@ -1,18 +1,18 @@
-BINARY		:= megaphone
-COMPILER	:= c++
-FLAGS		:= -Wall -Wextra -Werror -std=c++98
-OPT			:= -g3
-INCLUDE		:= $(shell find . | grep \.hpp)
-CFILES		:= $(shell find . -type f -name "*.cpp")
-OBJ			:= $(CFILES:.c=.o)
+BINARY		= megaphone
+CC			= c++
+OPT			= -g3
+FLAGS		= -Wall -Wextra -Werror -std=c++98 $(OPT)
+INCLUDE		= $(shell find . -type f -name *.hpp)
+CPPFILES	= $(shell find . -type f -name *.cpp)
+OBJ			= $(CPPFILES:.cpp=.o)
 
 all: $(BINARY)
 
-$(BINARY): obj
-	$(COMPILER) $(FLAGS) $(INCLUDE) $(OBJ) -o $(BINARY)
+$(BINARY): $(OBJ)
+	$(CC) $(FLAGS) $(INCLUDE) -o $@ $(OBJ)
 
-obj:
-	$(COMPILER) $(FLAGS) $(OPT) -c $(CFILES)
+%.o:%.cpp
+	$(CC) $(FLAGS) -c $^
 
 clean:
 	rm -f $(OBJ)
