@@ -9,7 +9,7 @@ OBJ			= $(CPPFILES:.cpp=.o)
 all: $(BINARY)
 
 $(BINARY): $(OBJ)
-	$(CC) $(FLAGS) $(INCLUDE) -o $@ $(OBJ)
+	$(CC) $(FLAGS) -I$(INCLUDE) -o $@ $(OBJ)
 
 %.o:%.cpp
 	$(CC) $(FLAGS) -c $^
