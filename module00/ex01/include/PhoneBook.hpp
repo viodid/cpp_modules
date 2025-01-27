@@ -9,21 +9,13 @@ class PhoneBook
 {
 public:
 	PhoneBook();
-	~PhoneBook() {delete phone_book;}
-	void	add_contact(Contact contact);
-	void	search_contact(const int	contact_id)
-	{
-		if (contact_id > 8 || contact_id < 1)
-		{
-			std::cout << "Index contact cannot be > 8 or < 1";
-			return;
-		}
-		Contact *contact = phone_book[contact_id];
-		print_contact(contact->first_name);
-	}
+
+	void add_contact();
+	static std::string get_input(const std::string& msg);
+
 private:
-	Contact	_phone_book[8];
-	int		_index = 0;
+	Contact _phone_book[8];
+	int _index;
 };
 
 #endif

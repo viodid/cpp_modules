@@ -13,7 +13,27 @@
 
 # include "../include/PhoneBook.hpp"
 
-void	PhoneBook::add_contact(Contact contact)
+PhoneBook::PhoneBook() : _index(0)
 {
-	_phone_book[_index] = std::move(contact);
+}
+
+std::string PhoneBook::get_input(const std::string& msg)
+{
+	std::string output;
+
+	std::cout << msg;
+	std::cin >> output;
+	return (output);
+}
+
+void PhoneBook::add_contact()
+{
+	Contact contact = _phone_book[_index];
+	contact.set_first_name(get_input("First name: "));
+	contact.set_last_name(get_input("Last name: "));
+	contact.set_nick_name(get_input("Nick name: "));
+	contact.set_phone_number(get_input("Phone number: "));
+	contact.set_darkest_secret(get_input("Darkest secret: "));
+	_index++;
+	_index %= 8;
 }
