@@ -1,18 +1,19 @@
 BINARY		= phonebook
 CC			= c++
 OPT			= -g3
-FLAGS		= -Wall -Wextra -Werror -std=c++98 $(OPT)
-INCLUDE		= $(shell find . -type f -name *.hpp)
-CPPFILES	= $(shell find . -type f -name *.cpp)
+FLAGS		= -Wall -Wextra -Werror -std=c++98 $(OPT) -I$(INCLUDE)
+SRC			= src
+INCLUDE		= ./include/
+CPPFILES	= $(shell find $(SRC) -type f -name '*.cpp')
 OBJ			= $(CPPFILES:.cpp=.o)
 
 all: $(BINARY)
 
 $(BINARY): $(OBJ)
-	$(CC) $(FLAGS) -I$(INCLUDE) -o $@ $(OBJ)
+	$(CC) $(FLAGS) -o $@ $(OBJ)
 
 %.o:%.cpp
-	$(CC) $(FLAGS) -c $^
+	$(CC) $(FLAGS) -c $^ -o $@
 
 clean:
 	rm -f $(OBJ)
