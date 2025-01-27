@@ -7,12 +7,10 @@
 
 class PhoneBook
 {
-private:
-	Contact	**phone_book = new Contact*;
-	int		m_size = 0;
 public:
+	PhoneBook();
 	~PhoneBook() {delete phone_book;}
-	void	add_contact(Contact *contact) const {phone_book[m_size] = contact;}
+	void	add_contact(Contact contact);
 	void	search_contact(const int	contact_id)
 	{
 		if (contact_id > 8 || contact_id < 1)
@@ -24,11 +22,8 @@ public:
 		print_contact(contact->first_name);
 	}
 private:
-	void	print_contact(std::string str)
-	{
-		std::cout << contact->first_name << '\n';
-		std::cout << contact->last_name << '\n';
-	}
+	Contact	_phone_book[8];
+	int		_index = 0;
 };
 
 #endif
