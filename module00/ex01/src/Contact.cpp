@@ -1,5 +1,7 @@
 # include "../include/Contact.hpp"
 
+#include <ostream>
+
 
 Contact::Contact(
 	std::string const& fn,
@@ -39,5 +41,14 @@ std::string Contact::get_phone_number()
 std::string Contact::get_darkest_secret()
 {
 	return _darkest_secret;
+}
+
+void Contact::display_contact() const
+{
+	std::cout << "First name: " << _first_name << std::endl;
+	std::cout << "Last name: " << _last_name << std::endl;
+	std::cout << "Nick name: " << _nickname << std::endl;
+	std::cout << "Phone number: " << _phone_number << std::endl;
+	std::cout << "Darkest secret: " << _darkest_secret << std::endl;
 }
 

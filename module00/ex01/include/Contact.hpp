@@ -2,6 +2,8 @@
 #define CONTACT_H
 
 #include <string>
+#include <iostream>
+#include <iomanip>
 
 class Contact
 {
@@ -18,6 +20,7 @@ public:
 	std::string get_nick_name();
 	std::string get_phone_number();
 	std::string get_darkest_secret();
+	void display_contact() const;
 private:
 	std::string _first_name;
 	std::string _last_name;
