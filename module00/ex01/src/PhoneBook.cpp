@@ -37,3 +37,33 @@ void PhoneBook::add_contact()
 	_index++;
 	_index %= 8;
 }
+
+void PhoneBook::display_contacts() const
+{
+	std::cout << std::setw(10) << "Index" << " | ";
+	std::cout << std::setw(10) << "First name" << " | ";
+	std::cout << std::setw(10) << "Last name" << " | ";
+	std::cout << std::setw(10) << "Nickname" << std::endl;
+	for (int i = 0; i < 8; i++)
+	{
+		Contact contact = _phone_book[_index];
+		if (contact.get_first_name().empty())
+			break;
+		std::cout << std::setw(10) << i + 1 << " | ";
+		std::cout << truncate_str(contact.get_first_name()) << " | ";
+		std::cout << truncate_str(contact.get_last_name()) << " | ";
+		std::cout << truncate_str(contact.get_nick_name()) << std::endl;
+	}
+}
+
+void PhoneBook::display_single_contact(const int i) const
+{
+	_phone_book[i].display_contact();
+}
+
+std::string PhoneBook::truncate_str(const std::string& str)
+{
+	if (str.length() <= 10)
+		return str;
+	return (str.substr(8) + ".");
+}
