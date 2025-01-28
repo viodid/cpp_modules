@@ -11,7 +11,7 @@ public:
 
 	void add_contact();
 	static std::string get_input(const std::string& msg);
-	void display_contacts() const;
+	void display_contacts(const PhoneBook& phone_book) const;
 	void display_single_contact(int i) const;
 
 private:
