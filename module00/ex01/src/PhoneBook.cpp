@@ -69,5 +69,5 @@ std::string PhoneBook::truncate_str(std::string str)
 {
 	if (str.length() <= 10)
 		return str;
-	return (str.substr(8) + ".");
+	return (str.substr(0, 9) + ".");
 }
