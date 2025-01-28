@@ -46,22 +46,22 @@ void	Contact::set_first_name(const std::string& fn)
 
 void	Contact::set_last_name(const std::string& ln)
 {
-	_first_name = ln;
+	_last_name = ln;
 }
 
 void	Contact::set_nick_name(const std::string& nn)
 {
-	_first_name = nn;
+	_nickname = nn;
 }
 
 void	Contact::set_phone_number(const std::string& pn)
 {
-	_first_name = pn;
+	_phone_number = pn;
 }
 
 void	Contact::set_darkest_secret(const std::string& ds)
 {
-	_first_name = ds;
+	_darkest_secret = ds;
 }
 
 void Contact::display_contact() const

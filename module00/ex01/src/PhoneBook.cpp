@@ -12,6 +12,7 @@
 
 
 # include "../include/PhoneBook.hpp"
+#include <iostream>
 
 PhoneBook::PhoneBook() : _index(0)
 {
@@ -28,12 +29,12 @@ std::string PhoneBook::get_input(const std::string& msg)
 
 void PhoneBook::add_contact()
 {
-	Contact contact = _phone_book[_index];
-	contact.set_first_name(get_input("First name: "));
-	contact.set_last_name(get_input("Last name: "));
-	contact.set_nick_name(get_input("Nick name: "));
-	contact.set_phone_number(get_input("Phone number: "));
-	contact.set_darkest_secret(get_input("Darkest secret: "));
+	Contact *contact = &_phone_book[_index];
+	contact->set_first_name(get_input("First name: "));
+	contact->set_last_name(get_input("Last name: "));
+	contact->set_nick_name(get_input("Nick name: "));
+	contact->set_phone_number(get_input("Phone number: "));
+	contact->set_darkest_secret(get_input("Darkest secret: "));
 	_index++;
 	_index %= 8;
 }
