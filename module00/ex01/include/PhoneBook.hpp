@@ -11,14 +11,14 @@ public:
 
 	void add_contact();
 	static std::string get_input(const std::string& msg);
-	void display_contacts(const PhoneBook& phone_book) const;
-	void display_single_contact(int i) const;
+	void display_contacts() const;
+	void display_single_contact(int i);
 
 private:
 	Contact _phone_book[8];
 	int _index;
 
-	static std::string truncate_str(const std::string& str);
+	static std::string truncate_str(std::string str);
 };
 
 #endif

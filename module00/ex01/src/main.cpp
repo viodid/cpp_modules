@@ -33,14 +33,14 @@ int main()
 		else if (cmd == "SEARCH")
 		{
 			std::string buffer;
-			phone_book.display_contacts(phone_book);
+			phone_book.display_contacts();
 			std::cout << "Index to display: ";
 			std::cin >> buffer;
 			const int index = atoi(buffer.c_str());
 			if (index < 1 || index > 8)
-				std::cout << "Index out of range 1 - 8";
+				std::cout << "Index out of range 1 - 8" << std::endl;
 			else
-				phone_book.display_single_contact(index);
+				phone_book.display_single_contact(index - 1);
 			std::cin.clear();
 			std::cin.ignore(256, '\n');
 		}
