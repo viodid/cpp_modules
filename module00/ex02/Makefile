@@ -1,4 +1,4 @@
-BINARY		= phonebook
+BINARY		= job
 CC			= c++
 OPT			= -g3
 FLAGS		= -Wall -Wextra -Werror -std=c++98 $(OPT)
