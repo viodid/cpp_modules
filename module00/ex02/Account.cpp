@@ -25,7 +25,6 @@ Account::~Account()
 {
 }
 
-
 int Account::getNbAccounts() { return _nbAccounts; }
 
 int Account::getTotalAmount() { return _totalAmount; }
@@ -65,7 +64,11 @@ int Account::checkAmount() const
 
 void Account::displayStatus() const
 {
-	std::cout << "hey there";
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "amount:" << _amount << ";";
+	std::cout << "deposits:" << _nbDeposits << ";";
+	std::cout << "withdrawals:" << _nbWithdrawals << std::endl;
 }
 
 void Account::_displayTimestamp()
