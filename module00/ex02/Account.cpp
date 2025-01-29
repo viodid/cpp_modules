@@ -44,8 +44,15 @@ void Account::displayAccountsInfos()
 
 void Account::makeDeposit(const int deposit)
 {
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "p_amount:" << _amount << ";";
 	_amount += deposit;
+	// FIXME: not sure if update _nbDeposits or _totalNbDeposits
 	_totalNbDeposits++;
+	std::cout << "deposit:" << deposit << ";";
+	std::cout << "amount:" << _amount << ";";
+	std::cout << "nb_deposits:" << _nbDeposits << std::endl;
 }
 
 bool Account::makeWithdrawal(const int withdrawal)
