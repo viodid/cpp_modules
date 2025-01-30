@@ -23,6 +23,10 @@ Account::Account(const int initial_deposit) :
 
 Account::~Account()
 {
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "amount:" << _amount << ";";
+	std::cout << "closed" << std::endl;
 }
 
 int Account::getNbAccounts() { return _nbAccounts; }
