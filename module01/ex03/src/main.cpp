@@ -1,12 +1,10 @@
-#include "../include/Zombie.hpp"
+#include "../include/HumanA.hpp"
+#include "../include/HumanB.hpp"
+#include "../include/Weapon.hpp"
 
 
 int main(void)
 {
-	const int n = 10;
-	const Zombie* arr_z = zombieHorde(n, "prettyZombieName");
-	for (int i = 0; i < n; i++)
-		arr_z[i].announce();
-	delete[] arr_z;
+	Weapon weaponA("crude spiked club");
 	return (0);
 }
