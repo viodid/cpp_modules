@@ -10,6 +10,7 @@ public:
 	~HumanB();
 
 	void attack();
+	void setWeapon(Weapon* new_weapon);
 
 private:
 	Weapon* _weapon;
