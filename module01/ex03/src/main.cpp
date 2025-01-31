@@ -13,7 +13,7 @@ int main(void)
 
 	Weapon weaponB("crude spiked club");
 	HumanB alice("Alice");
-	alice.setWeapon(&weaponB);
+	alice.setWeapon(weaponB);
 	alice.attack();
 	weaponB.setType("some other type of club");
 	alice.attack();
