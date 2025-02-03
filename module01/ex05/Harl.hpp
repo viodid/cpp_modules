@@ -3,12 +3,14 @@
 #include <string>
 #include <iostream>
 
-class Harld
+class Harl
 {
 public:
+	Harl();
 	void complain(std::string level);
 
 private:
+	void (Harl::*_complain_ptr[4])();
 	void debug(void);
 	void info(void);
 	void warning(void);
@@ -16,3 +18,5 @@ private:
 };
 
 #endif
+
+int hash_map(const std::string& value);
