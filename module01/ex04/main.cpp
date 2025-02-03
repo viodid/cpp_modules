@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-std::string replaceStr(const std::string& source, const std::string& s1, const std::string& s2)
+std::string replace(const std::string& source, const std::string& s1, const std::string& s2)
 {
 	std::string result;
 	std::size_t pos = 0;
@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 		content += buffer + "\n";
 	}
 	fin.close();
-	std::string replacedContent = replaceStr(content, s1, s2);
+	std::string replacedContent = replace(content, s1, s2);
 	std::ofstream fout;
 	fout.open((filename + ".replace").c_str());
 	if (!fout.is_open())

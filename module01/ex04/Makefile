@@ -1,9 +1,8 @@
 BINARY		= sed
 CC			= c++
 OPT			= -g3
-FLAGS		= -Wall -Wextra -Werror -std=c++98 $(OPT) -I$(INCLUDE)
+FLAGS		= -Wall -Wextra -Werror -std=c++98 $(OPT)
 SRC			= .
-INCLUDE		= ./include/
 CPPFILES	= $(shell find $(SRC) -type f -name '*.cpp')
 OBJ			= $(CPPFILES:.cpp=.o)
 
