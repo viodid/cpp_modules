@@ -7,10 +7,11 @@ class Harl
 {
 public:
 	Harl();
+	~Harl();
 	void complain(std::string level);
 
 private:
-	void (Harl::*_complain_ptr[4])();
+	void (Harl::*_complain_ptr[8])();
     int hash(const std::string& value);
 	void debug(void);
 	void info(void);

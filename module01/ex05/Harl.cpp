@@ -5,13 +5,16 @@
 
 Harl::Harl(void)
 {
-	_complain_ptr[hash("DEBUG")] = &debug;
-	_complain_ptr[hash("INFO")] = &debug;
-	_complain_ptr[hash("WARNING")] = &debug;
-	_complain_ptr[hash("ERROR")] = &debug;
+	_complain_ptr[hash("DEBUG")] = &Harl::debug;
+	_complain_ptr[hash("INFO")] = &Harl::info;
+	_complain_ptr[hash("WARNING")] = &Harl::warning;
+	_complain_ptr[hash("ERROR")] = &Harl::error;
 }
 
-void Harl::complain(std::string level) { _complain_ptr[hash(level)]; }
+Harl::~Harl() { }
+
+
+void Harl::complain(std::string level) { (this->*_complain_ptr[hash(level)])(); }
 
 void Harl::debug()
 {
@@ -29,7 +32,7 @@ void Harl::info()
 void Harl::warning()
 {
 	std::cout <<
-		" think I deserve to have some extra bacon for free. I’ve been coming for years whereas you started working here since last month."
+		"I think I deserve to have some extra bacon for free. I’ve been coming for years whereas you started working here since last month."
 		<< std::endl;
 }
 
@@ -38,16 +41,12 @@ void Harl::error()
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
+
 int Harl::hash(const std::string& value)
 {
 	int arr_index = 0;
-	for (int i = 0; i < value.length(); i++)
+	for (unsigned int i = 0; i < value.length(); i++)
 		arr_index += value[i];
-	arr_index %= 4;
-	while (_complain_ptr[arr_index])
-	{
-		arr_index++;
-		arr_index %= 4;
-	}
+	arr_index %= 8;
 	return (arr_index);
 }
