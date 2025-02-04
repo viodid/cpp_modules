@@ -9,13 +9,13 @@ int display_usage_err(const std::string& program_name)
 int hash_level(const std::string& level)
 {
 	if (level == "DEBUG")
-		return 1;
+		return 0;
 	if (level == "INFO")
-		return 2;
+		return 1;
 	if (level == "WARNING")
-		return 3;
+		return 2;
 	if (level == "ERROR")
-		return 4;
+		return 3;
 	return -1;
 }
 
@@ -23,11 +23,11 @@ int main(int argc, char* argv[])
 {
 	if (argc != 2)
 		return display_usage_err(argv[0]);
-	const std::string& level = static_cast<std::string>(argv[1]);
+	const std::string& level = argv[1];
 	if (level != "DEBUG"
-		|| level != "INFO"
-		|| level != "WARNING"
-		|| level != "ERROR")
+		&& level != "INFO"
+		&& level != "WARNING"
+		&& level != "ERROR")
 		return display_usage_err(argv[0]);
 
 	Harl harl = Harl();
