@@ -11,6 +11,7 @@ public:
 
 private:
 	void (Harl::*_complain_ptr[4])();
+    int hash(const std::string& value);
 	void debug(void);
 	void info(void);
 	void warning(void);
@@ -18,5 +19,3 @@ private:
 };
 
 #endif
-
-int hash_map(const std::string& value);

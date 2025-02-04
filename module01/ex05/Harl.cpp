@@ -5,30 +5,32 @@
 
 Harl::Harl(void)
 {
-	_complain_ptr[hash_map("DEBUG")] = &debug;
-	_complain_ptr[hash_map("INFO")] = &debug;
-	_complain_ptr[hash_map("WARNING")] = &debug;
-	_complain_ptr[hash_map("ERROR")] = &debug;
+	_complain_ptr[hash("DEBUG")] = &debug;
+	_complain_ptr[hash("INFO")] = &debug;
+	_complain_ptr[hash("WARNING")] = &debug;
+	_complain_ptr[hash("ERROR")] = &debug;
 }
 
-void Harl::complain(std::string level)
-{
-	void (Harl::*complain_ptr) () = &debug;
-}
+void Harl::complain(std::string level) { _complain_ptr[hash(level)]; }
 
 void Harl::debug()
 {
-	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!" << std::endl;
+	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!"
+		<< std::endl;
 }
 
 void Harl::info()
 {
-	std::cout << "I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!" << std::endl;
+	std::cout <<
+		"I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!"
+		<< std::endl;
 }
 
 void Harl::warning()
 {
-	std::cout << " think I deserve to have some extra bacon for free. I’ve been coming for years whereas you started working here since last month." << std::endl;
+	std::cout <<
+		" think I deserve to have some extra bacon for free. I’ve been coming for years whereas you started working here since last month."
+		<< std::endl;
 }
 
 void Harl::error()
@@ -36,7 +38,16 @@ void Harl::error()
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
-int hash_map(const std::string& value)
+int Harl::hash(const std::string& value)
 {
-	return (1);
+	int arr_index = 0;
+	for (int i = 0; i < value.length(); i++)
+		arr_index += value[i];
+	arr_index %= 4;
+	while (_complain_ptr[arr_index])
+	{
+		arr_index++;
+		arr_index %= 4;
+	}
+	return (arr_index);
 }
