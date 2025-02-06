@@ -11,7 +11,7 @@ Fixed::Fixed(const int n)
 	_value = n << _fracBits;
 }
 
-Fixed::Fixed(const float f)
+Fixed::Fixed(float f)
 {
 	std::cout << "Float constructor called" << std::endl;
 	const int intPart = static_cast<int>(f);
@@ -56,4 +56,9 @@ int Fixed::toInt() const
 	return (_value >> _fracBits);
 }
 
+std::ostream& operator<<(std::ostream& outputStream, const Fixed& obj)
+{
+	outputStream << obj.toFloat();
+	return (outputStream);
+}
 
