@@ -5,6 +5,21 @@ Fixed::Fixed() : _value(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
+Fixed::Fixed(const int n)
+{
+	std::cout << "Int constructor called" << std::endl;
+	_value = n << _fracBits;
+}
+
+Fixed::Fixed(const float f)
+{
+	std::cout << "Float constructor called" << std::endl;
+	const int intPart = static_cast<int>(f);
+	const float floatPart = f - intPart;
+	const int fixFractPart = static_cast<int>(roundf(floatPart * 256));
+	_value = (intPart << 8) + fixFractPart;
+}
+
 Fixed::Fixed(Fixed& copy)
 {
 	std::cout << "Copy constructor called" << std::endl;
@@ -30,5 +45,3 @@ int Fixed::getRawBits()
 }
 
 void Fixed::setRawBits(int raw) {(void)raw;}
-
-
