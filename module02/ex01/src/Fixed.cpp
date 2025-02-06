@@ -45,3 +45,15 @@ int Fixed::getRawBits()
 }
 
 void Fixed::setRawBits(int raw) {(void)raw;}
+
+float Fixed::toFloat() const
+{
+	return (static_cast<float>(_value) / 256);
+}
+
+int Fixed::toInt() const
+{
+	return (_value >> _fracBits);
+}
+
+

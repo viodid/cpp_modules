@@ -17,7 +17,7 @@ public:
 	int getRawBits();
 	void setRawBits(int raw);
 	float toFloat() const;
-	float toInt() const;
+	int toInt() const;
 
 private:
 	int _value;
