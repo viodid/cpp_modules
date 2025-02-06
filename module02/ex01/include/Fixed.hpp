@@ -8,13 +8,13 @@ class Fixed
 {
 public:
 	Fixed();
-	Fixed(int n);
-	Fixed(float f);
-	Fixed(Fixed& copy);
-	Fixed& operator=(Fixed& copy);
+	Fixed(const int n);
+	Fixed(const float f);
+	Fixed(const Fixed& copy);
+	Fixed& operator=(const Fixed& copy);
 	~Fixed();
 
-	int getRawBits();
+	int getRawBits() const;
 	void setRawBits(int raw);
 	float toFloat() const;
 	int toInt() const;

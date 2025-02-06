@@ -11,7 +11,7 @@ Fixed::Fixed(const int n)
 	_value = n << _fracBits;
 }
 
-Fixed::Fixed(float f)
+Fixed::Fixed(const float f)
 {
 	std::cout << "Float constructor called" << std::endl;
 	const int intPart = static_cast<int>(f);
@@ -20,13 +20,13 @@ Fixed::Fixed(float f)
 	_value = (intPart << 8) + fixFractPart;
 }
 
-Fixed::Fixed(Fixed& copy)
+Fixed::Fixed(const Fixed& copy)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	_value = copy.getRawBits();
 }
 
-Fixed& Fixed::operator=(Fixed& copy)
+Fixed& Fixed::operator=(const Fixed& copy)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	this->_value = copy.getRawBits();
@@ -38,9 +38,8 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
-int Fixed::getRawBits()
+int Fixed::getRawBits() const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return _value;
 }
 
