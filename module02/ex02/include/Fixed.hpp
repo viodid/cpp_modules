@@ -13,16 +13,16 @@ public:
 	Fixed(const float f);
 	Fixed(const Fixed& copy);
 	Fixed& operator=(const Fixed& obj);
-	Fixed& operator>(const Fixed& obj);
-	Fixed& operator<(const Fixed& obj);
-	Fixed& operator>=(const Fixed& obj);
-	Fixed& operator<=(const Fixed& obj);
-	Fixed& operator==(const Fixed& obj);
-	Fixed& operator!=(const Fixed& obj);
-	Fixed& operator+(const Fixed& obj);
-	Fixed& operator-(const Fixed& obj);
-	Fixed& operator*(const Fixed& obj);
-	Fixed& operator/(const Fixed& obj);
+	bool operator>(const Fixed& obj_1, const Fixed& obj_2);
+	bool operator<(const Fixed& obj_1, const Fixed& obj_2);
+	bool operator>=(const Fixed& obj_1, const Fixed& obj_2);
+	bool operator<=(const Fixed& obj_1, const Fixed& obj_2);
+	bool operator==(const Fixed& obj_1, const Fixed& obj_2);
+	bool operator!=(const Fixed& obj_1, const Fixed& obj_2);
+	Fixed& operator+(const Fixed& obj_1, const Fixed& obj_2);
+	Fixed& operator-(const Fixed& obj_1, const Fixed& obj_2);
+	Fixed& operator*(const Fixed& obj_1, const Fixed& obj_2);
+	Fixed& operator/(const Fixed& obj_1, const Fixed& obj_2);
 	Fixed& operator++(const Fixed& obj);
 	Fixed& operator--(const Fixed& obj);
 

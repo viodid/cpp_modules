@@ -1,9 +1,8 @@
 #include "../include/Fixed.hpp"
 
-Fixed::Fixed() : _value(0)
-{
-	std::cout << "Default constructor called" << std::endl;
-}
+Fixed::Fixed() : _value(0) { std::cout << "Default constructor called" << std::endl; }
+
+Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
 
 Fixed::Fixed(const int n)
 {
@@ -26,18 +25,6 @@ Fixed::Fixed(const Fixed& copy)
 	*this = copy;
 }
 
-Fixed& Fixed::operator=(const Fixed& obj)
-{
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->_value = obj.getRawBits();
-	return *this;
-}
-
-Fixed::~Fixed()
-{
-	std::cout << "Destructor called" << std::endl;
-}
-
 int Fixed::getRawBits() const
 {
 	return _value;
@@ -55,9 +42,50 @@ int Fixed::toInt() const
 	return (_value >> _fracBits);
 }
 
+// OPERATORS OVERLOAD
 std::ostream& operator<<(std::ostream& outputStream, const Fixed& obj)
 {
 	outputStream << obj.toFloat();
 	return (outputStream);
 }
+
+Fixed& Fixed::operator=(const Fixed& obj)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->_value = obj.getRawBits();
+	return *this;
+}
+
+
+bool operator>(const Fixed& obj_1, const Fixed& obj_2)
+{
+	return (obj_1.getRawBits() > obj_2.getRawBits());
+}
+
+bool operator<(const Fixed& obj_1, const Fixed& obj_2)
+{
+	return (obj_1.getRawBits() < obj_2.getRawBits());
+}
+
+bool operator>=(const Fixed& obj_1, const Fixed& obj_2)
+{
+	return (obj_1.getRawBits() >= obj_2.getRawBits());
+}
+
+bool operator<=(const Fixed& obj_1, const Fixed& obj_2)
+{
+	return (obj_1.getRawBits() <= obj_2.getRawBits());
+}
+
+Fixed& operator+(const Fixed& obj_1, const Fixed& obj_2)
+{
+
+}
+
+
+
+
+
+
+
 
