@@ -11,25 +11,25 @@ public:
 	~Fixed();
 	Fixed(const int n);
 	Fixed(const float f);
-	Fixed(const Fixed& copy);
+	Fixed(const Fixed& obj);
 	Fixed& operator=(const Fixed& obj);
-	bool operator>(const Fixed& obj_1, const Fixed& obj_2);
-	bool operator<(const Fixed& obj_1, const Fixed& obj_2);
-	bool operator>=(const Fixed& obj_1, const Fixed& obj_2);
-	bool operator<=(const Fixed& obj_1, const Fixed& obj_2);
-	bool operator==(const Fixed& obj_1, const Fixed& obj_2);
-	bool operator!=(const Fixed& obj_1, const Fixed& obj_2);
-	Fixed& operator+(const Fixed& obj_1, const Fixed& obj_2);
-	Fixed& operator-(const Fixed& obj_1, const Fixed& obj_2);
-	Fixed& operator*(const Fixed& obj_1, const Fixed& obj_2);
-	Fixed& operator/(const Fixed& obj_1, const Fixed& obj_2);
-	Fixed& operator++(const Fixed& obj);
-	Fixed& operator--(const Fixed& obj);
+	bool operator>(const Fixed& obj) const;
+	bool operator<(const Fixed& obj) const;
+	bool operator>=(const Fixed& obj) const;
+	bool operator<=(const Fixed& obj) const;
+	bool operator==(const Fixed& obj) const;
+	bool operator!=(const Fixed& obj) const;
+	Fixed operator+(const Fixed& obj) const;
+	Fixed operator-(const Fixed& obj) const;
+	Fixed operator*(const Fixed& obj) const;
+	Fixed operator/(const Fixed& obj) const;
+	// Fixed& operator++(const Fixed& obj); // TODO: implement
+	// Fixed& operator--(const Fixed& obj);
 
 	static Fixed& min(Fixed& obj_1, Fixed& obj_2);
-	static Fixed& min(const Fixed& obj_1, const Fixed& obj_2);
+	static const Fixed& min(const Fixed& obj_1, const Fixed& obj_2);
 	static Fixed& max(Fixed& obj_1, Fixed& obj_2);
-	static Fixed& max(const Fixed& obj_1, const Fixed& obj_2);
+	static const Fixed& max(const Fixed& obj_1, const Fixed& obj_2);
 
 	int getRawBits() const;
 	void setRawBits(int raw);

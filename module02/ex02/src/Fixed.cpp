@@ -19,10 +19,10 @@ Fixed::Fixed(const float f)
 	_value = (intPart << 8) + fixFractPart;
 }
 
-Fixed::Fixed(const Fixed& copy)
+Fixed::Fixed(const Fixed& obj)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = copy;
+	*this = obj;
 }
 
 int Fixed::getRawBits() const
@@ -58,36 +58,69 @@ Fixed& Fixed::operator=(const Fixed& obj)
 }
 
 
-bool operator>(const Fixed& obj_1, const Fixed& obj_2)
-{
-	return (obj_1.getRawBits() > obj_2.getRawBits());
-}
+bool Fixed::operator>(const Fixed& obj) const { return _value > obj.getRawBits(); }
 
-bool operator<(const Fixed& obj_1, const Fixed& obj_2)
-{
-	return (obj_1.getRawBits() < obj_2.getRawBits());
-}
+bool Fixed::operator<(const Fixed& obj) const { return _value < obj.getRawBits(); }
 
-bool operator>=(const Fixed& obj_1, const Fixed& obj_2)
-{
-	return (obj_1.getRawBits() >= obj_2.getRawBits());
-}
+bool Fixed::operator>=(const Fixed& obj) const { return _value >= obj.getRawBits(); }
 
-bool operator<=(const Fixed& obj_1, const Fixed& obj_2)
-{
-	return (obj_1.getRawBits() <= obj_2.getRawBits());
-}
+bool Fixed::operator<=(const Fixed& obj) const { return _value <= obj.getRawBits(); }
 
-Fixed operator+(const Fixed& obj_1, const Fixed& obj_2)
+bool Fixed::operator==(const Fixed& obj) const { return _value == obj.getRawBits(); }
+
+bool Fixed::operator!=(const Fixed& obj) const { return _value != obj.getRawBits(); }
+
+Fixed Fixed::operator+(const Fixed& obj) const
 {
-	const int fix_sum_val = obj_1.getRawBits() + obj_2.getRawBits();
+	const int fix_sum_val = _value + obj.getRawBits();
 	return (Fixed(fix_sum_val));
 }
 
+Fixed Fixed::operator-(const Fixed& obj) const
+{
+	const int fix_sum_val = abs(_value - obj.getRawBits());
+	return (Fixed(fix_sum_val));
+}
 
+Fixed Fixed::operator*(const Fixed& obj) const
+{
+	const int fix_sum_val = _value * obj.getRawBits();
+	return (Fixed(fix_sum_val));
+}
 
+Fixed Fixed::operator/(const Fixed& obj) const
+{
+	if (obj.getRawBits() == 0)
+		return (Fixed());
+	const int fix_sum_val = abs(_value * obj.getRawBits());
+	return (Fixed(fix_sum_val));
+}
 
+Fixed& Fixed::min(Fixed& obj_1, Fixed& obj_2)
+{
+	if (obj_1 < obj_2)
+		return obj_1;
+	return obj_2;
+}
 
+const Fixed& Fixed::min(const Fixed& obj_1, const Fixed& obj_2)
+{
+	if (obj_1 < obj_2)
+		return obj_1;
+	return obj_2;
+}
 
+Fixed& Fixed::max(Fixed& obj_1, Fixed& obj_2)
+{
+	if (obj_1 > obj_2)
+		return obj_1;
+	return obj_2;
+}
 
+const Fixed& Fixed::max(const Fixed& obj_1, const Fixed& obj_2)
+{
+	if (obj_1 > obj_2)
+		return obj_1;
+	return obj_2;
+}
 
