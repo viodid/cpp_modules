@@ -42,6 +42,7 @@ int Fixed::toInt() const
 	return (_value >> _fracBits);
 }
 
+
 // OPERATORS OVERLOAD
 std::ostream& operator<<(std::ostream& outputStream, const Fixed& obj)
 {
@@ -77,9 +78,10 @@ bool operator<=(const Fixed& obj_1, const Fixed& obj_2)
 	return (obj_1.getRawBits() <= obj_2.getRawBits());
 }
 
-Fixed& operator+(const Fixed& obj_1, const Fixed& obj_2)
+Fixed operator+(const Fixed& obj_1, const Fixed& obj_2)
 {
-
+	const int fix_sum_val = obj_1.getRawBits() + obj_2.getRawBits();
+	return (Fixed(fix_sum_val));
 }
 
 
