@@ -23,8 +23,10 @@ public:
 	Fixed operator-(const Fixed& obj) const;
 	Fixed operator*(const Fixed& obj) const;
 	Fixed operator/(const Fixed& obj) const;
-	// Fixed& operator++(const Fixed& obj); // TODO: implement
-	// Fixed& operator--(const Fixed& obj);
+	Fixed operator++(int) const;
+	Fixed operator--(int) const;
+	Fixed& operator++();
+	Fixed& operator--();
 
 	static Fixed& min(Fixed& obj_1, Fixed& obj_2);
 	static const Fixed& min(const Fixed& obj_1, const Fixed& obj_2);

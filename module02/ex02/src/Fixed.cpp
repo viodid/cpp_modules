@@ -30,7 +30,7 @@ int Fixed::getRawBits() const
 	return _value;
 }
 
-void Fixed::setRawBits(int raw) {(void)raw;}
+void Fixed::setRawBits(const int raw) {this->_value = raw;}
 
 float Fixed::toFloat() const
 {
@@ -42,6 +42,33 @@ int Fixed::toInt() const
 	return (_value >> _fracBits);
 }
 
+Fixed& Fixed::min(Fixed& obj_1, Fixed& obj_2)
+{
+	if (obj_1 < obj_2)
+		return obj_1;
+	return obj_2;
+}
+
+const Fixed& Fixed::min(const Fixed& obj_1, const Fixed& obj_2)
+{
+	if (obj_1 < obj_2)
+		return obj_1;
+	return obj_2;
+}
+
+Fixed& Fixed::max(Fixed& obj_1, Fixed& obj_2)
+{
+	if (obj_1 > obj_2)
+		return obj_1;
+	return obj_2;
+}
+
+const Fixed& Fixed::max(const Fixed& obj_1, const Fixed& obj_2)
+{
+	if (obj_1 > obj_2)
+		return obj_1;
+	return obj_2;
+}
 
 // OPERATORS OVERLOAD
 std::ostream& operator<<(std::ostream& outputStream, const Fixed& obj)
@@ -83,30 +110,10 @@ Fixed Fixed::operator/(const Fixed& obj) const
 	return (Fixed(this->toFloat() / obj.toFloat()));
 }
 
-Fixed& Fixed::min(Fixed& obj_1, Fixed& obj_2)
-{
-	if (obj_1 < obj_2)
-		return obj_1;
-	return obj_2;
-}
+Fixed Fixed::operator++(int) const { return Fixed((this->getRawBits() + 1) / 256); }
 
-const Fixed& Fixed::min(const Fixed& obj_1, const Fixed& obj_2)
-{
-	if (obj_1 < obj_2)
-		return obj_1;
-	return obj_2;
-}
+Fixed Fixed::operator--(int) const { return Fixed((this->getRawBits() - 1) / 256); }
 
-Fixed& Fixed::max(Fixed& obj_1, Fixed& obj_2)
-{
-	if (obj_1 > obj_2)
-		return obj_1;
-	return obj_2;
-}
+Fixed& Fixed::operator++() { this->setRawBits(this->getRawBits() + 1); return *this; }
 
-const Fixed& Fixed::max(const Fixed& obj_1, const Fixed& obj_2)
-{
-	if (obj_1 > obj_2)
-		return obj_1;
-	return obj_2;
-}
+Fixed& Fixed::operator--() { this->setRawBits(this->getRawBits() - 1); return *this; }
