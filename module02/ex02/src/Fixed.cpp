@@ -84,15 +84,15 @@ Fixed Fixed::operator-(const Fixed& obj) const
 
 Fixed Fixed::operator*(const Fixed& obj) const
 {
-	const int fix_sum_val = _value * obj.getRawBits();
-	return (Fixed(fix_sum_val));
+	const float fix_sum_val = static_cast<float>(_value * obj.getRawBits());
+	return (Fixed(fix_sum_val / (256 * 256)));
 }
 
 Fixed Fixed::operator/(const Fixed& obj) const
 {
 	if (obj.getRawBits() == 0)
 		return (Fixed());
-	const int fix_sum_val = abs(_value * obj.getRawBits());
+	const int fix_sum_val = abs(_value / obj.getRawBits());
 	return (Fixed(fix_sum_val));
 }
 

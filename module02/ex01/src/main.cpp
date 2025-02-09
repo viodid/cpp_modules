@@ -1,7 +1,6 @@
 #include "../include/Fixed.hpp"
 
 
-// TODO: match output example
 int main()
 {
 	Fixed a;
