@@ -42,5 +42,4 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& outputStream, const Fixed& obj);
-float calculate_double_fixed(float value);
 #endif
