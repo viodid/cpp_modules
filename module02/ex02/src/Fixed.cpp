@@ -72,28 +72,28 @@ bool Fixed::operator!=(const Fixed& obj) const { return _value != obj.getRawBits
 
 Fixed Fixed::operator+(const Fixed& obj) const
 {
-	const int fix_sum_val = _value + obj.getRawBits();
-	return (Fixed(fix_sum_val));
+	const float fix_val = static_cast<float>(_value + obj.getRawBits());
+	return (Fixed(calculate_double_fixed(fix_val)));
 }
 
 Fixed Fixed::operator-(const Fixed& obj) const
 {
-	const int fix_sum_val = abs(_value - obj.getRawBits());
-	return (Fixed(fix_sum_val));
+	const float fix_val = static_cast<float>(abs(_value - obj.getRawBits()));
+	return (Fixed(calculate_double_fixed(fix_val)));
 }
 
 Fixed Fixed::operator*(const Fixed& obj) const
 {
-	const float fix_sum_val = static_cast<float>(_value * obj.getRawBits());
-	return (Fixed(fix_sum_val / (256 * 256)));
+	const float fix_val = static_cast<float>(_value * obj.getRawBits());
+	return (Fixed(calculate_double_fixed(fix_val)));
 }
 
 Fixed Fixed::operator/(const Fixed& obj) const
 {
 	if (obj.getRawBits() == 0)
 		return (Fixed());
-	const int fix_sum_val = abs(_value / obj.getRawBits());
-	return (Fixed(fix_sum_val));
+	const float fix_val = static_cast<float>(abs(_value / obj.getRawBits()));
+	return (Fixed(calculate_double_fixed(fix_val)));
 }
 
 Fixed& Fixed::min(Fixed& obj_1, Fixed& obj_2)
@@ -124,3 +124,7 @@ const Fixed& Fixed::max(const Fixed& obj_1, const Fixed& obj_2)
 	return obj_2;
 }
 
+float calculate_double_fixed(const float value)
+{
+	return (value / (256 * 256));
+}
