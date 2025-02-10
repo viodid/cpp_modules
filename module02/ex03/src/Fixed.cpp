@@ -14,27 +14,15 @@ Fixed::Fixed(const float f)
 	_value = (intPart << 8) + fixFractPart;
 }
 
-Fixed::Fixed(const Fixed& obj)
-{
-	*this = obj;
-}
+Fixed::Fixed(const Fixed& obj) { *this = obj; }
 
-int Fixed::getRawBits() const
-{
-	return _value;
-}
+int Fixed::getRawBits() const { return _value; }
 
 void Fixed::setRawBits(const int raw) {this->_value = raw;}
 
-float Fixed::toFloat() const
-{
-	return (static_cast<float>(_value) / 256);
-}
+float Fixed::toFloat() const { return (static_cast<float>(_value) / 256); }
 
-int Fixed::toInt() const
-{
-	return (_value >> _fracBits);
-}
+int Fixed::toInt() const { return (_value >> _fracBits); }
 
 Fixed& Fixed::min(Fixed& obj_1, Fixed& obj_2)
 {

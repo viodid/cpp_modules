@@ -11,6 +11,9 @@ public:
 	Point(const Point& obj);
 	~Point();
 
+	Fixed getX() const;
+	Fixed getY() const;
+
 private:
 	const Fixed _x;
 	const Fixed _y;
