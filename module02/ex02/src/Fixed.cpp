@@ -1,18 +1,13 @@
 #include "../include/Fixed.hpp"
 
-Fixed::Fixed() : _value(0) { std::cout << "Default constructor called" << std::endl; }
+Fixed::Fixed() : _value(0) { }
 
-Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
+Fixed::~Fixed() { }
 
-Fixed::Fixed(const int n)
-{
-	std::cout << "Int constructor called" << std::endl;
-	_value = n << _fracBits;
-}
+Fixed::Fixed(const int n) { _value = n << _fracBits; }
 
 Fixed::Fixed(const float f)
 {
-	std::cout << "Float constructor called" << std::endl;
 	const int intPart = static_cast<int>(f);
 	const float floatPart = f - intPart;
 	const int fixFractPart = static_cast<int>(roundf(floatPart * 256));
@@ -21,7 +16,6 @@ Fixed::Fixed(const float f)
 
 Fixed::Fixed(const Fixed& obj)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = obj;
 }
 
@@ -79,7 +73,6 @@ std::ostream& operator<<(std::ostream& outputStream, const Fixed& obj)
 
 Fixed& Fixed::operator=(const Fixed& obj)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	this->_value = obj.getRawBits();
 	return *this;
 }
@@ -110,9 +103,9 @@ Fixed Fixed::operator/(const Fixed& obj) const
 	return (Fixed(this->toFloat() / obj.toFloat()));
 }
 
-Fixed Fixed::operator++(int) const { return Fixed((this->getRawBits() + 1) / 256); }
+Fixed Fixed::operator++(int) { return Fixed(static_cast<float>(this->_value++) / 256); }
 
-Fixed Fixed::operator--(int) const { return Fixed((this->getRawBits() - 1) / 256); }
+Fixed Fixed::operator--(int) { return Fixed(static_cast<float>(this->_value--) / 256); }
 
 Fixed& Fixed::operator++() { this->setRawBits(this->getRawBits() + 1); return *this; }
 

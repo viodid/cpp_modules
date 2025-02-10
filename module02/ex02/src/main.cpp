@@ -1,19 +1,23 @@
 #include "../include/Fixed.hpp"
 
 
+
 int main( void ) {
+
 	Fixed a;
 	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-	Fixed const c(a + b);
-	// TODO: match output
+	std::cout << Fixed(5.055f) << std::endl;
 	std::cout << a << std::endl;
 	std::cout << ++a << std::endl;
 	std::cout << a << std::endl;
 	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	std::cout << c << std::endl;
-	std::cout << c / Fixed(2) << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
+	std::cout << "a: " << a << std::endl;
+	std::cout << "b: " << b << std::endl;
+	std::cout << "max(a, b): " << Fixed::max( a, b ) << std::endl;
+	std::cout << "a - b: " << a - b << std::endl;
+	std::cout << "a + b: " << a + b << std::endl;
+	std::cout << "a * b: " << a * b << std::endl;
+	std::cout << "b / a: " << b / a << std::endl;
+
 	return 0;
 }

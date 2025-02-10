@@ -23,8 +23,8 @@ public:
 	Fixed operator-(const Fixed& obj) const;
 	Fixed operator*(const Fixed& obj) const;
 	Fixed operator/(const Fixed& obj) const;
-	Fixed operator++(int) const;
-	Fixed operator--(int) const;
+	Fixed operator++(int);
+	Fixed operator--(int);
 	Fixed& operator++();
 	Fixed& operator--();
 
