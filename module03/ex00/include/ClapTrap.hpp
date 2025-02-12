@@ -15,9 +15,9 @@ public:
 	void beRepaired(unsigned int amount);
 private:
 	const std::string _name;
-	int _hitPoints = 10;
-	int _energyPoints = 10;
-	const int _attackDamage = 0;
+	int _hitPoints;
+	int _energyPoints;
+	const int _attackDamage;
 };
 
 #endif
