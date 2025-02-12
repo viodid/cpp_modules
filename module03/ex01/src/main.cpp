@@ -1,8 +1,8 @@
-#include "../include/ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main() {
 
-	ClapTrap anon("anon");
+	ScavTrap anon("anon");
 	anon.attack("someone");
 	anon.beRepaired(3);
 	anon.takeDamage(12);
