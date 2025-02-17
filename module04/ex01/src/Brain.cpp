@@ -19,7 +19,3 @@ Brain& Brain::operator=(const Brain& obj)
 {
 	std::cout << "Brain copy assignment operator called." << std::endl;
 }
-
-
-
-
