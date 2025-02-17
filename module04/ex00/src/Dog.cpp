@@ -28,5 +28,3 @@ void Dog::makeSound() const
 {
 	std::cout << "Guau, guau, *licking sounds*" << std::endl;
 }
-
-
