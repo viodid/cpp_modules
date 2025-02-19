@@ -1,20 +1,23 @@
+#include <algorithm>
 #include <Animal.hpp>
 #include <Dog.hpp>
 #include <Cat.hpp>
 
+# define ARR_LEN 10
+
 int main()
 {
-	const Animal *animal = new Animal();
-	const Animal* dog = new Dog();
-	const Animal* cat = new Cat();
-	std::cout << dog->getType() << " " << std::endl;
-	std::cout << cat->getType() << " " << std::endl;
-	cat->makeSound();
-	dog->makeSound();
-	animal->makeSound();
-	delete animal;
-	delete dog;
-	delete cat;
+	const Dog basic;
+    const Dog tmp = basic;
+	std::cout << "basic: " << &basic << std::endl;
+	std::cout << "tmp: " << &tmp << std::endl;
 
+
+	// Animal *arr = new Animal[ARR_LEN];
+	// for (int i = 0; i < ARR_LEN / 2; i++)
+	// 	arr[i] = Dog();
+	// for (int i = ARR_LEN / 2; i < ARR_LEN; i++)
+	// 	arr[i] = Cat();
+ //    delete [] arr;
 	return (0);
 }

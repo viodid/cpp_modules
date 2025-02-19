@@ -29,4 +29,3 @@ const std::string* Brain::getIdeas() const
 {
 	return _ideas;
 }
-
