@@ -6,14 +6,14 @@
 class AAnimal
 {
 public:
-	AAnimal();
-	AAnimal(const AAnimal& obj);
 	virtual ~AAnimal();
-	AAnimal& operator=(const AAnimal& obj);
-	virtual void makeSound() const;
+	virtual void makeSound() const = 0; // this pure virtual member func makes the class abstract
 	const std::string& getType() const;
 
 protected:
+	AAnimal();
+	AAnimal(const AAnimal& obj);
+	AAnimal& operator=(const AAnimal& obj);
 	std::string type;
 };
 

@@ -23,5 +23,7 @@ int main()
 	std::cout << "dog:\t\t" << dog.getBrain() << std::endl;
 	std::cout << "copyDog:\t" << copyDog.getBrain() << std::endl;
 
+	// const AAnimal animal; // you cannot instantiate an abstract class
+
 	return (0);
 }
