@@ -1,9 +1,9 @@
 #ifndef DOG_H
 # define DOG_H
 #include <Brain.hpp>
-#include <Animal.hpp>
+#include <AAnimal.hpp>
 
-class Dog : public Animal
+class Dog : public AAnimal
 {
 public:
 	Dog();

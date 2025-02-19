@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <Animal.hpp>
+#include <AAnimal.hpp>
 #include <Dog.hpp>
 #include <Cat.hpp>
 
@@ -7,7 +7,7 @@
 
 int main()
 {
-	const Animal *arr[100];
+	const AAnimal *arr[100];
 	for (int i = 0; i < ARR_LEN / 2; i++)
 		arr[i] = new Dog;
 	for (int i = ARR_LEN / 2; i < ARR_LEN; i++)
