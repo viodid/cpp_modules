@@ -11,6 +11,8 @@ public:
 	~Cat();
 	Cat& operator=(const Cat& obj);
 	void makeSound() const;
+    Brain* getBrain() const;
+    void showIdeas() const;
 private:
 	Brain* _brain;
 };
