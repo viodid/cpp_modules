@@ -1,11 +1,15 @@
 #ifndef ICHARACTER_HPP
 # define ICHARACTER_HPP
-#include "AMateria.hpp"
+# include "AMateria.hpp"
 
 class ICharacter
 {
-private:
-	AMateria* _inventory;
+protected:
+	AMateria** _inventory;
+
+	ICharacter();
+	ICharacter(const ICharacter& obj);
+	ICharacter& operator=(const ICharacter& obj);
 public:
 	virtual ~ICharacter();
 	virtual const std::string& getName() const = 0;

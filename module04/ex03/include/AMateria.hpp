@@ -1,6 +1,10 @@
 #ifndef AMATERIA_HPP
 # define AMATERIA_HPP
-#include <string>
+# include <string>
+# include <ostream>
+# include <iostream>
+
+class ICharacter;
 
 class AMateria
 {
