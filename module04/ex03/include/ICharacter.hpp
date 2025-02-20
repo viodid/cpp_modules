@@ -5,8 +5,6 @@
 class ICharacter
 {
 protected:
-	AMateria** _inventory;
-
 	ICharacter();
 	ICharacter(const ICharacter& obj);
 	ICharacter& operator=(const ICharacter& obj);
