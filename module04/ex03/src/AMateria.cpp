@@ -1,5 +1,7 @@
 #include <AMateria.hpp>
 
+#include "ICharacter.hpp"
+
 AMateria::AMateria() : _type("")
 {
 	std::cout << "AMateria constructor called" << std::endl;
@@ -32,3 +34,9 @@ const std::string& AMateria::getType() const
 {
 	return _type;
 }
+
+void AMateria::use(ICharacter& target)
+{
+	std::cout << "* does nothing to " << target.getName() << " *" << std::endl;
+}
+

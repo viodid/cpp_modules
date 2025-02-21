@@ -1,6 +1,9 @@
 #include <Character.hpp>
 #include <cstring>
 
+#include "Cure.hpp"
+#include "Ice.hpp"
+
 Character::Character() : _name("")
 {
 	std::cout << "Character constructor called" << std::endl;
@@ -83,7 +86,9 @@ void Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx > 3)
 		return;
-	std::cout << "Something here: " << _inventory[idx];
-	AMateria::use(target);
+	if (_inventory[idx]->getType() == "ice")
+		Ice().use(target);
+	else
+		Cure().use(target);
 }
 

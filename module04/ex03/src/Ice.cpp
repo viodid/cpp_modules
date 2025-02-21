@@ -17,9 +17,10 @@ Ice::~Ice()
 	std::cout << "Ice destructor called" << std::endl;
 }
 
-Ice& Ice::operator=(const Ice& obj) : AMateria(obj.getType())
+Ice& Ice::operator=(const Ice& obj)
 {
 	std::cout << "Ice copy constructor called" << std::endl;
+	_type = obj.getType();
 	return *this;
 }
 

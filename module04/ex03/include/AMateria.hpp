@@ -16,7 +16,7 @@ protected:
 
 public:
 	AMateria(const std::string& type);
-	~AMateria();
+	virtual ~AMateria();
 
 	const std::string& getType() const;
 	virtual AMateria* clone() const = 0;

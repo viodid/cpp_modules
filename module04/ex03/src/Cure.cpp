@@ -17,9 +17,10 @@ Cure::~Cure()
 	std::cout << "Cure destructor called" << std::endl;
 }
 
-Cure& Cure::operator=(const Cure& obj) : AMateria(obj.getType())
+Cure& Cure::operator=(const Cure& obj)
 {
 	std::cout << "Cure copy constructor called" << std::endl;
+	_type = obj.getType();
 	return *this;
 }
 
