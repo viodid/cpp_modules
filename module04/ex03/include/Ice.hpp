@@ -11,6 +11,8 @@ protected:
 public:
 	Ice();
 	~Ice();
+	AMateria* clone() const;
+	void use(ICharacter& target);
 };
 
 #endif
