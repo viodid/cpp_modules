@@ -39,3 +39,51 @@ Character& Character::operator=(const Character& obj)
 	}
 	return *this;
 }
+
+Character::~Character()
+{
+	std::cout << "Character destructor called" << std::endl;
+	for (int i = 0; i < 4; i++)
+	{
+		if (_inventory[i] == NULL)
+			continue;
+		delete _inventory[i];
+	}
+	delete _inventory;
+}
+
+const std::string& Character::getName() const
+{
+	return _name;
+}
+
+AMateria** Character::getInventory() const
+{
+	return _inventory;
+}
+
+void Character::equip(AMateria* m)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (_inventory[i] != NULL)
+			continue;
+		_inventory[i] = m;
+	}
+}
+
+void Character::unequip(int idx)
+{
+	if (idx < 0 || idx > 3)
+		return;
+	_inventory[idx] = NULL;
+}
+
+void Character::use(int idx, ICharacter& target)
+{
+	if (idx < 0 || idx > 3)
+		return;
+	std::cout << "Something here: " << _inventory[idx];
+	AMateria::use(target);
+}
+
