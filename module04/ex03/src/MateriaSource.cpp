@@ -47,6 +47,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& obj)
 		if (_inventory[i] == NULL)
 			break;
 	}
+	return *this;
 }
 
 void MateriaSource::learnMateria(AMateria* materia)
@@ -54,8 +55,10 @@ void MateriaSource::learnMateria(AMateria* materia)
 	for (int i = 0; i < 4; i++)
 	{
 		if (_inventory[i] == NULL)
-			continue;
-		_inventory[i] = materia;
+		{
+			_inventory[i] = materia;
+			break;
+		}
 	}
 }
 

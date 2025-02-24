@@ -71,9 +71,11 @@ void Character::equip(AMateria* m)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		if (_inventory[i] != NULL)
-			continue;
-		_inventory[i] = m;
+		if (_inventory[i] == NULL)
+		{
+			_inventory[i] = m;
+			break;
+		}
 	}
 }
 
