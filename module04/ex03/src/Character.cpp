@@ -22,6 +22,8 @@ Character::Character(const Character& obj)
 {
 	std::cout << "Character copy constructor called" << std::endl;
 	_name = obj.getName();
+	_inventory = new AMateria*[4];
+	std::memset(_inventory, 0, sizeof(AMateria*) * 4);
 	for (int i = 0; i < 4; i++)
 	{
 		_inventory[i] = obj.getInventory()[i];
