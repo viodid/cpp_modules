@@ -54,7 +54,7 @@ Character::~Character()
 			continue;
 		delete _inventory[i];
 	}
-	delete _inventory;
+	delete [] _inventory;
 }
 
 const std::string& Character::getName() const
@@ -90,9 +90,8 @@ void Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx > 3)
 		return;
-	if (_inventory[idx]->getType() == "ice")
+	if (_inventory[idx] != NULL && _inventory[idx]->getType() == "ice")
 		Ice().use(target);
-	else
+	if (_inventory[idx] != NULL && _inventory[idx]->getType() == "cure")
 		Cure().use(target);
 }
-

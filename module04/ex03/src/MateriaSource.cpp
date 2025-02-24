@@ -33,7 +33,7 @@ MateriaSource::~MateriaSource()
 			continue;
 		delete _inventory[i];
 	}
-	delete _inventory;
+	delete [] _inventory;
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& obj)
