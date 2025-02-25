@@ -26,6 +26,7 @@ Cure& Cure::operator=(const Cure& obj)
 
 AMateria* Cure::clone() const
 {
+	std::cout << "Cure clone mem func called" << std::endl;
 	return new Cure();
 }
 

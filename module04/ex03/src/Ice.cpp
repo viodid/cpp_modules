@@ -26,6 +26,7 @@ Ice& Ice::operator=(const Ice& obj)
 
 AMateria* Ice::clone() const
 {
+	std::cout << "Ice clone mem func called" << std::endl;
 	return new Ice();
 }
 
