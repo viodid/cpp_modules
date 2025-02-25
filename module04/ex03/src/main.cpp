@@ -5,9 +5,9 @@
 
 int main()
 {
-	Character alice;
-	Character eve;
-	ICharacter* bob = new Character("bob");
+	Character alice("Alice");
+	Character eve("Eve");
+	ICharacter* bob = new Character("Bob");
 
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
@@ -23,7 +23,7 @@ int main()
 	bob->unequip(3);
 	bob->equip(tmp->clone());
 
-	alice.use(0, eve);
+	alice.use(0, *bob);
 	alice.use(1, eve);
 	eve.use(0, eve);
 	bob->use(0, alice);
