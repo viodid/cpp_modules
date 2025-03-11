@@ -6,7 +6,7 @@ int display_usage_err(const std::string& program_name)
 	return (1);
 }
 
-int hash_level(const std::string& level)
+int match_level(const std::string& level)
 {
 	if (level == "DEBUG")
 		return 0;
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 		return display_usage_err(argv[0]);
 
 	Harl harl = Harl();
-	switch (hash_level(level))
+	switch (match_level(level))
 	{
 	case 0:
 		harl.complain("DEBUG");
@@ -49,6 +49,9 @@ int main(int argc, char* argv[])
 		harl.complain("ERROR");
 		break;
 	case 3:
+		harl.complain("ERROR");
+		break;
+    default:
 		harl.complain("ERROR");
 		break;
 	}
