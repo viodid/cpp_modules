@@ -1,7 +1,7 @@
 #include "../include/Zombie.hpp"
 #include <cstdlib>
 
-Zombie* zombieHorde(const int N, const std::string name)
+Zombie* zombieHorde(const int N, std::string name)
 {
 	if (N < 1)
 	{
