@@ -43,7 +43,10 @@ int Fixed::getRawBits() const
 	return _value;
 }
 
-void Fixed::setRawBits(const int raw) {this->value = raw;}
+void Fixed::setRawBits(const int raw)
+{
+    _value = raw;
+}
 
 float Fixed::toFloat() const
 {
