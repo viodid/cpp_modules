@@ -11,7 +11,7 @@ public:
 	Fixed& operator=(Fixed& copy);
 	~Fixed();
 
-	int getRawBits();
+	int getRawBits() const;
 	void setRawBits(int raw);
 
 private:
