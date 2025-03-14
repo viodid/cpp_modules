@@ -29,6 +29,9 @@ int Fixed::getRawBits() const
 	return _value;
 }
 
-void Fixed::setRawBits(int const raw) {(void)raw;}
+void Fixed::setRawBits(int const raw)
+{
+    _value = raw;
+}
 
 
