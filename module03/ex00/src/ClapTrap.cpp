@@ -1,5 +1,17 @@
 #include "../include/ClapTrap.hpp"
 
+ClapTrap::ClapTrap() :_name("defaul name"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+{
+	std::cout << "Default constructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap(ClapTrap& obj)
+{
+	std::cout << "Copy constructor called" << std::endl;
+    _name = obj.
+	_value = copy.getRawBits();
+}
+
 
 ClapTrap::ClapTrap(const std::string& name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
