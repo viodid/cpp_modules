@@ -1,16 +1,19 @@
 #ifndef FRAGTRAP_H
-# define FRAGTRAP_H
+#define FRAGTRAP_H
 
-# include "ClapTrap.hpp"
+#include "ClapTrap.hpp"
 
-class FragTrap : virtual public ClapTrap
-{
+class FragTrap : public virtual ClapTrap {
 public:
-	FragTrap(const std::string& name);
-	~FragTrap();
+    FragTrap();
+    FragTrap(const std::string& name);
+    FragTrap(const FragTrap& obj);
+    ~FragTrap();
 
-	void attack(const std::string& target);
-	void highFivesGuys() const;
+    FragTrap& operator=(const FragTrap& obj);
+
+    void attack(const std::string& target);
+    void highFivesGuys() const;
 };
 
 #endif

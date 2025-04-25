@@ -32,6 +32,18 @@ ClapTrap::~ClapTrap()
     std::cout << "ClapTrap destructor called" << std::endl;
 }
 
+ClapTrap& ClapTrap::operator=(const ClapTrap& obj)
+{
+    std::cout << "ClapTrap copy assignment operator called" << std::endl;
+    if (this != &obj) {
+        _name = obj.getName();
+        _hitPoints = obj.getHitPoints();
+        _energyPoints = obj.getEnergPoints();
+        _attackDamage = obj.getAttackDamage();
+    }
+    return *this;
+}
+
 void ClapTrap::attack(const std::string& target)
 {
     if (_hitPoints <= 0) {
