@@ -1,25 +1,32 @@
 #ifndef CLAPTRAP_H
-# define CLAPTRAP_H
-#include <string>
-#include <ostream>
+#define CLAPTRAP_H
 #include <iostream>
+#include <ostream>
+#include <string>
 
-class ClapTrap
-{
+class ClapTrap {
 public:
-	ClapTrap(const std::string& name);
+    ClapTrap();
+    ClapTrap(const std::string& name);
     ClapTrap(const ClapTrap& obj);
-	~ClapTrap();
+    ~ClapTrap();
     ClapTrap& operator=(const ClapTrap& obj);
 
-	void attack(const std::string& target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
+    int getAttackDamage() const;
+    int getHitPoints() const;
+    int getEnergPoints() const;
+    std::string getName() const;
+
+    void attack(const std::string& target);
+    void takeDamage(unsigned int amount);
+    void beRepaired(unsigned int amount);
+    void decreaseEnergy();
+
 protected:
-	const std::string _name;
-	int _hitPoints;
-	int _energyPoints;
-	int _attackDamage;
+    std::string _name;
+    int _hitPoints;
+    int _energyPoints;
+    int _attackDamage;
 };
 
 #endif
