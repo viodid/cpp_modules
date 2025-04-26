@@ -1,13 +1,12 @@
 #include "../include/Animal.hpp"
 #include "../include/Cat.hpp"
 #include "../include/Dog.hpp"
-// #include <algorithm>
 
 #define ARR_LEN 4
 
 int main()
 {
-    const Animal* arr[100];
+    const Animal* arr[ARR_LEN];
     for (int i = 0; i < ARR_LEN / 2; i++)
         arr[i] = new Dog;
     for (int i = ARR_LEN / 2; i < ARR_LEN; i++)

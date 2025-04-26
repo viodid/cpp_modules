@@ -9,6 +9,7 @@ public:
     Cat(const Cat& obj);
     ~Cat();
     Cat& operator=(const Cat& obj);
+
     void makeSound() const;
     Brain* getBrain() const;
     void showIdeas() const;
