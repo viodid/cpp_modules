@@ -16,10 +16,14 @@ int main()
         delete arr[i];
     }
 
-    const Dog dog;
-    const Dog copyDog(dog);
-    std::cout << "dog:\t\t" << dog.getBrain() << std::endl;
-    std::cout << "copyDog:\t" << copyDog.getBrain() << std::endl;
+    std::cout << "------" << std::endl;
+
+    Dog basic;
+    std::cout << "basic:\t\t" << basic.getBrain() << std::endl;
+    {
+        Dog tmp = basic;
+        std::cout << "tmp:\t\t" << tmp.getBrain() << std::endl;
+    }
 
     return (0);
 }
