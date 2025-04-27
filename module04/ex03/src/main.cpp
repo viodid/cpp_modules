@@ -9,24 +9,24 @@ int main()
     Character eve("Eve");
     ICharacter* bob = new Character("Bob");
 
-    IMateriaSource* src = new MateriaSource();
-    src->learnMateria(new Ice());
-    src->learnMateria(new Cure());
+    MateriaSource src;
+    src.learnMateria(new Ice());
+    src.learnMateria(new Cure());
 
     AMateria* tmp;
-    tmp = src->createMateria("cure");
+    tmp = src.createMateria("cure");
     alice.equip(tmp);
-    tmp = src->createMateria("cure");
+    tmp = src.createMateria("cure");
     alice.equip(tmp);
-    tmp = src->createMateria("cure");
+    tmp = src.createMateria("cure");
     alice.equip(tmp);
-    tmp = src->createMateria("cure");
+    tmp = src.createMateria("cure");
     alice.equip(tmp);
     MateriaSource newMS;
     newMS.learnMateria(new Ice());
     AMateria* extra = newMS.createMateria("ice");
     alice.equip(extra);
-    tmp = src->createMateria("ice");
+    tmp = src.createMateria("ice");
     eve.equip(tmp);
     bob->unequip(3);
     bob->equip(tmp->clone());
@@ -38,7 +38,6 @@ int main()
     eve.use(0, eve);
     bob->use(0, alice);
     delete bob;
-    delete src;
     delete extra;
 
     return 0;
