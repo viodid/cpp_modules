@@ -1,42 +1,42 @@
-#include <AMateria.hpp>
+#include "../include/AMateria.hpp"
+#include "../include/ICharacter.hpp"
 
-#include "ICharacter.hpp"
-
-AMateria::AMateria() : _type("")
+AMateria::AMateria()
+    : _type("")
 {
-	std::cout << "AMateria constructor called" << std::endl;
+    std::cout << "AMateria constructor called" << std::endl;
 }
 
-AMateria::AMateria(const std::string& type) : _type(type)
+AMateria::AMateria(const std::string& type)
+    : _type(type)
 {
-	std::cout << "AMateria constructor called" << std::endl;
+    std::cout << "AMateria constructor called" << std::endl;
 }
 
 AMateria::AMateria(const AMateria& obj)
 {
-	std::cout << "AMateria copy constructor called" << std::endl;
-	_type = obj.getType();
+    std::cout << "AMateria copy constructor called" << std::endl;
+    _type = obj.getType();
 }
 
 AMateria::~AMateria()
 {
-	std::cout << "AMateria destructor called" << std::endl;
+    std::cout << "AMateria destructor called" << std::endl;
 }
 
 AMateria& AMateria::operator=(const AMateria& obj)
 {
-	std::cout << "AMateria copy constructor called" << std::endl;
-	_type = obj.getType();
-	return *this;
+    std::cout << "AMateria copy constructor called" << std::endl;
+    _type = obj.getType();
+    return *this;
 }
 
 const std::string& AMateria::getType() const
 {
-	return _type;
+    return _type;
 }
 
 void AMateria::use(ICharacter& target)
 {
-	std::cout << "* does nothing to " << target.getName() << " *" << std::endl;
+    std::cout << "* does nothing to " << target.getName() << " *" << std::endl;
 }
-
