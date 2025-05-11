@@ -15,3 +15,21 @@ Bureaucrat::Bureaucrat(const std::string& name, uint grade)
         throw Bureaucrat::GradeTooLowException("Grade too low.");
     }
 }
+
+Bureaucrat::Bureaucrat(const Bureaucrat& copy) { }
+
+Bureaucrat::Bureaucrat operator=(const Bureaucrat& copy) { }
+
+void Bureaucrat::incremetGrade()
+{
+    if (_grade == 1) {
+        throw Bureaucrat::GradeTooHighException("Cannot increment grade beyond 1.");
+    }
+}
+
+void Bureaucrat::decrementGrade()
+{
+    if (_grade == 150) {
+        throw Bureaucrat::GradeTooLowException("Cannot decrement grade beyond 150.");
+    }
+}

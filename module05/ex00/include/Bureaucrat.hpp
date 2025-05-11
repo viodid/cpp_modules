@@ -16,8 +16,10 @@ public:
     ~Bureaucrat();
     Bureaucrat& operator=(const Bureaucrat& copy);
 
-    const std::string& getName();
-    uint getGrade();
+    const std::string& getName() const;
+    uint getGrade() const;
+    void incremetGrade();
+    void decrementGrade();
 
     class GradeTooHighException : public std::exception {
     private:
