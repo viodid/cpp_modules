@@ -6,7 +6,7 @@ Bureaucrat::Bureaucrat()
 {
 }
 
-Bureaucrat::Bureaucrat(const std::string& name, uint grade)
+Bureaucrat::Bureaucrat(const std::string& name, int grade)
     : _name(name)
 {
     if (grade < 1) {
@@ -18,7 +18,7 @@ Bureaucrat::Bureaucrat(const std::string& name, uint grade)
 
 Bureaucrat::Bureaucrat(const Bureaucrat& copy) { }
 
-Bureaucrat::Bureaucrat operator=(const Bureaucrat& copy) { }
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& copy) { }
 
 void Bureaucrat::incremetGrade()
 {
@@ -33,3 +33,11 @@ void Bureaucrat::decrementGrade()
         throw Bureaucrat::GradeTooLowException("Cannot decrement grade beyond 150.");
     }
 }
+
+// Exception classes
+Bureaucrat::GradeTooHighException::GradeTooHighException(std::string error)
+    : _error(error)
+{
+}
+
+Bureaucrat::GradeTooHighException::~GradeTooHighException() { }
