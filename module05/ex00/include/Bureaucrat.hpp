@@ -22,25 +22,11 @@ public:
     void decrementGrade();
 
     class GradeTooHighException : public std::exception {
-    private:
-        std::string _error;
-
-    public:
-        GradeTooHighException(std::string error);
-        ~GradeTooHighException() throw();
-
-        const std::string& getError() const;
+        const char* what() const throw();
     };
 
     class GradeTooLowException : public std::exception {
-    private:
-        std::string _error;
-
-    public:
-        GradeTooLowException(std::string error);
-        ~GradeTooLowException() throw();
-
-        const std::string& getError() const;
+        const char* what() const throw();
     };
 };
 #endif

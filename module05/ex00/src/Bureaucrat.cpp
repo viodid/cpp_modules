@@ -10,9 +10,9 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade)
     : _name(name)
 {
     if (grade < 1) {
-        throw Bureaucrat::GradeTooHighException("Grade too high.");
+        throw Bureaucrat::GradeTooHighException();
     } else if (grade > 150) {
-        throw Bureaucrat::GradeTooLowException("Grade too low.");
+        throw Bureaucrat::GradeTooLowException();
     }
 }
 
@@ -23,21 +23,24 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& copy) { }
 void Bureaucrat::incremetGrade()
 {
     if (_grade == 1) {
-        throw Bureaucrat::GradeTooHighException("Cannot increment grade beyond 1.");
+        throw Bureaucrat::GradeTooHighException();
     }
 }
 
 void Bureaucrat::decrementGrade()
 {
     if (_grade == 150) {
-        throw Bureaucrat::GradeTooLowException("Cannot decrement grade beyond 150.");
+        throw Bureaucrat::GradeTooLowException();
     }
 }
 
 // Exception classes
-Bureaucrat::GradeTooHighException::GradeTooHighException(std::string error)
-    : _error(error)
+const char* Bureaucrat::Bureaucrat::GradeTooHighException::what() const throw()
 {
+    return ("Grade is too high!");
 }
 
-Bureaucrat::GradeTooHighException::~GradeTooHighException() { }
+const char* Bureaucrat::Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return ("Grade is too low!");
+}
