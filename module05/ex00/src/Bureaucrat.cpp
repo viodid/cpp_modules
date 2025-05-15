@@ -23,7 +23,10 @@ Bureaucrat::Bureaucrat(const Bureaucrat& copy)
 {
 }
 
-Bureaucrat::~Bureaucrat() { }
+Bureaucrat::~Bureaucrat()
+{
+    std::cout << "Bureaucrat " << _name << " destructor called" << std::endl;
+}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& copy)
 {
