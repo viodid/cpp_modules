@@ -1,7 +1,8 @@
-#include "../include/Bureaucrat.hpp"
+#include "../include/Form.hpp"
 
 int main(void)
 {
+    Form f;
     Bureaucrat bob("Bob", 42);
     Bureaucrat* alice = new Bureaucrat;
     std::cout << bob << std::endl;
