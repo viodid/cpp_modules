@@ -13,11 +13,17 @@ int main(void)
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
+    ana.decrementGrade();
+    ana.decrementGrade();
+    std::cout << ana << std::endl;
     try {
         alice->decrementGrade();
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
+    alice->incremetGrade();
+    alice->incremetGrade();
+    std::cout << *alice << std::endl;
     delete alice;
     try {
         Bureaucrat foo("Foo", 255);
