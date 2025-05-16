@@ -3,16 +3,16 @@
 Form::Form()
     : _name("undefined")
     , _signed(false)
-    , _execute_grade(150)
     , _sign_grade(150)
+    , _execute_grade(150)
 {
 }
 
 Form::Form(const std::string& name, int sign_grade, int execute_grade)
     : _name(name)
     , _signed(false)
-    , _execute_grade(execute_grade)
     , _sign_grade(sign_grade)
+    , _execute_grade(execute_grade)
 {
     if (sign_grade < 1 || execute_grade < 1) {
         throw Bureaucrat::GradeTooHighException();
@@ -24,8 +24,8 @@ Form::Form(const std::string& name, int sign_grade, int execute_grade)
 Form::Form(const Form& copy)
     : _name(copy.getName())
     , _signed(copy.isSigned())
-    , _execute_grade(copy.getExecuteGrade())
     , _sign_grade(copy.getSignGrade())
+    , _execute_grade(copy.getExecuteGrade())
 {
 }
 
@@ -52,12 +52,12 @@ bool Form::isSigned() const
     return _signed;
 }
 
-const int Form::getSignGrade() const
+int Form::getSignGrade() const
 {
     return _sign_grade;
 }
 
-const int Form::getExecuteGrade() const
+int Form::getExecuteGrade() const
 {
     return _execute_grade;
 }

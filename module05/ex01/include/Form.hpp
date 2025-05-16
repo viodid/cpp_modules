@@ -2,6 +2,10 @@
 #define FORM_H
 
 #include "Bureaucrat.hpp"
+#include <exception>
+#include <iostream>
+
+class Bureaucrat;
 
 class Form {
 private:
@@ -19,8 +23,8 @@ public:
 
     const std::string& getName() const;
     bool isSigned() const;
-    const int getSignGrade() const;
-    const int getExecuteGrade() const;
+    int getSignGrade() const;
+    int getExecuteGrade() const;
     void beSigned(Bureaucrat b);
 
     class GradeTooHighException : public std::exception {
