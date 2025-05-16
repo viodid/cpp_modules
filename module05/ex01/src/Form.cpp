@@ -69,22 +69,22 @@ void Form::beSigned(Bureaucrat b)
     _signed = true;
 }
 
-// TODO: from here
-
 // Exception classes
-const char* Bureaucrat::Bureaucrat::GradeTooHighException::what() const throw()
+const char* Form::Form::GradeTooHighException::what() const throw()
 {
     return ("Grade is too high!");
 }
 
-const char* Bureaucrat::Bureaucrat::GradeTooLowException::what() const throw()
+const char* Form::Form::GradeTooLowException::what() const throw()
 {
     return ("Grade is too low!");
 }
 
 // Overload operator
-std::ostream& operator<<(std::ostream& out, const Bureaucrat& b)
+std::ostream& operator<<(std::ostream& out, const Form& f)
 {
-    out << b.getName() << ", bureaucrat grade " << b.getGrade() << "." << std::endl;
+    out << "Form: " << f.getName() << "\nIs it signed: " << f.isSigned()
+        << "Required grade to signed it: " << f.getSignGrade()
+        << "Required grade to execute it: " << f.getExecuteGrade() << std::endl;
     return out;
 }
