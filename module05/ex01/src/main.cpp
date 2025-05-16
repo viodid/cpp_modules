@@ -3,28 +3,17 @@
 
 int main(void)
 {
-    Form f;
+    Form f("form-A", 42, 10);
+    std::cout << f << std::endl;
     Bureaucrat bob("Bob", 42);
-    Bureaucrat* alice = new Bureaucrat;
+    Bureaucrat alice("Alice", 150);
     std::cout << bob << std::endl;
-    std::cout << *alice << std::endl;
-    std::cout << "====" << std::endl;
-    Bureaucrat ana("Ana", 1);
+    std::cout << alice << std::endl;
     try {
-        ana.incremetGrade();
+        bob.signForm(f);
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
-    try {
-        alice->decrementGrade();
-    } catch (std::exception& e) {
-        std::cout << e.what() << std::endl;
-    }
-    delete alice;
-    try {
-        Bureaucrat foo("Foo", 255);
-    } catch (std::exception& e) {
-        std::cout << e.what() << std::endl;
-    }
+    // TODO: more tests
     return 0;
 }
