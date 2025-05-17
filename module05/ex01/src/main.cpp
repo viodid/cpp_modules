@@ -11,9 +11,9 @@ int main(void)
     std::cout << alice << std::endl;
     try {
         bob.signForm(f);
+        alice.signForm(f);
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
-    // TODO: more tests
     return 0;
 }
