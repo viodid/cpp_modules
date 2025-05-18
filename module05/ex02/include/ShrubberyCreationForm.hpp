@@ -5,11 +5,7 @@
 
 class ShrubberyCreationForm : public AForm {
 private:
-    const std::string _name;
     const std::string _target;
-    bool _signed;
-    const int _sign_grade;
-    const int _execute_grade;
 
 public:
     ShrubberyCreationForm();
@@ -18,6 +14,7 @@ public:
     ~ShrubberyCreationForm();
     ShrubberyCreationForm& operator=(const ShrubberyCreationForm& copy);
 
+    const std::string& getTarget() const;
     void excecute(const Bureaucrat& executor) const;
 };
 #endif

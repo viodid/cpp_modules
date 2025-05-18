@@ -1,42 +1,39 @@
 #include "../include/ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : _name("undefined")
+    : AForm("undefined", 145, 137)
     , _target("undefined")
-    , _signed(false)
-    , _sign_grade(145)
-    , _execute_grade(137)
 {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& name, const std::string& target)
-    : _name(name)
+    : AForm(name, 145, 137)
     , _target(target)
-    , _signed(false)
-    , _sign_grade(145)
-    , _execute_grade(137)
 {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy)
-    : _name(copy.getName())
-    , _signed(copy.isSigned())
-    , _sign_grade(copy.getSignGrade())
-    , _execute_grade(copy.getExecuteGrade())
+    : AForm(copy.getName(), copy.getSignGrade(), copy.getExecuteGrade())
+    , _target(copy.getTarget())
 {
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-    std::cout << "ShrubberyCreationForm " << _name << " destructor called" << std::endl;
+    std::cout << "ShrubberyCreationForm " << getName() << " destructor called" << std::endl;
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& copy)
 {
     if (this != &copy) {
-        _signed = copy.isSigned();
+        setSign(copy.isSigned());
     }
     return *this;
+}
+
+const std::string& ShrubberyCreationForm::getTarget() const
+{
+    return _target;
 }
 
 void ShrubberyCreationForm::excecute(const Bureaucrat& executor) const
