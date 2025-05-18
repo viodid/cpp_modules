@@ -8,7 +8,7 @@ ShrubberyCreationForm::ShrubberyCreationForm()
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& name, const std::string& target)
     : AForm(name, 145, 137)
-    , _target(target)
+    , _target(target + "_shrubbery")
 {
 }
 
@@ -38,4 +38,9 @@ const std::string& ShrubberyCreationForm::getTarget() const
 
 void ShrubberyCreationForm::excecute(const Bureaucrat& executor) const
 {
+    (void)executor;
+    std::ifstream f;
+    f.open(_target.c_str(), std::ios::out);
+    std::cout.write("test input file\n", 42);
+    f.close();
 }

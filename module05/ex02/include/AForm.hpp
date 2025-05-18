@@ -19,7 +19,7 @@ public:
     AForm();
     AForm(const std::string& name, int sign_grade, int execute_grade);
     AForm(const AForm& copy);
-    ~AForm();
+    virtual ~AForm();
     AForm& operator=(const AForm& copy);
 
     const std::string& getName() const;
