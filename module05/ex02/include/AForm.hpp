@@ -3,6 +3,7 @@
 
 #include "Bureaucrat.hpp"
 #include <exception>
+#include <fstream>
 #include <iostream>
 
 class Bureaucrat;
@@ -23,11 +24,12 @@ public:
 
     const std::string& getName() const;
     bool isSigned() const;
+    void setSign(bool sign);
     int getSignGrade() const;
     int getExecuteGrade() const;
     void beSigned(Bureaucrat& b);
 
-    virtual void excecute(const Bureaucrat& executor) const = 0; // TODO: from here
+    virtual void excecute(const Bureaucrat& executor) const = 0;
 
     class GradeTooHighException : public std::exception {
         const char* what() const throw();

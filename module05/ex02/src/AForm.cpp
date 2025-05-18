@@ -52,6 +52,11 @@ bool AForm::isSigned() const
     return _signed;
 }
 
+void AForm::setSign(bool sign)
+{
+    _signed = sign;
+}
+
 int AForm::getSignGrade() const
 {
     return _sign_grade;
