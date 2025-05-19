@@ -85,6 +85,15 @@ const char* AForm::AForm::GradeTooLowException::what() const throw()
     return ("Grade is too low!");
 }
 
+void AForm::checkRequirements(Bureaucrat& b) const
+{
+    if (isSigned() == false) {
+        throw FormIsNotSigned();
+    } else if (b.getGrade() > getExecuteGrade()) {
+        throw GradeTooLowException();
+    }
+}
+
 // Overload operator
 std::ostream& operator<<(std::ostream& out, const AForm& f)
 {

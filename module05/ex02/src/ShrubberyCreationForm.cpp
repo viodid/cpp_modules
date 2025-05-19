@@ -38,7 +38,7 @@ const std::string& ShrubberyCreationForm::getTarget() const
 
 void ShrubberyCreationForm::excecute(const Bureaucrat& executor) const
 {
-    (void)executor;
+    checkRequirements(executor);
     std::ofstream f;
     f.open(_target.c_str(), std::ios::out);
     f << "      /\\\n";
