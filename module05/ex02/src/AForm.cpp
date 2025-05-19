@@ -77,15 +77,15 @@ void AForm::beSigned(Bureaucrat& b)
 // Exception classes
 const char* AForm::AForm::GradeTooHighException::what() const throw()
 {
-    return ("Grade is too high!");
+    return ("Grade is too high!\n");
 }
 
 const char* AForm::AForm::GradeTooLowException::what() const throw()
 {
-    return ("Grade is too low!");
+    return ("Grade is too low!\n");
 }
 
-void AForm::checkRequirements(Bureaucrat& b) const
+void AForm::checkRequirements(const Bureaucrat& b) const
 {
     if (isSigned() == false) {
         throw FormIsNotSigned();
@@ -106,5 +106,5 @@ std::ostream& operator<<(std::ostream& out, const AForm& f)
 // Exception classes
 const char* AForm::AForm::FormIsNotSigned::what() const throw()
 {
-    return ("Form is not signed!");
+    return ("Form is not signed, cannot be executed!\n");
 }

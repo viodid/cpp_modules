@@ -73,15 +73,26 @@ void Bureaucrat::signForm(AForm& f)
     std::cout << _name << " signed " << f.getName() << std::endl;
 }
 
+void Bureaucrat::executeForm(const AForm& form) const
+{
+    try {
+        form.excecute(*this);
+    } catch (std::exception& e) {
+        std::cout << "Form: " << form.getName()
+                  << " cannot be executed because "
+                  << e.what();
+    }
+}
+
 // Exception classes
 const char* Bureaucrat::Bureaucrat::GradeTooHighException::what() const throw()
 {
-    return ("Grade is too high!");
+    return ("Grade is too high!\n");
 }
 
 const char* Bureaucrat::Bureaucrat::GradeTooLowException::what() const throw()
 {
-    return ("Grade is too low!");
+    return ("Grade is too low!\n");
 }
 
 // Overload operator
