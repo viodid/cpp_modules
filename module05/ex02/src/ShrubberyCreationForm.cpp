@@ -1,13 +1,13 @@
 #include "../include/ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : AForm("undefined", 145, 137)
+    : AForm("Shrubbery Form", 145, 137)
     , _target("undefined")
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& name, const std::string& target)
-    : AForm(name, 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
+    : AForm("Shrubbery Form", 145, 137)
     , _target(target + "_shrubbery")
 {
 }

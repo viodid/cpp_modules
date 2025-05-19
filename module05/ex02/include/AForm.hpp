@@ -3,7 +3,6 @@
 
 #include "Bureaucrat.hpp"
 #include <exception>
-#include <fstream>
 #include <iostream>
 
 class Bureaucrat;
@@ -36,6 +35,10 @@ public:
     };
 
     class GradeTooLowException : public std::exception {
+        const char* what() const throw();
+    };
+
+    class FormIsNotSigned : public std::exception {
         const char* what() const throw();
     };
 };

@@ -93,3 +93,9 @@ std::ostream& operator<<(std::ostream& out, const AForm& f)
         << "\nRequired grade to execute it: " << f.getExecuteGrade() << std::endl;
     return out;
 }
+
+// Exception classes
+const char* AForm::AForm::FormIsNotSigned::what() const throw()
+{
+    return ("Form is not signed!");
+}
