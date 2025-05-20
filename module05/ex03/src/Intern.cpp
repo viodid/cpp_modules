@@ -33,7 +33,7 @@ AForm* Intern::makePresidentialForm(const std::string& target)
     return new PresidentialPardonForm(target);
 }
 
-AForm* Intern::makeForm(const std::string& f_name, const std::string& f_target)
+AForm* Intern::makeForm(const std::string& name, const std::string& target)
 {
     int option = 0;
     AForm* (Intern::* forms[3])(const std::string&) = {
@@ -49,5 +49,11 @@ AForm* Intern::makeForm(const std::string& f_name, const std::string& f_target)
     };
 
     for (int i = 0; i < 3; i++) {
+        if (name == names[i]) {
+            std::cout << "Intern creates " << name << std::endl;
+            return (this->*(forms[i]))(target);
+        }
     }
+    std::cout << "Invalid form name!" << std::endl;
+    return NULL;
 }
