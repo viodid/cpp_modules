@@ -51,4 +51,5 @@ void ShrubberyCreationForm::excecute(const Bureaucrat& executor) const
     f << "      ||\n";
     f << "      ||\n";
     f.close();
+    std::cout << getName() << " executed!" << std::endl;
 }

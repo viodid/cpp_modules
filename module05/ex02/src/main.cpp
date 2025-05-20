@@ -6,16 +6,20 @@
 
 int main(void)
 {
-    AForm* f = new ShrubberyCreationForm("superfile");
-    std::cout << *f << std::endl;
+    std::cout << "== BUREAUCRAT INITIALIZATION ==" << std::endl;
     Bureaucrat bob("Bob", 42);
     std::cout << bob << std::endl;
+    std::cout << "== SHRUBBERY FORM ==" << std::endl;
+    AForm* f = new ShrubberyCreationForm("superfile");
+    std::cout << *f << std::endl;
     bob.signForm(*f);
     bob.executeForm(*f);
+    std::cout << "== ROBOTOMY FORM ==" << std::endl;
     RobotomyRequestForm rf("Ford");
     std::cout << rf << std::endl;
     bob.signForm(rf);
     bob.executeForm(rf);
+    std::cout << "== PRESIDENTIAL FORM ==" << std::endl;
     PresidentialPardonForm pf("Marvin");
     std::cout << pf << std::endl;
     bob.signForm(pf);
@@ -24,6 +28,9 @@ int main(void)
     std::cout << alice << std::endl;
     alice.signForm(pf);
     alice.executeForm(pf);
+    Bureaucrat vp("Vice President", 2);
+    std::cout << vp << std::endl;
+    vp.executeForm(pf);
     std::cout << "== DESTRUCTORS ==" << std::endl;
     delete f;
     return 0;
