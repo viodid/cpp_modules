@@ -6,6 +6,7 @@ Intern::Intern()
 
 Intern::Intern(const Intern& copy)
 {
+    (void)copy;
 }
 
 Intern::~Intern()
@@ -15,6 +16,7 @@ Intern::~Intern()
 
 Intern& Intern::operator=(const Intern& copy)
 {
+    (void)copy;
     return *this;
 }
 
@@ -35,14 +37,13 @@ AForm* Intern::makePresidentialForm(const std::string& target)
 
 AForm* Intern::makeForm(const std::string& name, const std::string& target)
 {
-    int option = 0;
     AForm* (Intern::* forms[3])(const std::string&) = {
         &Intern::makeShrubberyForm,
         &Intern::makeRobotomyForm,
         &Intern::makePresidentialForm,
     };
 
-    const std::string names[3] {
+    const std::string names[3] = {
         "shrubbery",
         "robotomy",
         "presidential",

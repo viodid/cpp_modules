@@ -14,6 +14,8 @@ public:
     Intern& operator=(const Intern& copy);
 
     AForm* makeForm(const std::string& name, const std::string& target);
+
+private:
     AForm* makeShrubberyForm(const std::string& target);
     AForm* makeRobotomyForm(const std::string& target);
     AForm* makePresidentialForm(const std::string& target);
