@@ -2,7 +2,9 @@
 #define INTERN_H
 
 #include "AForm.hpp"
-#include <exception>
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 class Intern {
 public:
@@ -12,14 +14,9 @@ public:
     Intern& operator=(const Intern& copy);
 
     AForm* makeForm(const std::string& name, const std::string& target);
-
-    class GradeTooHighException : public std::exception {
-        const char* what() const throw();
-    };
-
-    class GradeTooLowException : public std::exception {
-        const char* what() const throw();
-    };
+    AForm* makeShrubberyForm(const std::string& target);
+    AForm* makeRobotomyForm(const std::string& target);
+    AForm* makePresidentialForm(const std::string& target);
 };
 
 #endif
