@@ -15,3 +15,8 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& cp)
         *this = cp;
     return *this;
 }
+
+void ScalarConverter::convert(std::string& literal)
+{
+    std::cout << std::stoi(literal) << std::endl;
+}
