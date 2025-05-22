@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+test
 megaphone
 phonebook
 job
@@ -44,6 +45,7 @@ animals
 materia
 bsp
 bureaucrat
+convert
 
 #IDE
 .idea
