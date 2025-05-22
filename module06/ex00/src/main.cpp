@@ -6,8 +6,8 @@ int main(int argc, char** argv)
         std::cerr << "Wrong number of args: "
                   << argv[0] << " [literal]"
                   << std::endl;
+        exit(EXIT_FAILURE);
     }
-    std::string str = argv[1];
-    ScalarConverter::convert(str);
+    ScalarConverter::convert(argv[1]);
     return 0;
 }

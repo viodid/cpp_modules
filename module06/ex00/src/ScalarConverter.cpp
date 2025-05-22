@@ -16,7 +16,13 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& cp)
     return *this;
 }
 
-void ScalarConverter::convert(std::string& literal)
+bool ScalarConverter::isChar(const std::string& str)
 {
-    std::cout << std::stoi(literal) << std::endl;
+    if (str.length() == 1 && std::isprint(str.c_str()[0]))
+        return true;
+    return false;
+}
+
+void ScalarConverter::convert(const std::string& str)
+{
 }
