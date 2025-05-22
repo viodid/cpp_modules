@@ -1,6 +1,8 @@
 #ifndef SCALAR_H
 #define SCALAR_H
 
+#include <cctype>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 
@@ -13,9 +15,9 @@ private:
     ScalarConverter& operator=(const ScalarConverter& cp);
 
     static bool isChar(const std::string& str);
-    static bool isInt(const std::string& str);
     static bool isDouble(const std::string& str);
     static bool isFloat(const std::string& str);
+    static bool isInt(const std::string& str);
 
 public:
     static void convert(const std::string& str);
