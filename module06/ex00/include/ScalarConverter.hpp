@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 
+#define DIGITS "0123456789"
+
 class ScalarConverter {
 private:
     ScalarConverter();

@@ -23,7 +23,10 @@ bool ScalarConverter::isChar(const std::string& str)
 
 bool ScalarConverter::isInt(const std::string& str)
 {
-    return std::atoi(str.c_str()) != 0;
+    bool signal = false;
+    if (str[0] == '-')
+        signal = true;
+    return str.find_first_not_of(DIGITS, signal) == str.npos;
 }
 
 bool ScalarConverter::isDouble(const std::string& str)
@@ -38,7 +41,12 @@ void ScalarConverter::convert(const std::string& str)
 }
 
 // TODO: add tests
-int main(void)
+int main(int argc, char** argv)
 {
+    if (argc != 2) {
+        std::cout << "Usage: ./test <str>" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    ScalarConverter::convert(argv[1]);
     return 0;
 }
