@@ -34,16 +34,26 @@ bool ScalarConverter::isDouble(const std::string& str)
     size_t dot = str.find('.');
     if (dot == str.npos)
         return false;
+    if (str[dot + 1] == '-')
+        return false;
     if (!isInt(str.substr(0, dot))
         || !isInt(str.substr(dot + 1, str.size())))
         return false;
     return true;
 }
 
+bool ScalarConverter::isFloat(const std::string& str)
+{
+    if (!isDouble(str.substr(0, str.size() - 2)))
+        return false;
+    return str[str.size() - 1] == 'f';
+}
+
 void ScalarConverter::convert(const std::string& str)
 {
     std::cout << "isInt:\t\t" << isInt(str) << std::endl;
     std::cout << "isDouble:\t" << isDouble(str) << std::endl;
+    std::cout << "isFloat:\t" << isFloat(str) << std::endl;
 }
 
 int main(int argc, char** argv)
