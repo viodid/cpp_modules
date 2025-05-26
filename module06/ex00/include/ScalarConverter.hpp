@@ -20,6 +20,7 @@ private:
     static bool isDouble(const std::string& str);
     static bool isFloat(const std::string& str);
     static bool isInt(const std::string& str);
+    static bool isInf(const std::string& str);
 
 public:
     static void convert(const std::string& str);

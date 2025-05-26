@@ -26,6 +26,8 @@ bool ScalarConverter::isInt(const std::string& str)
     bool signal = false;
     if (str[0] == '-')
         signal = true;
+    if (str.size() - signal == 0)
+        return false;
     return str.find_first_not_of(DIGITS, signal) == str.npos;
 }
 
@@ -42,15 +44,25 @@ bool ScalarConverter::isDouble(const std::string& str)
     return true;
 }
 
+bool ScalarConverter::isInf(const std::string& str)
+{
+    if (str == "-inff" || str == "+inff"
+        || str == "nanf" || str == "-inf"
+        || str == "+inf" || str == "nan")
+        return true;
+    return false;
+}
+
 bool ScalarConverter::isFloat(const std::string& str)
 {
-    if (!isDouble(str.substr(0, str.size() - 2)))
+    if (!isDouble(str.substr(0, str.size() - 1)))
         return false;
     return str[str.size() - 1] == 'f';
 }
 
 void ScalarConverter::convert(const std::string& str)
 {
+    std::cout << "isChar:\t\t" << isChar(str) << std::endl;
     std::cout << "isInt:\t\t" << isInt(str) << std::endl;
     std::cout << "isDouble:\t" << isDouble(str) << std::endl;
     std::cout << "isFloat:\t" << isFloat(str) << std::endl;
