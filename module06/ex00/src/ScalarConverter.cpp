@@ -98,6 +98,14 @@ void ScalarConverter::convertFromInt(const std::string& str)
         std::cout << "double: " << std::strtod(str.c_str(), NULL) << std::endl;
 }
 
+void ScalarConverter::convertFromInf()
+{
+    std::cout << "char:\t\t" << "impossible" << std::endl;
+    std::cout << "int:\t\t" << "impossible" << std::endl;
+    std::cout << "float:\t\t" << "nanf" << std::endl;
+    std::cout << "double:\t\t" << "nan" << std::endl;
+}
+
 void ScalarConverter::convert(const std::string& str)
 {
     std::cout << "isChar:\t\t" << isChar(str) << std::endl;
@@ -107,10 +115,12 @@ void ScalarConverter::convert(const std::string& str)
     std::cout << "isInf:\t\t" << isInf(str) << std::endl;
     if (isChar(str))
         convertFromChar(str);
-    else if (isInf(str))
-        convertFromInf(str);
-    else
+    else if (isInt(str) || isDouble(str) || isFloat(str))
         convertFromInt(str);
+    else if (isInf(str))
+        convertFromInf();
+    else
+        std::cout << "impossible conversion" << std::endl;
 }
 
 int main(int argc, char** argv)
