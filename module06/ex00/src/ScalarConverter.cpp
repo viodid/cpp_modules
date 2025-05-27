@@ -60,17 +60,12 @@ bool ScalarConverter::isInf(const std::string& str)
     return false;
 }
 
-void ScalarConverter::convertToChar(const std::string& str)
+void ScalarConverter::convertFromChar(const std::string& str)
 {
     if (std::isprint(str[0]))
         std::cout << "char: '" << static_cast<char>(str[0]) << "'" << std::endl;
     else
         std::cout << "char: " << "non displayable" << std::endl;
-}
-
-void ScalarConverter::convertFromChar(const std::string& str)
-{
-    convertToChar(str);
     std::cout << "int: " << static_cast<int>(str[0]) << std::endl;
     std::cout << "double: " << static_cast<double>(str[0]) << std::endl;
     std::cout << "float: " << static_cast<float>(str[0]) << std::endl;
@@ -78,23 +73,29 @@ void ScalarConverter::convertFromChar(const std::string& str)
 
 void ScalarConverter::convertFromInt(const std::string& str)
 {
-    convertToChar(str);
     long double n = std::strtold(str.c_str(), NULL);
+    if (n > std::numeric_limits<char>::max()
+        || n < std::numeric_limits<char>::min())
+        std::cout << "char: " << "overflows" << std::endl;
+    else if (std::isprint(n))
+        std::cout << "char: '" << static_cast<char>(n) << "'" << std::endl;
+    else
+        std::cout << "char: " << "non displayable" << std::endl;
     if (n > std::numeric_limits<int>::max()
         || n < std::numeric_limits<int>::min())
         std::cout << "int: " << "overflows" << std::endl;
     else
         std::cout << "int: " << std::atoi(str.c_str()) << std::endl;
+    if (n > std::numeric_limits<float>::max()
+        || n < -std::numeric_limits<float>::max())
+        std::cout << "float: " << "overflows" << std::endl;
+    else
+        std::cout << "float: " << std::strtof(str.c_str(), NULL) << "f" << std::endl;
     if (n > std::numeric_limits<double>::max()
-        || n < std::numeric_limits<double>::min())
+        || n < -std::numeric_limits<double>::max())
         std::cout << "double: " << "overflows" << std::endl;
     else
         std::cout << "double: " << std::strtod(str.c_str(), NULL) << std::endl;
-    if (n > std::numeric_limits<float>::max()
-        || n < std::numeric_limits<float>::min())
-        std::cout << "float: " << "overflows" << std::endl;
-    else
-        std::cout << "float: " << std::strtof(str.c_str(), NULL) << std::endl;
 }
 
 void ScalarConverter::convert(const std::string& str)
@@ -107,7 +108,7 @@ void ScalarConverter::convert(const std::string& str)
     if (isChar(str))
         convertFromChar(str);
     else if (isInf(str))
-        convertFromInt(str);
+        convertFromInf(str);
     else
         convertFromInt(str);
 }
