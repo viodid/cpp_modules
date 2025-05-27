@@ -44,6 +44,13 @@ bool ScalarConverter::isDouble(const std::string& str)
     return true;
 }
 
+bool ScalarConverter::isFloat(const std::string& str)
+{
+    if (!isDouble(str.substr(0, str.size() - 1)))
+        return false;
+    return str[str.size() - 1] == 'f';
+}
+
 bool ScalarConverter::isInf(const std::string& str)
 {
     if (str == "-inff" || str == "+inff"
@@ -53,11 +60,12 @@ bool ScalarConverter::isInf(const std::string& str)
     return false;
 }
 
-bool ScalarConverter::isFloat(const std::string& str)
+void ScalarConverter::convertFromChar(const std::string& str)
 {
-    if (!isDouble(str.substr(0, str.size() - 1)))
-        return false;
-    return str[str.size() - 1] == 'f';
+    if (std::isprint(str[0]))
+        std::cout << "char: '" << static_cast<char>(str[0]) << "'" << std::endl;
+    else
+        std::cout << "char: " << "non displayable" << std::endl;
 }
 
 void ScalarConverter::convert(const std::string& str)
@@ -66,6 +74,13 @@ void ScalarConverter::convert(const std::string& str)
     std::cout << "isInt:\t\t" << isInt(str) << std::endl;
     std::cout << "isDouble:\t" << isDouble(str) << std::endl;
     std::cout << "isFloat:\t" << isFloat(str) << std::endl;
+    std::cout << "isInf:\t\t" << isInf(str) << std::endl;
+    if (isChar(str))
+        convertFromChar(str);
+    else if (isInf(str))
+        convertFromInt(str);
+    else
+        convertFromInt(str);
 }
 
 int main(int argc, char** argv)

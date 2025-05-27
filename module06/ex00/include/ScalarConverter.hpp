@@ -22,6 +22,10 @@ private:
     static bool isInt(const std::string& str);
     static bool isInf(const std::string& str);
 
+    static void convertFromChar(const std::string& str);
+    static void convertFromInt(const std::string& str);
+    static void convertFromInf(const std::string& str);
+
 public:
     static void convert(const std::string& str);
 };
