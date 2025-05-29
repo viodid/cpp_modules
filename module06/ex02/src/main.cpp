@@ -2,5 +2,7 @@
 
 int main(void)
 {
+    Base* base = generate();
+    std::cout << base << std::endl;
     return 0;
 }
