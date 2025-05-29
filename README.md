@@ -13,3 +13,5 @@ c++ exercises
 **module_04**: 16h
 
 **module_05**: 13.5h
+
+**module_06**: 8.5h
