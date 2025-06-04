@@ -43,3 +43,9 @@ T* Array<T>::getArr() const
 {
     return _arr;
 }
+
+template <typename T>
+const char* Array<T>::Array::IndexOutOfBounds::what() const throw()
+{
+    return ("Index out of bounds!\n");
+}
