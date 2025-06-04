@@ -1,7 +1,8 @@
 BINARY		= array
 CC			= c++
 OPT			= -g3
-FLAGS		= -Wall -Wextra -Werror -std=c++98 $(OPT)
+INCLUDES	= ./include
+FLAGS		= -Wall -Wextra -Werror -std=c++98 $(OPT) -I$(INCLUDES)
 SRC			= src
 CPPFILES	= $(shell find $(SRC) -type f -name '*.cpp')
 TESTCPP		= $(shell find $(SRC) -type f -name '*.cpp' | grep -v 'main.cpp')
