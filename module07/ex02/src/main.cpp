@@ -1,5 +1,7 @@
 #include "../include/Array.hpp"
-#include <iostream>
-#include <ostream>
 
-int main(void) { return 0; }
+int main(void)
+{
+    Array<int> a(3);
+    return 0;
+}
