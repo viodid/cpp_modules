@@ -16,8 +16,8 @@ public:
     ~Array();
     Array& operator=(const Array& cp);
 
-    T& operator[](int i) const;
-    unsigned int getSize() const;
+    T& operator[](unsigned int i) const;
+    unsigned int size() const;
     T* getArr() const;
 
     class IndexOutOfBounds : public std::exception {
