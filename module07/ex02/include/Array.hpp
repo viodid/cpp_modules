@@ -2,6 +2,12 @@
 #define ARRAY_H
 
 #include <exception>
+#include <string>
+
+typedef struct s_test {
+    int n;
+    std::string s;
+} t_test;
 
 template <typename T>
 class Array {
@@ -14,6 +20,7 @@ public:
     Array(unsigned int n);
     Array(const Array& cp);
     ~Array();
+
     Array& operator=(const Array& cp);
 
     T& operator[](unsigned int i) const;
