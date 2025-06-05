@@ -33,10 +33,24 @@ Array<T>::~Array()
 }
 
 template <typename T>
+Array<T>& Array<T>::operator=(const Array& cp)
+{
+    if (cp == *this)
+        return this;
+    delete[] _arr;
+    _size = cp.size();
+    _arr = new T(cp.size());
+    for (unsigned int i = 0; i < cp.size(); i++) {
+        _arr[i] = cp.getArr()[i];
+    }
+    return *this;
+}
+
+template <typename T>
 T& Array<T>::operator[](unsigned int i) const
 {
     if (i >= _size)
-        throw Array<T>::IndexOutOfBounds();
+        throw IndexOutOfBounds();
     return _arr[i];
 }
 
@@ -55,5 +69,5 @@ T* Array<T>::getArr() const
 template <typename T>
 const char* Array<T>::Array::IndexOutOfBounds::what() const throw()
 {
-    return ("Index out of bounds!\n");
+    return ("Index out of bounds!");
 }
