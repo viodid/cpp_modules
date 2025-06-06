@@ -31,6 +31,6 @@ public:
         const char* what() const throw();
     };
 };
-#include "Array.cpp"
+#include "Array.tpp"
 
 #endif
