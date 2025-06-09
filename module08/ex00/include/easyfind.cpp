@@ -1,17 +1,10 @@
 #include "easyfind.hpp"
 
 template <typename T>
-T easyfind(T t, int n)
+T easyfind(T t, int toBeFound)
 {
-    T e = t.begin();
-    while (true) {
-        if (e == t)
-            break;
-        if (e == t.end())
-            throw ValueNotFound();
-        e = e++;
-    }
-    return t;
+    // TODO: use find and already containers member functions
+    typename T::iterator it;
 }
 
 const char* ValueNotFound::what() const throw()
