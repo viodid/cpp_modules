@@ -5,17 +5,10 @@
 #include <string>
 
 template <typename T>
-T easyfind(T t, int n)
-{
-    T e = t.begin();
-    while (true) {
-        if (e == t)
-            break;
-        if (e == t.end())
-            throw;
-        e = e++;
-    }
-    return t;
-}
+T easyfind(T t, int n);
+
+class ValueNotFound : public std::exception {
+    virtual const char* what() const throw();
+};
 
 #endif
