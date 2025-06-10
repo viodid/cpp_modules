@@ -5,6 +5,8 @@
 
 int main(void)
 {
+    // TODO: use random and iterators to fill up the containers
+    // Use 4 types of containers
     try {
         std::vector<int> v;
         v.push_back(3);
