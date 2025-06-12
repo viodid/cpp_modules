@@ -1,14 +1,14 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
+#include <algorithm>
 #include <exception>
-#include <string>
+#include <set>
 
-template <typename T>
 class Span {
 private:
-    T* _arr;
-    unsigned int _size;
+    std::set<int> _s;
+    unsigned int _len;
 
 public:
     Span();
@@ -18,14 +18,11 @@ public:
 
     Span& operator=(const Span& cp);
 
-    T& operator[](unsigned int i) const;
-    unsigned int size() const;
-    T* getArr() const;
+    unsigned int getLen() const;
 
     class IndexOutOfBounds : public std::exception {
         const char* what() const throw();
     };
 };
-#include "Span.cpp"
 
 #endif
