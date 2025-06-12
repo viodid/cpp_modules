@@ -11,8 +11,6 @@ static void fillContainer(T* t);
 
 int main(void)
 {
-    // TODO: use random and iterators to fill up the containers
-    // Use 4 types of containers
     std::vector<int>* v = new std::vector<int>;
     std::list<int>* l = new std::list<int>;
     srand(time(NULL));
