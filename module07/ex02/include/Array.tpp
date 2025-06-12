@@ -35,8 +35,8 @@ Array<T>::~Array()
 template <typename T>
 Array<T>& Array<T>::operator=(const Array& cp)
 {
-    if (cp == *this)
-        return this;
+    if (&cp == this)
+        return *this;
     delete[] _arr;
     _size = cp.size();
     _arr = new T(cp.size());
