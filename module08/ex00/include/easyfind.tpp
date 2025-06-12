@@ -15,7 +15,7 @@ typename T::iterator easyfind(T t, int toBeFound)
 
 const char* ValueNotFound::what() const throw()
 {
-    return "Value not found in container\n";
+    return "Value not found in container";
 }
 
 #endif
