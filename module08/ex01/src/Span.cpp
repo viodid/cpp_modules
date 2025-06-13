@@ -33,6 +33,17 @@ void Span::addNumber(unsigned int n)
 {
     _v.push_back(n);
 }
+unsigned int Span::shortestSpan() const
+{
+    std::sort(_v.begin(), _v.end());
+}
+
+unsigned int Span::longestSpan() const
+{
+    unsigned int smallest = *(std::min_element(_v.begin(), _v.end()));
+    unsigned int largest = *(std::max_element(_v.begin(), _v.end()));
+    return largest - smallest;
+}
 
 const char* Span::Span::NotFound::what() const throw()
 {
