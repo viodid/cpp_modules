@@ -3,11 +3,11 @@
 
 #include <algorithm>
 #include <exception>
-#include <set>
+#include <vector>
 
 class Span {
 private:
-    std::set<int> _s;
+    std::vector<int> _v;
     unsigned int _len;
 
 public:
@@ -19,8 +19,11 @@ public:
     Span& operator=(const Span& cp);
 
     unsigned int getLen() const;
+    void addNumber(unsigned int n);
+    unsigned int shortestSpan() const;
+    unsigned int longestSpan() const;
 
-    class IndexOutOfBounds : public std::exception {
+    class NotFound : public std::exception {
         const char* what() const throw();
     };
 };

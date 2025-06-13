@@ -29,7 +29,12 @@ unsigned int Span::getLen() const
     return _len;
 }
 
-const char* Span::Span::IndexOutOfBounds::what() const throw()
+void Span::addNumber(unsigned int n)
+{
+    _v.push_back(n);
+}
+
+const char* Span::Span::NotFound::what() const throw()
 {
     return ("Index out of bounds!");
 }
