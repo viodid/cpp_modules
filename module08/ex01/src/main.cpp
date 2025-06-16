@@ -22,10 +22,12 @@ int main(void)
 
 static Span fillSpan(Span& s)
 {
+    std::vector<int> inputVector;
     for (int i = 0; i < SIZE; i++) {
         int randN = rand() % 20;
         std::cout << "index " << i + 1 << ":\t" << randN << std::endl;
-        s.addNumber(randN);
+        inputVector.push_back(randN);
     }
+    s.insertVector(inputVector);
     return s;
 }

@@ -43,7 +43,7 @@ unsigned int Span::shortestSpan() const
     std::sort(cp.begin(), cp.end());
     std::vector<int>::iterator it = cp.begin();
     int range = *(it + 1) - *it;
-    for (it = cp.begin(); it != cp.end(); it++) {
+    for (it = cp.begin(); it != cp.end() - 1; it++) {
         int exp = *(it + 1) - *it;
         if (exp < range)
             range = exp;
@@ -58,6 +58,15 @@ unsigned int Span::longestSpan() const
     unsigned int smallest = *(std::min_element(_v.begin(), _v.end()));
     unsigned int largest = *(std::max_element(_v.begin(), _v.end()));
     return largest - smallest;
+}
+
+/*
+ * This func inserts a range of iterators from the begining
+ * to the end of the input vector.
+ */
+void Span::insertVector(const std::vector<int> input)
+{
+    _v.insert(_v.begin(), input.begin(), input.end());
 }
 
 const char* Span::Span::NotFound::what() const throw()

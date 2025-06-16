@@ -22,6 +22,7 @@ public:
     void addNumber(unsigned int n);
     unsigned int shortestSpan() const;
     unsigned int longestSpan() const;
+    void insertVector(const std::vector<int> v);
 
     class NotFound : public std::exception {
         const char* what() const throw();
