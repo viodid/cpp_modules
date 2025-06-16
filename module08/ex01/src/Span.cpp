@@ -37,11 +37,24 @@ void Span::addNumber(unsigned int n)
 }
 unsigned int Span::shortestSpan() const
 {
-    std::sort(_v.begin(), _v.end());
+    if (_len <= 1)
+        throw NotFound();
+    std::vector<int> cp = _v;
+    std::sort(cp.begin(), cp.end());
+    std::vector<int>::iterator it;
+    int range = *(it + 1) - *it;
+    for (it = cp.begin(); it != cp.end(); it++) {
+        int exp = *(it + 1) - *it;
+        if (exp < range)
+            range = exp;
+    }
+    return abs(range);
 }
 
 unsigned int Span::longestSpan() const
 {
+    if (_len <= 1)
+        throw NotFound();
     unsigned int smallest = *(std::min_element(_v.begin(), _v.end()));
     unsigned int largest = *(std::max_element(_v.begin(), _v.end()));
     return largest - smallest;
