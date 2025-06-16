@@ -31,6 +31,8 @@ unsigned int Span::getLen() const
 
 void Span::addNumber(unsigned int n)
 {
+    if (_v.size() == _len)
+        throw LimitExceeded();
     _v.push_back(n);
 }
 unsigned int Span::shortestSpan() const
@@ -47,5 +49,10 @@ unsigned int Span::longestSpan() const
 
 const char* Span::Span::NotFound::what() const throw()
 {
-    return ("Index out of bounds!");
+    return ("Range cannot be found");
+}
+
+const char* Span::Span::LimitExceeded::what() const throw()
+{
+    return ("Size limit exceeded");
 }

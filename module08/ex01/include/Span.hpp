@@ -26,6 +26,9 @@ public:
     class NotFound : public std::exception {
         const char* what() const throw();
     };
+    class LimitExceeded : public std::exception {
+        const char* what() const throw();
+    };
 };
 
 #endif
