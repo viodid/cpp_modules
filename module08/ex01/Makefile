@@ -1,4 +1,4 @@
-BINARY		= array
+BINARY		= span
 CC			= c++
 OPT			= -g3
 INCLUDES	= ./include

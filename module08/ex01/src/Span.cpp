@@ -41,7 +41,7 @@ unsigned int Span::shortestSpan() const
         throw NotFound();
     std::vector<int> cp = _v;
     std::sort(cp.begin(), cp.end());
-    std::vector<int>::iterator it;
+    std::vector<int>::iterator it = cp.begin();
     int range = *(it + 1) - *it;
     for (it = cp.begin(); it != cp.end(); it++) {
         int exp = *(it + 1) - *it;
