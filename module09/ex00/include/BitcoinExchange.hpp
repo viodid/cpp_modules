@@ -12,10 +12,9 @@ class BitcoinExchange {
 private:
     std::map<std::string, float> _db;
 
-    void _validateRowData(const std::string& row) const;
-    void _validateDate(const std::string& date) const;
-    void _validateAmount(const std::string& amount) const;
-    void _calculateTotal(const std::string& date, const std::string& amount) const;
+    void _parseRowData(const std::string& row);
+    const std::string& _parseDate(const std::string& date) const;
+    unsigned int _parseAmount(const std::string& amount) const;
 
 public:
     BitcoinExchange();
@@ -24,6 +23,7 @@ public:
     BitcoinExchange& operator=(const BitcoinExchange& cp);
 
     void parseDataFromFile(const std::string& filePath);
+    void calculateTotal(const std::string& date, const std::string& amount) const;
 
     class ErrorOpenFile : public std::exception {
         virtual const char* what() const throw();

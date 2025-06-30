@@ -19,17 +19,30 @@ void BitcoinExchange::parseDataFromFile(const std::string& filePath)
     }
     std::string buffer;
     while (std::getline(file, buffer)) {
-        _validateRowData(buffer);
+        _parseRowData(buffer);
     }
     file.close();
 }
 
-void BitcoinExchange::_validateRowData(const std::string& row) const
+void BitcoinExchange::_parseRowData(const std::string& row)
 {
-    std::string cp = row;
-    std::string delimeter = "|";
-    _validateDate(cp.substr(0, cp.find_first_of(delimeter)));
-    _validateAmount(cp.substr(cp.find_first_of(delimeter), cp.size()));
+    const std::string delimeter = "|";
+    const std::string whitespace = " \t";
+    const std::string untrimmedDate = row.substr(0, row.find_first_of(delimeter));
+    std::string date = _parseDate(
+        untrimmedDate.substr(
+            untrimmedDate.find_first_not_of(whitespace),
+            untrimmedDate.find_last_not_of(whitespace)));
+    const std::string untrimmedAmount = row.substr(row.find_first_of(delimeter), row.size());
+    float amount = _parseAmount(untrimmedAmount.substr(
+        untrimmedAmount.find_first_not_of(whitespace),
+        untrimmedAmount.find_last_not_of(whitespace)));
+    _db[date] = amount;
 }
-void BitcoinExchange::_validateDate(const std::string& date) const { }
-void BitcoinExchange::_validateAmount(const std::string& amount) const { }
+const std::string& BitcoinExchange::_parseDate(const std::string& date) const
+{
+    return date;
+}
+unsigned int BitcoinExchange::_parseAmount(const std::string& amount) const
+{
+}
