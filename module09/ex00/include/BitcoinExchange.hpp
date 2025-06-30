@@ -2,6 +2,9 @@
 #define BITCOIN_HPP
 
 #include <cfloat>
+#include <exception>
+#include <fstream>
+#include <iostream>
 #include <map>
 #include <string>
 
@@ -21,6 +24,10 @@ public:
     BitcoinExchange& operator=(const BitcoinExchange& cp);
 
     void parseDataFromFile(const std::string& filePath);
+
+    class ErrorOpenFile : public std::exception {
+        virtual const char* what() const throw();
+    };
 };
 
 #endif
