@@ -41,6 +41,16 @@ void BitcoinExchange::_parseRowData(const std::string& row)
 }
 const std::string& BitcoinExchange::_parseDate(const std::string& date) const
 {
+    const std::string year = date.substr(0, date.find_first_of("-"));
+    if (year.size() != 4)
+        throw WrongDateFormat();
+    const std::string month = date.substr(year.size() - 1, date.find_first_of("-"));
+    if (month.size() != 2)
+        throw WrongDateFormat();
+    const std::string day = date.substr(year.size() + month.size() - 1);
+    if (month.size() != 2)
+        throw WrongDateFormat();
+    int iyear = atoi(year.c_str());
     return date;
 }
 unsigned int BitcoinExchange::_parseAmount(const std::string& amount) const
