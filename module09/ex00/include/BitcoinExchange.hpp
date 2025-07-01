@@ -28,6 +28,9 @@ public:
     class ErrorOpenFile : public std::exception {
         virtual const char* what() const throw();
     };
+    class WrongDateFormat : public std::exception {
+        virtual const char* what() const throw();
+    };
 };
 
 #endif
