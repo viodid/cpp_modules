@@ -13,7 +13,8 @@ void BitcoinExchange::parseDataFromFile(const std::string& filePath)
 {
     std::cout << "Parsing DB into memory" << std::endl;
 
-    std::ifstream file(filePath);
+    std::ifstream file;
+    file.open(filePath.c_str());
     if (!file.is_open()) {
         throw ErrorOpenFile();
     }
@@ -29,15 +30,19 @@ void BitcoinExchange::_parseRowData(const std::string& row)
     const std::string delimeter = "|";
     const std::string whitespace = " \t";
     const std::string untrimmedDate = row.substr(0, row.find_first_of(delimeter));
-    t_date* date = _parseDate(
-        untrimmedDate.substr(
-            untrimmedDate.find_first_not_of(whitespace),
-            untrimmedDate.find_last_not_of(whitespace)));
-    const std::string untrimmedAmount = row.substr(row.find_first_of(delimeter), row.size());
-    float amount = _parseAmount(untrimmedAmount.substr(
-        untrimmedAmount.find_first_not_of(whitespace),
-        untrimmedAmount.find_last_not_of(whitespace)));
-    _db[date] = amount;
+    try {
+        t_date* date = _parseDate(
+            untrimmedDate.substr(
+                untrimmedDate.find_first_not_of(whitespace),
+                untrimmedDate.find_last_not_of(whitespace)));
+        const std::string untrimmedAmount = row.substr(row.find_first_of(delimeter), row.size());
+        float amount = _parseAmount(untrimmedAmount.substr(
+            untrimmedAmount.find_first_not_of(whitespace),
+            untrimmedAmount.find_last_not_of(whitespace)));
+        _db[date] = amount;
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 t_date* BitcoinExchange::_parseDate(const std::string& date) const
