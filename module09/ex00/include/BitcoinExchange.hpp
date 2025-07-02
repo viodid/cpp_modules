@@ -18,7 +18,7 @@ private:
 
     void _parseRowData(const std::string& row);
     t_date* _parseDate(const std::string& date) const;
-    unsigned int _parseAmount(const std::string& amount) const;
+    float _parseAmount(const std::string& amount) const;
 
 public:
     BitcoinExchange();
@@ -33,6 +33,12 @@ public:
         virtual const char* what() const throw();
     };
     class WrongDateFormat : public std::exception {
+        virtual const char* what() const throw();
+    };
+    class ValueTooLow : public std::exception {
+        virtual const char* what() const throw();
+    };
+    class ValueTooLarge : public std::exception {
         virtual const char* what() const throw();
     };
 };

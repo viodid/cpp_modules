@@ -39,6 +39,7 @@ void BitcoinExchange::_parseRowData(const std::string& row)
         untrimmedAmount.find_last_not_of(whitespace)));
     _db[date] = amount;
 }
+
 t_date* BitcoinExchange::_parseDate(const std::string& date) const
 {
     t_date* tm = new t_date;
@@ -48,8 +49,17 @@ t_date* BitcoinExchange::_parseDate(const std::string& date) const
     }
     return tm;
 }
-unsigned int BitcoinExchange::_parseAmount(const std::string& amount) const
+
+float BitcoinExchange::_parseAmount(const std::string& amount) const
 {
+    if (amount == "0" || amount == "0.0")
+        return 0;
+    if (amount.size() > 30)
+        throw ValueTooLarge();
+    float f = std::atof(amount.c_str());
+    if (f < 0)
+        throw ValueTooLow();
+    return f;
 }
 
 const char* BitcoinExchange::ErrorOpenFile::what() const throw()
@@ -60,4 +70,14 @@ const char* BitcoinExchange::ErrorOpenFile::what() const throw()
 const char* BitcoinExchange::WrongDateFormat ::what() const throw()
 {
     return "Error date: bad input";
+}
+
+const char* BitcoinExchange::ValueTooLow ::what() const throw()
+{
+    return "Error amount: value is negative";
+}
+
+const char* BitcoinExchange::ValueTooLarge ::what() const throw()
+{
+    return "Error amount: value too large";
 }
