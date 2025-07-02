@@ -7,6 +7,10 @@ BitcoinExchange::BitcoinExchange()
 BitcoinExchange::~BitcoinExchange()
 {
     std::cout << "Removing in memory DB" << std::endl;
+    std::map<t_date*, float>::iterator it;
+    for (it = _db.begin(); it != _db.end(); it++) {
+        delete it->first;
+    }
 }
 
 void BitcoinExchange::parseDataFromFile(const std::string& filePath)
@@ -19,10 +23,17 @@ void BitcoinExchange::parseDataFromFile(const std::string& filePath)
         throw ErrorOpenFile();
     }
     std::string buffer;
+    std::getline(file, buffer);
+    _parseHeader(buffer);
     while (std::getline(file, buffer)) {
         _parseRowData(buffer);
     }
     file.close();
+}
+
+void BitcoinExchange::_parseHeader(const std::string& header) const
+{
+    // TODO: check wether the csv file can contain different separators
 }
 
 void BitcoinExchange::_parseRowData(const std::string& row)
@@ -35,7 +46,7 @@ void BitcoinExchange::_parseRowData(const std::string& row)
             untrimmedDate.substr(
                 untrimmedDate.find_first_not_of(whitespace),
                 untrimmedDate.find_last_not_of(whitespace)));
-        const std::string untrimmedAmount = row.substr(row.find_first_of(delimeter), row.size());
+        const std::string untrimmedAmount = row.substr(row.find_first_of(delimeter), std::string::npos);
         float amount = _parseAmount(untrimmedAmount.substr(
             untrimmedAmount.find_first_not_of(whitespace),
             untrimmedAmount.find_last_not_of(whitespace)));
@@ -62,6 +73,8 @@ float BitcoinExchange::_parseAmount(const std::string& amount) const
     if (amount.size() > 30)
         throw ValueTooLarge();
     float f = std::atof(amount.c_str());
+    if (f > 1000)
+        throw ValueTooLarge();
     if (f < 0)
         throw ValueTooLow();
     return f;

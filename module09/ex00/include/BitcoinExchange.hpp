@@ -16,6 +16,7 @@ class BitcoinExchange {
 private:
     std::map<t_date*, float> _db;
 
+    void _parseHeader(const std::string& header) const;
     void _parseRowData(const std::string& row);
     t_date* _parseDate(const std::string& date) const;
     float _parseAmount(const std::string& amount) const;
