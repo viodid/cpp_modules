@@ -29,7 +29,7 @@ void BitcoinExchange::_parseRowData(const std::string& row)
     const std::string delimeter = "|";
     const std::string whitespace = " \t";
     const std::string untrimmedDate = row.substr(0, row.find_first_of(delimeter));
-    std::string date = _parseDate(
+    t_date* date = _parseDate(
         untrimmedDate.substr(
             untrimmedDate.find_first_not_of(whitespace),
             untrimmedDate.find_last_not_of(whitespace)));
@@ -39,19 +39,14 @@ void BitcoinExchange::_parseRowData(const std::string& row)
         untrimmedAmount.find_last_not_of(whitespace)));
     _db[date] = amount;
 }
-const std::string& BitcoinExchange::_parseDate(const std::string& date) const
+t_date* BitcoinExchange::_parseDate(const std::string& date) const
 {
-    const std::string year = date.substr(0, date.find_first_of("-"));
-    if (year.size() != 4)
+    t_date* tm = new t_date;
+    if (!strptime(date.c_str(), "%Y-%m-%d", tm)) {
+        delete tm;
         throw WrongDateFormat();
-    const std::string month = date.substr(year.size() - 1, date.find_first_of("-"));
-    if (month.size() != 2)
-        throw WrongDateFormat();
-    const std::string day = date.substr(year.size() + month.size() - 1);
-    if (month.size() != 2)
-        throw WrongDateFormat();
-    int iyear = atoi(year.c_str());
-    return date;
+    }
+    return tm;
 }
 unsigned int BitcoinExchange::_parseAmount(const std::string& amount) const
 {

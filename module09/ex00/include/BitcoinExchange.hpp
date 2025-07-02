@@ -8,13 +8,16 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <time.h>
+
+typedef struct tm t_date;
 
 class BitcoinExchange {
 private:
-    std::map<std::string, float> _db;
+    std::map<t_date*, float> _db;
 
     void _parseRowData(const std::string& row);
-    const std::string& _parseDate(const std::string& date) const;
+    t_date* _parseDate(const std::string& date) const;
     unsigned int _parseAmount(const std::string& amount) const;
 
 public:
