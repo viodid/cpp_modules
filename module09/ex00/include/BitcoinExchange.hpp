@@ -2,6 +2,7 @@
 #define BITCOIN_HPP
 
 #include <cfloat>
+#include <cstdlib>
 #include <exception>
 #include <fstream>
 #include <iostream>

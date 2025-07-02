@@ -56,3 +56,13 @@ const std::string& BitcoinExchange::_parseDate(const std::string& date) const
 unsigned int BitcoinExchange::_parseAmount(const std::string& amount) const
 {
 }
+
+const char* BitcoinExchange::ErrorOpenFile::what() const throw()
+{
+    return "Error: could not open file";
+}
+
+const char* BitcoinExchange::WrongDateFormat ::what() const throw()
+{
+    return "Error date: bad input";
+}
