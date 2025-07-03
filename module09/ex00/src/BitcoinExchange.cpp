@@ -18,6 +18,14 @@ BitcoinExchange::~BitcoinExchange()
     }
 }
 
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& cp) { (void)cp; }
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& cp)
+{
+    (void)cp;
+    return *this;
+}
+
 void BitcoinExchange::parseInputFile(const std::string& filePath)
 {
     std::cout << "Parsing DB into memory" << std::endl;
