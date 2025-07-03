@@ -4,6 +4,11 @@ BitcoinExchange::BitcoinExchange()
 {
 }
 
+BitcoinExchange::BitcoinExchange(const std::string& file_path)
+{
+    _parseDB();
+}
+
 BitcoinExchange::~BitcoinExchange()
 {
     std::cout << "Removing in memory DB" << std::endl;
@@ -13,7 +18,7 @@ BitcoinExchange::~BitcoinExchange()
     }
 }
 
-void BitcoinExchange::parseDataFromFile(const std::string& filePath)
+void BitcoinExchange::parseInputFile(const std::string& filePath)
 {
     std::cout << "Parsing DB into memory" << std::endl;
 
@@ -80,6 +85,7 @@ float BitcoinExchange::_parseAmount(const std::string& amount) const
     return f;
 }
 
+// Exceptions
 const char* BitcoinExchange::ErrorOpenFile::what() const throw()
 {
     return "Error: could not open file";

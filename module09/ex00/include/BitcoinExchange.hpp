@@ -21,14 +21,16 @@ private:
     t_date* _parseDate(const std::string& date) const;
     float _parseAmount(const std::string& amount) const;
 
+    void _parseDB();
+
 public:
     BitcoinExchange();
+    BitcoinExchange(const std::string& file_path);
     ~BitcoinExchange();
     BitcoinExchange(const BitcoinExchange& cp);
     BitcoinExchange& operator=(const BitcoinExchange& cp);
 
-    void parseDataFromFile(const std::string& filePath);
-    void calculateTotal(const std::string& date, const std::string& amount) const;
+    void parseInputFile(const std::string& filePath);
 
     class ErrorOpenFile : public std::exception {
         virtual const char* what() const throw();
