@@ -26,21 +26,36 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& cp)
     return *this;
 }
 
-void BitcoinExchange::parseInputFile(const std::string& filePath)
+void BitcoinExchange::_rowFileApply(void (BitcoinExchange::*f)(const std::string& content), std::ifstream& file)
+{
+    std::string buffer;
+    std::getline(file, buffer);
+    _parseHeader(buffer);
+    while (std::getline(file, buffer)) {
+        (this->*f)(buffer);
+    }
+}
+
+void BitcoinExchange::_parseDB()
 {
     std::cout << "Parsing DB into memory" << std::endl;
+    std::ifstream file;
+    file.open("../data.csv");
+    if (!file.is_open()) {
+        throw ErrorOpenFile();
+    }
+    _rowFileApply();
+    file.close();
+}
 
+void BitcoinExchange::parseInputFile(const std::string& filePath)
+{
     std::ifstream file;
     file.open(filePath.c_str());
     if (!file.is_open()) {
         throw ErrorOpenFile();
     }
-    std::string buffer;
-    std::getline(file, buffer);
-    _parseHeader(buffer);
-    while (std::getline(file, buffer)) {
-        _parseRowData(buffer);
-    }
+    _rowFileApply(&BitcoinExchange::_parseRowData, file);
     file.close();
 }
 
