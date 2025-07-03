@@ -26,16 +26,6 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& cp)
     return *this;
 }
 
-void BitcoinExchange::_rowFileApply(void (BitcoinExchange::*f)(const std::string& content), std::ifstream& file)
-{
-    std::string buffer;
-    std::getline(file, buffer);
-    _parseHeader(buffer);
-    while (std::getline(file, buffer)) {
-        (this->*f)(buffer);
-    }
-}
-
 void BitcoinExchange::_parseDB()
 {
     std::cout << "Parsing DB into memory" << std::endl;
@@ -46,6 +36,26 @@ void BitcoinExchange::_parseDB()
     }
     _rowFileApply();
     file.close();
+    std::cout << "DB created successfully" << std::endl;
+}
+
+void BitcoinExchange::_rowFileApply(void (BitcoinExchange::*f)(const std::string& content), std::ifstream& file)
+{
+    std::string buffer;
+    std::getline(file, buffer);
+    _parseHeader(buffer);
+    while (std::getline(file, buffer)) {
+        (this->*f)(buffer);
+    }
+}
+
+void BitcoinExchange::_parseRowDB(const std::string& row)
+{
+    std::string date = row.substr(0, row.find_first_of(","));
+    std::string price = row.substr(row.find_first_of(",") + 1, std::string::npos);
+    t_date* tdate = _parseDate(date);
+    float fprice = std::atof(price.c_str());
+    _db[tdate] = fprice;
 }
 
 void BitcoinExchange::parseInputFile(const std::string& filePath)
