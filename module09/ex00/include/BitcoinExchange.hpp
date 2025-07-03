@@ -45,6 +45,9 @@ public:
     class ValueTooLarge : public std::exception {
         virtual const char* what() const throw();
     };
+    class WrongHeader : public std::exception {
+        virtual const char* what() const throw();
+    };
 };
 
 #endif

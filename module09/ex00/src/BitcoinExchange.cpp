@@ -62,6 +62,10 @@ void BitcoinExchange::parseInputFile(const std::string& filePath)
 void BitcoinExchange::_parseHeader(const std::string& header) const
 {
     // TODO: check wether the csv file can contain different separators
+    if (header == "date,exchange_rate")
+        return;
+    if (header != "date | value")
+        throw WrongHeader();
 }
 
 void BitcoinExchange::_parseRowData(const std::string& row)
@@ -127,4 +131,9 @@ const char* BitcoinExchange::ValueTooLow ::what() const throw()
 const char* BitcoinExchange::ValueTooLarge ::what() const throw()
 {
     return "Error amount: value too large";
+}
+
+const char* BitcoinExchange::WrongHeader::what() const throw()
+{
+    return "Header is missing or have a wrong format";
 }
