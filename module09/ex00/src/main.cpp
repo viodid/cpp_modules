@@ -8,6 +8,7 @@ int main(int argc, char* argv[])
     }
     try {
         BitcoinExchange be;
+        be.parseInputFile(argv[1]);
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }

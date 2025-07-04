@@ -22,6 +22,7 @@ private:
     float _parseAmount(const std::string& amount) const;
     void _rowFileApply(void (BitcoinExchange::*f)(const std::string&), std::ifstream&);
     void _parseRowDB(const std::string& row);
+    float _calculateAmount(t_date* date, float amount);
 
     void _parseDB();
 

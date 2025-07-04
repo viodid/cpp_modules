@@ -100,7 +100,12 @@ void BitcoinExchange::_parseRowData(const std::string& row)
     try {
         t_date* date = _parseDate(sdate);
         float amount = _parseAmount(samount);
-        _db[date] = amount;
+        std::cout << date->tm_year
+                  << "-" << date->tm_mon
+                  << "-" << date->tm_mday
+                  << " => " << amount
+                  << " = " << _calculateAmount(date, amount)
+                  << std::endl;
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
@@ -118,6 +123,31 @@ float BitcoinExchange::_parseAmount(const std::string& amount) const
     if (f < 0)
         throw ValueTooLow();
     return f;
+}
+
+float BitcoinExchange::_calculateAmount(t_date* date, float amount)
+{
+    int year = date->tm_year;
+    int month = date->tm_mon;
+    int day = date->tm_mday;
+    std::map<t_date*, float>::iterator it = _db.end();
+    for (int diff = year - it->first->tm_year; diff < 0 and it != _db.begin(); it--) {
+        year = it->first->tm_year;
+    }
+    for (int diff = month - it->first->tm_mon; diff < 0 and it != _db.begin(); it--) {
+        month = it->first->tm_mon;
+        if (year != it->first->tm_year) {
+            it++;
+            break;
+        }
+    }
+    for (int diff = day - it->first->tm_mday; diff < 0 and it != _db.begin(); it--) {
+        if (month != it->first->tm_mon) {
+            it++;
+            break;
+        }
+    }
+    return it->second * amount;
 }
 
 // Exceptions
