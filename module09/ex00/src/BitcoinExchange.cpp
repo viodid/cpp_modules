@@ -35,16 +35,6 @@ void BitcoinExchange::_parseDB()
     std::cout << "DB created successfully" << std::endl;
 }
 
-void BitcoinExchange::_rowFileApply(void (BitcoinExchange::*f)(const std::string& content), std::ifstream& file)
-{
-    std::string buffer;
-    std::getline(file, buffer);
-    _parseHeader(buffer);
-    while (std::getline(file, buffer)) {
-        (this->*f)(buffer);
-    }
-}
-
 void BitcoinExchange::_parseRowDB(const std::string& row)
 {
     std::string date = row.substr(0, row.find_first_of(","));
@@ -52,50 +42,20 @@ void BitcoinExchange::_parseRowDB(const std::string& row)
     t_date* tdate = _parseDate(date);
     float fprice = std::atof(price.c_str());
     _db[tdate] = fprice;
-    std::cout << tdate->tm_year
-              << "-" << tdate->tm_mon
-              << "-" << tdate->tm_mday
-              << "\t" << fprice << std::endl;
+    // std::cout << tdate->tm_year
+    //           << "-" << tdate->tm_mon
+    //           << "-" << tdate->tm_mday
+    //           << "\t" << fprice << std::endl;
 }
 
-void BitcoinExchange::parseInputFile(const std::string& filePath)
-{
-    std::ifstream file;
-    file.open(filePath.c_str());
-    if (!file.is_open()) {
-        throw ErrorOpenFile();
-    }
-    _rowFileApply(&BitcoinExchange::_parseRowData, file);
-    file.close();
-}
+// generic helpers
 
 void BitcoinExchange::_parseHeader(const std::string& header) const
 {
-    // TODO: check wether the csv file can contain different separators
     if (header == "date,exchange_rate")
         return;
     if (header != "date | value")
         throw WrongHeader();
-}
-
-void BitcoinExchange::_parseRowData(const std::string& row)
-{
-    const std::string delimeter = "|";
-    const std::string whitespace = " \t";
-    const std::string untrimmedDate = row.substr(0, row.find_first_of(delimeter));
-    try {
-        t_date* date = _parseDate(
-            untrimmedDate.substr(
-                untrimmedDate.find_first_not_of(whitespace),
-                untrimmedDate.find_last_not_of(whitespace)));
-        const std::string untrimmedAmount = row.substr(row.find_first_of(delimeter), std::string::npos);
-        float amount = _parseAmount(untrimmedAmount.substr(
-            untrimmedAmount.find_first_not_of(whitespace),
-            untrimmedAmount.find_last_not_of(whitespace)));
-        _db[date] = amount;
-    } catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
 }
 
 t_date* BitcoinExchange::_parseDate(const std::string& date) const
@@ -108,6 +68,42 @@ t_date* BitcoinExchange::_parseDate(const std::string& date) const
     tm->tm_mon++;
     tm->tm_year = tm->tm_year + 1900;
     return tm;
+}
+
+void BitcoinExchange::_rowFileApply(void (BitcoinExchange::*f)(const std::string& content), std::ifstream& file)
+{
+    std::string buffer;
+    std::getline(file, buffer);
+    _parseHeader(buffer);
+    while (std::getline(file, buffer)) {
+        (this->*f)(buffer);
+    }
+}
+
+// Parse Input File
+void BitcoinExchange::parseInputFile(const std::string& filePath)
+{
+    std::ifstream file;
+    file.open(filePath.c_str());
+    if (!file.is_open()) {
+        throw ErrorOpenFile();
+    }
+    _rowFileApply(&BitcoinExchange::_parseRowData, file);
+    file.close();
+}
+
+void BitcoinExchange::_parseRowData(const std::string& row)
+{
+    const std::string delimeter = " | ";
+    const std::string sdate = row.substr(0, row.find_first_of(delimeter));
+    const std::string samount = row.substr(row.find_first_of(delimeter), std::string::npos);
+    try {
+        t_date* date = _parseDate(sdate);
+        float amount = _parseAmount(samount);
+        _db[date] = amount;
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 float BitcoinExchange::_parseAmount(const std::string& amount) const
