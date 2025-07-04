@@ -130,6 +130,7 @@ float BitcoinExchange::_calculateAmount(t_date* date, float amount)
     int year = date->tm_year;
     int month = date->tm_mon;
     int day = date->tm_mday;
+    // TODO: iterator cannot start with end (before end)
     std::map<t_date*, float>::iterator it = _db.end();
     for (int diff = year - it->first->tm_year; diff < 0 and it != _db.begin(); it--) {
         year = it->first->tm_year;
