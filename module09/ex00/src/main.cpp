@@ -6,9 +6,8 @@ int main(int argc, char* argv[])
         std::cerr << "Wrong number of arguments" << std::endl;
         std::cerr << "Usage: " << argv[0] << "[path to file]" << std::endl;
     }
-    BitcoinExchange be;
     try {
-        be.parseDataFromFile(argv[1]);
+        BitcoinExchange be;
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }

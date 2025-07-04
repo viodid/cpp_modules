@@ -2,10 +2,6 @@
 
 BitcoinExchange::BitcoinExchange()
 {
-}
-
-BitcoinExchange::BitcoinExchange(const std::string& file_path)
-{
     _parseDB();
 }
 
@@ -28,13 +24,13 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& cp)
 
 void BitcoinExchange::_parseDB()
 {
-    std::cout << "Parsing DB into memory" << std::endl;
     std::ifstream file;
-    file.open("../data.csv");
+    file.open("data.csv");
     if (!file.is_open()) {
         throw ErrorOpenFile();
     }
-    _rowFileApply();
+    std::cout << "Parsing DB into memory" << std::endl;
+    _rowFileApply(&BitcoinExchange::_parseRowDB, file);
     file.close();
     std::cout << "DB created successfully" << std::endl;
 }
@@ -56,6 +52,10 @@ void BitcoinExchange::_parseRowDB(const std::string& row)
     t_date* tdate = _parseDate(date);
     float fprice = std::atof(price.c_str());
     _db[tdate] = fprice;
+    std::cout << tdate->tm_year
+              << "-" << tdate->tm_mon
+              << "-" << tdate->tm_mday
+              << "\t" << fprice << std::endl;
 }
 
 void BitcoinExchange::parseInputFile(const std::string& filePath)
@@ -105,6 +105,8 @@ t_date* BitcoinExchange::_parseDate(const std::string& date) const
         delete tm;
         throw WrongDateFormat();
     }
+    tm->tm_mon++;
+    tm->tm_year = tm->tm_year + 1900;
     return tm;
 }
 

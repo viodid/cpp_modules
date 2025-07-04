@@ -27,7 +27,6 @@ private:
 
 public:
     BitcoinExchange();
-    BitcoinExchange(const std::string& file_path);
     ~BitcoinExchange();
     BitcoinExchange(const BitcoinExchange& cp);
     BitcoinExchange& operator=(const BitcoinExchange& cp);
