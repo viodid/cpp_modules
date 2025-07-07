@@ -95,8 +95,10 @@ void BitcoinExchange::parseInputFile(const std::string& filePath)
 void BitcoinExchange::_parseRowData(const std::string& row)
 {
     const std::string delimeter = " | ";
+    if (row.find(delimeter) == std::string::npos)
+        throw WrongInput();
     const std::string sdate = row.substr(0, row.find_first_of(delimeter));
-    const std::string samount = row.substr(row.find_first_of(delimeter), std::string::npos);
+    const std::string samount = row.substr(row.find_first_of(delimeter) + 3, std::string::npos);
     try {
         t_date* date = _parseDate(sdate);
         float amount = _parseAmount(samount);
@@ -122,6 +124,8 @@ float BitcoinExchange::_parseAmount(const std::string& amount) const
         throw ValueTooLarge();
     if (f < 0)
         throw ValueTooLow();
+    if (f == 0)
+        throw WrongInput();
     return f;
 }
 
@@ -130,24 +134,36 @@ float BitcoinExchange::_calculateAmount(t_date* date, float amount)
     int year = date->tm_year;
     int month = date->tm_mon;
     int day = date->tm_mday;
-    // TODO: iterator cannot start with end (before end)
     std::map<t_date*, float>::iterator it = _db.end();
-    for (int diff = year - it->first->tm_year; diff < 0 and it != _db.begin(); it--) {
-        year = it->first->tm_year;
+    it--; // last pair
+
+    int diff = it->first->tm_year - year;
+    while (diff > 0 && it != _db.begin()) {
+        it--;
+        diff = it->first->tm_year - year;
     }
-    for (int diff = month - it->first->tm_mon; diff < 0 and it != _db.begin(); it--) {
-        month = it->first->tm_mon;
-        if (year != it->first->tm_year) {
-            it++;
+    if (diff > 0 && it == _db.begin())
+        throw DateTooEarly();
+    year = it->first->tm_year;
+    diff = it->first->tm_mon - month;
+    while (diff > 0 && it != _db.begin()) {
+        if (year != it->first->tm_year)
+            return it->second * amount;
+        it--;
+        diff = it->first->tm_mon - month;
+    }
+    if (diff > 0 && it == _db.begin())
+        throw DateTooEarly();
+    month = it->first->tm_mon;
+    diff = it->first->tm_mday - day;
+    while (diff > 0 && it != _db.begin()) {
+        if (month != it->first->tm_mon)
             break;
-        }
+        it--;
+        diff = it->first->tm_mday - day;
     }
-    for (int diff = day - it->first->tm_mday; diff < 0 and it != _db.begin(); it--) {
-        if (month != it->first->tm_mon) {
-            it++;
-            break;
-        }
-    }
+    if (diff > 0 && it == _db.begin())
+        throw DateTooEarly();
     return it->second * amount;
 }
 
@@ -175,4 +191,14 @@ const char* BitcoinExchange::ValueTooLarge ::what() const throw()
 const char* BitcoinExchange::WrongHeader::what() const throw()
 {
     return "Header is missing or have a wrong format";
+}
+
+const char* BitcoinExchange::DateTooEarly::what() const throw()
+{
+    return "Date is too early, no records found.";
+}
+
+const char* BitcoinExchange::WrongInput::what() const throw()
+{
+    return "Error: wrong input format";
 }
