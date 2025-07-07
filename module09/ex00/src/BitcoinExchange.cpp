@@ -95,6 +95,7 @@ void BitcoinExchange::parseInputFile(const std::string& filePath)
 void BitcoinExchange::_parseRowData(const std::string& row)
 {
     const std::string delimeter = " | ";
+    // TODO: exits when exception is thrown
     if (row.find(delimeter) == std::string::npos)
         throw WrongInput();
     const std::string sdate = row.substr(0, row.find_first_of(delimeter));
@@ -102,9 +103,7 @@ void BitcoinExchange::_parseRowData(const std::string& row)
     try {
         t_date* date = _parseDate(sdate);
         float amount = _parseAmount(samount);
-        std::cout << date->tm_year
-                  << "-" << date->tm_mon
-                  << "-" << date->tm_mday
+        std::cout << sdate
                   << " => " << amount
                   << " = " << _calculateAmount(date, amount)
                   << std::endl;
