@@ -49,6 +49,12 @@ public:
     class WrongHeader : public std::exception {
         virtual const char* what() const throw();
     };
+    class DateTooEarly : public std::exception {
+        virtual const char* what() const throw();
+    };
+    class WrongInput : public std::exception {
+        const char* what() const throw();
+    };
 };
 
 #endif
