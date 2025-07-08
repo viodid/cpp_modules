@@ -7,7 +7,7 @@ BitcoinExchange::BitcoinExchange()
 
 BitcoinExchange::~BitcoinExchange()
 {
-    std::cout << "Removing in memory DB" << std::endl;
+    std::cout << "Removing in-memory DB" << std::endl;
     std::map<t_date*, float>::iterator it;
     for (it = _db.begin(); it != _db.end(); it++) {
         delete it->first;
