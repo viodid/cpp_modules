@@ -72,11 +72,7 @@ void BitcoinExchange::_rowFileApply(void (BitcoinExchange::*f)(const std::string
     std::getline(file, buffer);
     _parseHeader(buffer);
     while (std::getline(file, buffer)) {
-        try {
-            (this->*f)(buffer);
-        } catch (std::exception& e) {
-            std::cerr << e.what() << std::endl;
-        }
+        (this->*f)(buffer);
     }
 }
 
@@ -95,16 +91,25 @@ void BitcoinExchange::parseInputFile(const std::string& filePath)
 void BitcoinExchange::_parseRowData(const std::string& row)
 {
     const std::string delimeter = " | ";
-    if (row.find(delimeter) == std::string::npos)
-        throw WrongInput();
+    if (row.find(delimeter) == std::string::npos) {
+        std::cerr << "Error: wrong input format" << std::endl;
+        return;
+    }
     const std::string sdate = row.substr(0, row.find_first_of(delimeter));
     const std::string samount = row.substr(row.find_first_of(delimeter) + 3, std::string::npos);
-    t_date* date = _parseDate(sdate);
-    float amount = _parseAmount(samount);
-    std::cout << sdate
-              << " => " << amount
-              << " = " << _calculateAmount(date, amount)
-              << std::endl;
+    t_date* date = NULL;
+    try {
+        date = _parseDate(sdate);
+        float amount = _parseAmount(samount);
+        std::cout << sdate
+                  << " => " << amount
+                  << " = " << _calculateAmount(date, amount)
+                  << std::endl;
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
+    if (date)
+        delete date;
 }
 
 float BitcoinExchange::_parseAmount(const std::string& amount) const
