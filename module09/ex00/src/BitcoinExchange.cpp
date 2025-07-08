@@ -42,10 +42,6 @@ void BitcoinExchange::_parseRowDB(const std::string& row)
     t_date* tdate = _parseDate(date);
     float fprice = std::atof(price.c_str());
     _db[tdate] = fprice;
-    // std::cout << tdate->tm_year
-    //           << "-" << tdate->tm_mon
-    //           << "-" << tdate->tm_mday
-    //           << "\t" << fprice << std::endl;
 }
 
 // generic helpers
@@ -76,7 +72,11 @@ void BitcoinExchange::_rowFileApply(void (BitcoinExchange::*f)(const std::string
     std::getline(file, buffer);
     _parseHeader(buffer);
     while (std::getline(file, buffer)) {
-        (this->*f)(buffer);
+        try {
+            (this->*f)(buffer);
+        } catch (std::exception& e) {
+            std::cerr << e.what() << std::endl;
+        }
     }
 }
 
@@ -95,21 +95,16 @@ void BitcoinExchange::parseInputFile(const std::string& filePath)
 void BitcoinExchange::_parseRowData(const std::string& row)
 {
     const std::string delimeter = " | ";
-    // TODO: exits when exception is thrown
     if (row.find(delimeter) == std::string::npos)
         throw WrongInput();
     const std::string sdate = row.substr(0, row.find_first_of(delimeter));
     const std::string samount = row.substr(row.find_first_of(delimeter) + 3, std::string::npos);
-    try {
-        t_date* date = _parseDate(sdate);
-        float amount = _parseAmount(samount);
-        std::cout << sdate
-                  << " => " << amount
-                  << " = " << _calculateAmount(date, amount)
-                  << std::endl;
-    } catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
+    t_date* date = _parseDate(sdate);
+    float amount = _parseAmount(samount);
+    std::cout << sdate
+              << " => " << amount
+              << " = " << _calculateAmount(date, amount)
+              << std::endl;
 }
 
 float BitcoinExchange::_parseAmount(const std::string& amount) const
@@ -135,7 +130,6 @@ float BitcoinExchange::_calculateAmount(t_date* date, float amount)
     int day = date->tm_mday;
     std::map<t_date*, float>::iterator it = _db.end();
     it--; // last pair
-
     int diff = it->first->tm_year - year;
     while (diff > 0 && it != _db.begin()) {
         it--;
