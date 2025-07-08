@@ -57,12 +57,17 @@ void BitcoinExchange::_parseHeader(const std::string& header) const
 t_date* BitcoinExchange::_parseDate(const std::string& date) const
 {
     t_date* tm = new t_date;
-    if (!strptime(date.c_str(), "%Y-%m-%d", tm)) {
+    char* parseTime = strptime(date.c_str(), "%Y-%m-%d", tm);
+    if (!parseTime || *parseTime != '\0') {
         delete tm;
         throw WrongDateFormat();
     }
     tm->tm_mon++;
     tm->tm_year = tm->tm_year + 1900;
+    if (tm->tm_mday > 31) {
+        delete tm;
+        throw WrongDateFormat();
+    }
     return tm;
 }
 
