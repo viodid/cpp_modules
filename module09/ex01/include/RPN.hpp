@@ -11,12 +11,11 @@ private:
 
 public:
     RPN();
-    RPN(std::string& ex);
     ~RPN();
     RPN(const RPN& cp);
     RPN& operator=(const RPN& cp);
 
-    void parseExpression(const std::string& x);
+    void parseExpression(const std::string&);
 
     class ExceptionOverflow : public std::exception {
         virtual const char* what() const throw();
