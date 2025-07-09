@@ -1,4 +1,4 @@
-BINARY		= rpn
+BINARY		= RPN
 CC			= c++
 OPT			= -g3
 INCLUDES	= ./include
