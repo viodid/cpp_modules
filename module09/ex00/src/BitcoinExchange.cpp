@@ -1,7 +1,5 @@
 #include "../include/BitcoinExchange.hpp"
 
-// TODO: last checks correction file
-
 BitcoinExchange::BitcoinExchange()
 {
     _parseDB();
