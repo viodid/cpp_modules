@@ -1,6 +1,9 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#define OPERATOR "+-/*"
+#define OPERANDS "0123456789"
+
 #include <ostream>
 #include <stack>
 #include <string>
