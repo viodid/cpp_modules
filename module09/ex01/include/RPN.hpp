@@ -15,6 +15,7 @@ public:
     RPN(const RPN& cp);
     RPN& operator=(const RPN& cp);
 
+    const std::stack<float>& getStack() const;
     void parseExpression(const std::string&);
 
     class ExceptionOverflow : public std::exception {
