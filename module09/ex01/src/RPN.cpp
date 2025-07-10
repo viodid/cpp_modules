@@ -15,3 +15,17 @@ RPN& RPN::operator=(const RPN& cp)
         _stack = cp.getStack();
     return *this;
 }
+
+void RPN::parseExpression(const std::string&)
+{
+}
+
+const char* RPN::ExceptionOverflow::what() const throw()
+{
+    return "Error: overflow";
+}
+
+const char* RPN::ExceptionToken::what() const throw()
+{
+    return "Error: token unknown";
+}
