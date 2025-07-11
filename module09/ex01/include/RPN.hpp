@@ -8,20 +8,7 @@
 #include <stack>
 #include <string>
 
-typedef enum e_tokenType {
-    OPERATOR,
-    OPERAND,
-} tokenType;
-
-typedef struct s_token {
-    tokenType type;
-    std::string literal;
-} t_token;
-
-typedef struct s_list {
-    void* content;
-    s_list* next;
-} t_list;
+#include "Lexer.hpp"
 
 class RPN {
 private:

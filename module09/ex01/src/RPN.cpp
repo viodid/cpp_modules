@@ -16,8 +16,28 @@ RPN& RPN::operator=(const RPN& cp)
     return *this;
 }
 
-void RPN::parseExpression(const std::string&)
+void RPN::_parseExpression(t_list* tokens)
 {
+    for (t_list* node = tokens; node != NULL; node = node->next) {
+        t_token* t = (t_token*)node->content;
+        if (t->type == OPERAND)
+            _stack.push(4.42);
+        // else if (t->type == OPERATOR)
+        // _calculate
+    }
+}
+
+t_list* RPN::_nextToken(const std::string& ex)
+{
+
+    while (eatWhitespace()) {
+    }
+}
+
+void RPN::calculateExpression(const std::string& ex)
+{
+    t_list* tokens = _tokenizer(ex);
+    // free_list(tokens);
 }
 
 const char* RPN::ExceptionOverflow::what() const throw()
