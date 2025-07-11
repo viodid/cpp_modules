@@ -21,14 +21,15 @@ typedef struct s_list {
 class Lexer {
 
 private:
-    int position;
-    int readPosition;
-    char ch;
+    const std::string& _buffer;
+    int _position;
+    int _readPosition;
+    char _ch;
 
     void _readChar();
 
 public:
-    Lexer();
+    Lexer(const std::string&);
     ~Lexer();
 
     t_token nextToken();
