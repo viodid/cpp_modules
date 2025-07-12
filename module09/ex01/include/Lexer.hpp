@@ -4,8 +4,16 @@
 #include <string>
 
 typedef enum e_tokenType {
-    OPERATOR,
-    OPERAND,
+    // OPERANDS
+    INTEGER,
+    // OPERATORS
+    PLUS,
+    MINUS,
+    SLASH,
+    ASTERISK,
+    // SPECIAL
+    ILEGAL,
+    END,
 } tokenType;
 
 typedef struct s_token {
@@ -27,6 +35,7 @@ private:
     char _ch;
 
     void _readChar();
+    void _eatWhitespace();
 
 public:
     Lexer(const std::string&);
