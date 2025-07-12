@@ -1,9 +1,7 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
-#define OPERATORS "+-/*"
-#define OPERANDS "0123456789"
-
+#include <cstdlib>
 #include <ostream>
 #include <stack>
 #include <string>
@@ -12,9 +10,8 @@
 
 class RPN {
 private:
-    std::stack<float> _stack;
+    std::stack<int> _stack;
 
-    t_list* _tokenizer(const std::string& ex);
     void _parseExpression(t_list* tokens);
 
 public:
@@ -23,13 +20,16 @@ public:
     RPN(const RPN& cp);
     RPN& operator=(const RPN& cp);
 
-    const std::stack<float>& getStack() const;
+    const std::stack<int>& getStack() const;
     void calculateExpression(const std::string&);
 
     class ExceptionOverflow : public std::exception {
         virtual const char* what() const throw();
     };
     class ExceptionToken : public std::exception {
+        virtual const char* what() const throw();
+    };
+    class IlegalOperation : public std::exception {
         virtual const char* what() const throw();
     };
 };

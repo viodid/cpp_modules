@@ -52,7 +52,7 @@ t_token Lexer::nextToken()
         t.type = END;
     default:
         if (isNumber(_ch))
-            t.type = INTEGER;
+            t.type = NUMBER;
         else
             t.type = ILEGAL;
         t.literal = _ch;

@@ -16,28 +16,32 @@ RPN& RPN::operator=(const RPN& cp)
     return *this;
 }
 
-void RPN::_parseExpression(t_list* tokens)
+const std::stack<int>& RPN::getStack() const
 {
-    for (t_list* node = tokens; node != NULL; node = node->next) {
-        t_token* t = (t_token*)node->content;
-        if (t->type == OPERAND)
-            _stack.push(4.42);
-        // else if (t->type == OPERATOR)
-        // _calculate
-    }
+    return _stack;
 }
 
-t_list* RPN::_nextToken(const std::string& ex)
+void RPN::calculateExpression(const std::string& e)
 {
-
-    while (eatWhitespace()) {
+    Lexer l(e);
+    t_token t = l.nextToken();
+    while (t.type != END) {
+        switch (t.type) {
+        case ILEGAL:
+            throw ExceptionToken();
+        case NUMBER:
+            _stack.push(std::atoi(t.literal.c_str()));
+        case PLUS:
+            _addition();
+        case MINUS:
+            _substraction();
+        case SLASH:
+            _division();
+        case ASTERISK:
+            _multiplication();
+        }
+        l.nextToken();
     }
-}
-
-void RPN::calculateExpression(const std::string& ex)
-{
-    t_list* tokens = _tokenizer(ex);
-    // free_list(tokens);
 }
 
 const char* RPN::ExceptionOverflow::what() const throw()
@@ -47,5 +51,10 @@ const char* RPN::ExceptionOverflow::what() const throw()
 
 const char* RPN::ExceptionToken::what() const throw()
 {
-    return "Error: token unknown";
+    return "Error: unknown token";
+}
+
+const char* RPN::IlegalOperation::what() const throw()
+{
+    return "Error: invalid expression";
 }

@@ -5,7 +5,7 @@
 
 typedef enum e_tokenType {
     // OPERANDS
-    INTEGER,
+    NUMBER,
     // OPERATORS
     PLUS,
     MINUS,
