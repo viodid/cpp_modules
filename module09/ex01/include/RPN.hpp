@@ -13,6 +13,11 @@ private:
     std::stack<int> _stack;
 
     void _parseExpression(t_list* tokens);
+    void _addition(int, int);
+    void _substraction(int, int);
+    void _multiplication(int, int);
+    void _division(int, int);
+    void _calculateValue(void (RPN::*f)(int, int));
 
 public:
     RPN();

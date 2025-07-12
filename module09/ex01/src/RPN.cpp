@@ -32,16 +32,25 @@ void RPN::calculateExpression(const std::string& e)
         case NUMBER:
             _stack.push(std::atoi(t.literal.c_str()));
         case PLUS:
-            _addition();
+            _calculateValue(&RPN::_addition);
         case MINUS:
-            _substraction();
+            _calculateValue(&RPN::_substraction);
         case SLASH:
-            _division();
+            _calculateValue(&RPN::_division);
         case ASTERISK:
-            _multiplication();
+            _calculateValue(&RPN::_multiplication);
         }
         l.nextToken();
     }
+}
+
+/*
+ * Retrieves the last two operands
+ * and takes a pointer to a mem func that calculates the value.
+ * Finally, the calculated value is pushed back to the stack.
+ */
+void RPN::_calculateValue(void (RPN::*f)(int, int))
+{
 }
 
 const char* RPN::ExceptionOverflow::what() const throw()
