@@ -18,7 +18,7 @@ Lexer::~Lexer() { }
  */
 void Lexer::_readChar()
 {
-    if (_readPosition == _buffer.length()) {
+    if (_readPosition == _buffer[_buffer.length() - 1]) {
         _ch = '\0';
     } else {
         _ch = _buffer[_readPosition];
@@ -38,18 +38,23 @@ t_token Lexer::nextToken()
     case '+':
         t.literal = _ch;
         t.type = PLUS;
+        break;
     case '-':
         t.literal = _ch;
         t.type = MINUS;
+        break;
     case '/':
         t.literal = _ch;
         t.type = SLASH;
+        break;
     case '*':
         t.literal = _ch;
         t.type = ASTERISK;
+        break;
     case '\0':
         t.literal = "";
         t.type = END;
+        break;
     default:
         if (isNumber(_ch))
             t.type = NUMBER;

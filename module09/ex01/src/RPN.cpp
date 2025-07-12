@@ -16,7 +16,7 @@ RPN& RPN::operator=(const RPN& cp)
     return *this;
 }
 
-const std::stack<int>& RPN::getStack() const
+const std::stack<float>& RPN::getStack() const
 {
     return _stack;
 }
@@ -27,30 +27,64 @@ void RPN::calculateExpression(const std::string& e)
     t_token t = l.nextToken();
     while (t.type != END) {
         switch (t.type) {
-        case ILEGAL:
-            throw ExceptionToken();
         case NUMBER:
             _stack.push(std::atoi(t.literal.c_str()));
+            break;
         case PLUS:
             _calculateValue(&RPN::_addition);
+            break;
         case MINUS:
             _calculateValue(&RPN::_substraction);
+            break;
         case SLASH:
             _calculateValue(&RPN::_division);
+            break;
         case ASTERISK:
             _calculateValue(&RPN::_multiplication);
+            break;
+        case ILEGAL:
+            throw ExceptionToken();
+        case END:
+            return;
         }
         l.nextToken();
     }
 }
 
 /*
- * Retrieves the last two operands
+ * Retrieves the uppermost two operands
  * and takes a pointer to a mem func that calculates the value.
  * Finally, the calculated value is pushed back to the stack.
  */
-void RPN::_calculateValue(void (RPN::*f)(int, int))
+void RPN::_calculateValue(float (RPN::*f)(float, float))
 {
+    if (_stack.size() < 2)
+        throw IlegalOperation();
+    float x = _stack.top();
+    _stack.pop();
+    float y = _stack.top();
+    _stack.pop();
+    _stack.push((this->*f)(x, y));
+}
+
+float RPN::_addition(float x, float y)
+{
+    return x + y;
+}
+
+float RPN::_substraction(float x, float y)
+{
+    return x - y;
+}
+
+float RPN::_multiplication(float x, float y)
+{
+    return x * y;
+}
+
+float RPN::_division(float x, float y)
+{
+    return x / y;
 }
 
 const char* RPN::ExceptionOverflow::what() const throw()
