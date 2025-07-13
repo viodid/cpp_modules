@@ -45,10 +45,13 @@ void RPN::calculateExpression(const std::string& e)
         case ILEGAL:
             throw ExceptionToken();
         case END:
-            return;
+            break;
         }
-        l.nextToken();
+        t = l.nextToken();
     }
+    if (_stack.size() >= 2)
+        throw IlegalOperation();
+    std::cout << _stack.top() << std::endl;
 }
 
 /*

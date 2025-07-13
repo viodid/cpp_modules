@@ -18,8 +18,8 @@ Lexer::~Lexer() { }
  */
 void Lexer::_readChar()
 {
-    if (_readPosition == _buffer[_buffer.length() - 1]) {
-        _ch = '\0';
+    if (_readPosition >= (int)_buffer.length()) {
+        _ch = 0;
     } else {
         _ch = _buffer[_readPosition];
     }
@@ -71,7 +71,7 @@ t_token Lexer::nextToken()
  */
 void Lexer::_eatWhitespace()
 {
-    while (_ch == ' ' || _ch == '\t' || _ch == '\n' || !_ch) {
+    while (_ch == ' ' || _ch == '\t' || _ch == '\n') {
         _readChar();
     }
 }
