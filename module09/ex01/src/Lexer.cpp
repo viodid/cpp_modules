@@ -78,5 +78,5 @@ void Lexer::_eatWhitespace()
 
 static bool isNumber(char ch)
 {
-    return ch > '0' and ch < '9';
+    return ch >= '0' and ch <= '9';
 }

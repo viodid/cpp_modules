@@ -8,6 +8,10 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
     RPN rpn;
-    rpn.calculateExpression(argv[1]);
+    try {
+        rpn.calculateExpression(argv[1]);
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
     return EXIT_SUCCESS;
 }

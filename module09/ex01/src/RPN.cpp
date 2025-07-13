@@ -63,9 +63,9 @@ void RPN::_calculateValue(float (RPN::*f)(float, float))
 {
     if (_stack.size() < 2)
         throw IlegalOperation();
-    float x = _stack.top();
-    _stack.pop();
     float y = _stack.top();
+    _stack.pop();
+    float x = _stack.top();
     _stack.pop();
     _stack.push((this->*f)(x, y));
 }
