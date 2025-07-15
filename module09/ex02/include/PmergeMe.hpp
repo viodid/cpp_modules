@@ -19,6 +19,10 @@ public:
     PmergeMe& operator=(const PmergeMe&);
 
     void sort(int, char**);
+
+    class WrongInput : public std::exception {
+        virtual const char* what() const throw();
+    };
 };
 
 #endif

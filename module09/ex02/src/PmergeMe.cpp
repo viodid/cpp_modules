@@ -29,9 +29,16 @@ void PmergeMe::_parseInput(int argc, char** argv)
             continue;
         }
         int n = std::atoi(argv[i]);
-        if (!n)
-            throw TODO();
+        if (!n || n < 0)
+            throw WrongInput();
         _list.push_back(n);
         _vector.push_back(n);
     }
+}
+
+// Exceptions
+
+const char* PmergeMe::WrongInput::what() const throw()
+{
+    return "Error: input should be a positive integer";
 }
