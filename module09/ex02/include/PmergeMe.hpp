@@ -3,14 +3,19 @@
 
 #include <cstdlib>
 #include <list>
+#include <string>
 #include <vector>
 
 class PmergeMe {
 private:
     std::vector<unsigned int> _vector;
     std::list<unsigned int> _list;
+    unsigned int _executionTime;
+    void _printExecTime(const std::string& container);
 
     void _parseInput(int, char**);
+    void _printBefore();
+    void _printAfter();
 
 public:
     PmergeMe();
