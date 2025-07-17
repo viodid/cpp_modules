@@ -15,7 +15,6 @@ private:
 
     void _parseInput(int, char**);
     void _printBefore();
-    void _printAfter();
 
 public:
     PmergeMe();
@@ -29,5 +28,8 @@ public:
         virtual const char* what() const throw();
     };
 };
+
+template <typename T>
+void printContainer(T container);
 
 #endif

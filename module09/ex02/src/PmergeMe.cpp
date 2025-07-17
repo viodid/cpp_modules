@@ -22,6 +22,9 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& cp)
 void PmergeMe::sort(int argc, char** argv)
 {
     _parseInput(argc, argv);
+    _printBefore();
+    printContainer(_vector);
+    printContainer(_list);
 }
 
 void PmergeMe::_parseInput(int argc, char** argv)
@@ -50,16 +53,6 @@ void PmergeMe::_printBefore()
     std::cout << std::endl;
 }
 
-void PmergeMe::_printAfter()
-{
-    std::cout << "After:\t";
-    std::vector<unsigned int>::iterator it;
-    for (it = _vector.begin(); it != _vector.end(); it++) {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-}
-
 void PmergeMe::_printExecTime(const std::string& container)
 {
     std::cout << "Time to process a range of " << _vector.size()
@@ -67,8 +60,18 @@ void PmergeMe::_printExecTime(const std::string& container)
               << _executionTime << " time order of magnitude" << std::endl;
 }
 
-// Exceptions
+template <typename T>
+void printContainer(T container)
+{
+    std::cout << "After:\t";
+    typename T::iterator it;
+    for (it = container.begin(); it != container.end(); it++) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
 
+// Exceptions
 const char* PmergeMe::WrongInput::what() const throw()
 {
     return "Error: input should be a positive integer";
