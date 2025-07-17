@@ -27,6 +27,14 @@ void PmergeMe::sort(int argc, char** argv)
     printContainer(_list);
 }
 
+void PmergeMe::_mergeInsertVector(unsigned int depth)
+{
+    unsigned int elementSize = std::pow(2, depth - 1);
+    for (unsigned int elemnt = 1; elemnt <= (_vector.size() / elementSize); elemnt++) {
+        // TODO: continue with algo
+    }
+}
+
 void PmergeMe::_parseInput(int argc, char** argv)
 {
     for (int i = 0; i < argc; i++) {

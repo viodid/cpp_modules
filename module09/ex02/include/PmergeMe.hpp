@@ -1,6 +1,7 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <cmath>
 #include <cstdlib>
 #include <list>
 #include <string>
@@ -15,6 +16,7 @@ private:
 
     void _parseInput(int, char**);
     void _printBefore();
+    void _mergeInsertVector();
 
 public:
     PmergeMe();
