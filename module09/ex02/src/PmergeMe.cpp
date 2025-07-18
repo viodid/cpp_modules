@@ -1,5 +1,4 @@
 #include "../include/PmergeMe.hpp"
-#include <iostream>
 
 PmergeMe::PmergeMe()
     : _executionTime(0)
@@ -23,21 +22,22 @@ void PmergeMe::sort(int argc, char** argv)
 {
     _parseInput(argc, argv);
     _printBefore();
+    _mergeInsertVector(1);
     printContainer(_vector);
-    printContainer(_list);
+    // printContainer(_list);
 }
 
 void PmergeMe::_mergeInsertVector(unsigned int depth)
 {
-    unsigned int elementSize = std::pow(2, depth - 1);
+    unsigned int elementSize = std::pow(2, depth);
     for (unsigned int elemnt = 1; elemnt <= (_vector.size() / elementSize); elemnt++) {
         std::vector<unsigned int>::iterator a = _vector.begin();
         std::vector<unsigned int>::iterator b = _vector.begin();
-        unsigned int bigIdx = elemnt * depth * 2 - 1;
-        unsigned int smallIdx = bigIdx - elementSize;
+        unsigned int bigIdx = elemnt * elementSize - 1;
+        unsigned int smallIdx = bigIdx - (elementSize / 2);
         std::advance(a, bigIdx);
         std::advance(b, smallIdx);
-        if (b > a)
+        if (*b > *a)
             std::iter_swap(a, b);
     }
 }
