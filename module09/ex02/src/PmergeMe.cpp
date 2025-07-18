@@ -31,7 +31,14 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
 {
     unsigned int elementSize = std::pow(2, depth - 1);
     for (unsigned int elemnt = 1; elemnt <= (_vector.size() / elementSize); elemnt++) {
-        // TODO: continue with algo
+        std::vector<unsigned int>::iterator a = _vector.begin();
+        std::vector<unsigned int>::iterator b = _vector.begin();
+        unsigned int bigIdx = elemnt * depth * 2 - 1;
+        unsigned int smallIdx = bigIdx - elementSize;
+        std::advance(a, bigIdx);
+        std::advance(b, smallIdx);
+        if (b > a)
+            std::iter_swap(a, b);
     }
 }
 

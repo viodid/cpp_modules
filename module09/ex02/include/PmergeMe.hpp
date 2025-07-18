@@ -17,6 +17,7 @@ private:
     void _parseInput(int, char**);
     void _printBefore();
     void _mergeInsertVector();
+    void _mergeInsertVector(unsigned int depth);
 
 public:
     PmergeMe();
