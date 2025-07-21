@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+typedef std::vector<unsigned int>::iterator t_it;
+
 class PmergeMe {
 private:
     std::vector<unsigned int> _vector;
@@ -19,6 +21,7 @@ private:
     void _printBefore();
     void _mergeInsertVector();
     void _mergeInsertVector(unsigned int depth);
+    void _swapElements(t_it a, t_it b, unsigned int elemntSize);
 
 public:
     PmergeMe();
