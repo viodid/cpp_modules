@@ -22,6 +22,9 @@ private:
     void _mergeInsertVector();
     void _mergeInsertVector(unsigned int depth);
     void _swapElements(t_it a, t_it b, unsigned int elemntSize);
+    void _moveLabels(t_it* a, t_it* b, unsigned int elementSize, unsigned int block);
+    void _moveBigLabel(t_it* l, unsigned int elementSize, unsigned int block);
+    void _moveSmallLabel(t_it* l, unsigned int elementSize, unsigned int block);
 
 public:
     PmergeMe();

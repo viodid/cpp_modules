@@ -32,19 +32,58 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     unsigned int elementSize = std::pow(2, depth - 1);
     if (elementSize > _vector.size() / 2)
         return;
+    t_it a = _vector.begin();
+    t_it b = _vector.begin();
     for (unsigned int block = 1; block <= (_vector.size() / (elementSize * 2)); block++) {
-        t_it a = _vector.begin();
-        t_it b = _vector.begin();
-        unsigned int bigIdx = block * (elementSize * 2) - 1;
-        unsigned int smallIdx = bigIdx - elementSize;
-        std::advance(a, bigIdx);
-        std::advance(b, smallIdx);
+        _moveLabels(&a, &b, elementSize, block);
         if (*b > *a)
             _swapElements(a, b, elementSize);
     }
     std::cout << "depth=" << depth << std::endl;
     printContainer(_vector);
     _mergeInsertVector(depth + 1);
+    // step 2: relabel at each recursion level, create main and pend sequences
+    std::vector<unsigned int> main;
+    std::vector<unsigned int> pend;
+    a = _vector.begin();
+    for (unsigned int i = 0; i < elementSize * 2; i++) {
+        main.push_back(*a);
+        a++;
+    }
+    for (unsigned int block = 2; block <= (_vector.size() / (elementSize * 2)); block++) {
+        _moveSmallLabel(&a, elementSize, block);
+        a++;
+        for (unsigned int i = 0; i < elementSize; i++) {
+            main.push_back(*a);
+            a++;
+        }
+    }
+    // TODO: pend
+    std::cout << "main=" << std::endl;
+    printContainer(main);
+    std::cout << "pend=" << std::endl;
+    printContainer(pend);
+}
+
+void PmergeMe::_moveLabels(t_it* a, t_it* b, unsigned int elementSize, unsigned int block)
+{
+    _moveBigLabel(a, elementSize, block);
+    _moveSmallLabel(b, elementSize, block);
+}
+
+void PmergeMe::_moveBigLabel(t_it* l, unsigned int elementSize, unsigned int block)
+{
+    *l = _vector.begin();
+    unsigned int bigIdx = block * elementSize * 2 - 1;
+    std::advance(*l, bigIdx);
+}
+
+void PmergeMe::_moveSmallLabel(t_it* l, unsigned int elementSize, unsigned int block)
+{
+    *l = _vector.begin();
+    unsigned int bigIdx = block * elementSize * 2 - 1;
+    unsigned int smallIdx = bigIdx - elementSize;
+    std::advance(*l, smallIdx);
 }
 
 void PmergeMe::_swapElements(t_it a, t_it b, unsigned int elemntSize)
