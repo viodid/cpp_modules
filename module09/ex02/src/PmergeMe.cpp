@@ -29,14 +29,14 @@ void PmergeMe::sort(int argc, char** argv)
 
 void PmergeMe::_mergeInsertVector(unsigned int depth)
 {
-    unsigned int elementSize = std::pow(2, depth);
-    if (elementSize / 2 > _vector.size() / 2)
+    unsigned int elementSize = std::pow(2, depth - 1);
+    if (elementSize > _vector.size() / 2)
         return;
-    for (unsigned int elemnt = 1; elemnt <= (_vector.size() / elementSize); elemnt++) {
+    for (unsigned int block = 1; block <= (_vector.size() / (elementSize * 2)); block++) {
         t_it a = _vector.begin();
         t_it b = _vector.begin();
-        unsigned int bigIdx = elemnt * elementSize - 1;
-        unsigned int smallIdx = bigIdx - (elementSize / 2);
+        unsigned int bigIdx = block * (elementSize * 2) - 1;
+        unsigned int smallIdx = bigIdx - elementSize;
         std::advance(a, bigIdx);
         std::advance(b, smallIdx);
         if (*b > *a)
@@ -49,7 +49,7 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
 
 void PmergeMe::_swapElements(t_it a, t_it b, unsigned int elemntSize)
 {
-    for (unsigned int i = 0; i < elemntSize / 2; i++) {
+    for (unsigned int i = 0; i < elemntSize; i++) {
         std::iter_swap(a, b);
         a--;
         b--;
