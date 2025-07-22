@@ -51,14 +51,25 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
         a++;
     }
     for (unsigned int block = 2; block <= (_vector.size() / (elementSize * 2)); block++) {
+        // copy main sequence
         _moveSmallLabel(&a, elementSize, block);
         a++;
         for (unsigned int i = 0; i < elementSize; i++) {
             main.push_back(*a);
             a++;
         }
+        // copy pend sequence
+        _moveBigLabel(&b, elementSize, block - 1);
+        b++;
+        for (unsigned int i = 0; i < elementSize; i++) {
+            pend.push_back(*b);
+            b++;
+        }
     }
-    // TODO: pend
+    for (t_it it = a; it != _vector.end(); it++) {
+        pend.push_back(*it);
+    }
+    std::cout << "========" << std::endl;
     std::cout << "main=" << std::endl;
     printContainer(main);
     std::cout << "pend=" << std::endl;
