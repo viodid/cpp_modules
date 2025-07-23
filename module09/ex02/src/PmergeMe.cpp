@@ -47,19 +47,20 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     std::vector<unsigned int> main;
     std::vector<unsigned int> pend;
     a = _vector.begin();
+    // create head main sequence {b1, a1}
     for (unsigned int i = 0; i < elementSize * 2; i++) {
         main.push_back(*a);
         a++;
     }
     for (unsigned int block = 2; block <= (_vector.size() / (elementSize * 2)); block++) {
-        // copy main sequence
+        // complete remaining main sequence {a2, a3...}
         _moveSmallLabel(&a, elementSize, block);
         a++;
         for (unsigned int i = 0; i < elementSize; i++) {
             main.push_back(*a);
             a++;
         }
-        // copy pend sequence
+        // create pend sequence {b2, b3...}
         _moveBigLabel(&b, elementSize, block - 1);
         b++;
         for (unsigned int i = 0; i < elementSize; i++) {
@@ -70,8 +71,8 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     for (t_it it = a; it != _vector.end(); it++) {
         pend.push_back(*it);
     }
-    // Step 3: find nth Jacobsthal number and insert element
     // cp main and pend to main container
+    // TODO: decouple logic with fn
     _vector.clear();
     for (t_it it = main.begin(); it != main.end(); it++) {
         _vector.push_back(*it);
@@ -79,7 +80,15 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     for (t_it it = pend.begin(); it != pend.end(); it++) {
         _vector.push_back(*it);
     }
-
+    // Step 3: find nth Jacobsthal number and insert element
+    unsigned int pjn = 1;
+    while (true) {
+        unsigned int jn = nextJacobNum(jn);
+        unsigned int cmpNum = (jn - pjn) * elementSize;
+        if (cmpNum > pend.size())
+            break;
+        pjn = jn;
+    }
     // loging
     std::cout << "========" << std::endl;
     std::cout << "main=" << std::endl;
