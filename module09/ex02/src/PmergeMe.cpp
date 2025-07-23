@@ -29,6 +29,7 @@ void PmergeMe::sort(int argc, char** argv)
 
 void PmergeMe::_mergeInsertVector(unsigned int depth)
 {
+    // Step 1: recursive pairing & sorting
     unsigned int elementSize = std::pow(2, depth - 1);
     if (elementSize > _vector.size() / 2)
         return;
@@ -42,7 +43,7 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     std::cout << "depth=" << depth << std::endl;
     printContainer(_vector);
     _mergeInsertVector(depth + 1);
-    // step 2: relabel at each recursion level, create main and pend sequences
+    // Step 2: relabel at each recursion level, create main and pend sequences
     std::vector<unsigned int> main;
     std::vector<unsigned int> pend;
     a = _vector.begin();
@@ -69,11 +70,24 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     for (t_it it = a; it != _vector.end(); it++) {
         pend.push_back(*it);
     }
+    // Step 3: find nth Jacobsthal number and insert element
+    // cp main and pend to main container
+    _vector.clear();
+    for (t_it it = main.begin(); it != main.end(); it++) {
+        _vector.push_back(*it);
+    }
+    for (t_it it = pend.begin(); it != pend.end(); it++) {
+        _vector.push_back(*it);
+    }
+
+    // loging
     std::cout << "========" << std::endl;
     std::cout << "main=" << std::endl;
     printContainer(main);
     std::cout << "pend=" << std::endl;
     printContainer(pend);
+    std::cout << "_vector=" << std::endl;
+    printContainer(_vector);
 }
 
 void PmergeMe::_moveLabels(t_it* a, t_it* b, unsigned int elementSize, unsigned int block)
