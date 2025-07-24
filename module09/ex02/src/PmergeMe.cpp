@@ -82,13 +82,26 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     }
     // Step 3: find nth Jacobsthal number and insert element
     unsigned int pjn = 1;
-    while (true) {
-        unsigned int jn = nextJacobNum(jn);
-        unsigned int cmpNum = (jn - pjn) * elementSize;
-        if (cmpNum > pend.size())
-            break;
+    unsigned int jn = nextJacobNum(jn);
+    unsigned int elemsToInsert = jn - pjn;
+    unsigned int totalInserted = elemsToInsert;
+    while (elemsToInsert * elementSize <= pend.size()) {
+        while (elemsToInsert > 0) {
+            t_it it = pend.begin();
+            std::advance(it, elemsToInsert * elementSize - 1);
+            // insert element into main starting from bound limit
+            _insertBoundElem(it, elementSize, getBoundElem(jn + totalInserted));
+            pend.erase(it);
+            elemsToInsert--;
+        }
+        // TODO: insert remaining pend elemnts
+        if (pend.size() > 0) { }
         pjn = jn;
+        jn = nextJacobNum(jn);
+        elemsToInsert = jn - pjn;
+        totalInserted += elemsToInsert;
     }
+
     // loging
     std::cout << "========" << std::endl;
     std::cout << "main=" << std::endl;
