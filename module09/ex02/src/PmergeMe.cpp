@@ -81,10 +81,10 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
         _vector.push_back(*it);
     }
     // Step 3: find nth Jacobsthal number and insert element
-    unsigned int pjn = 1;
-    unsigned int jn = nextJacobNum(jn);
-    unsigned int elemsToInsert = jn - pjn;
+    unsigned int jnSeq = 3;
+    unsigned int elemsToInsert = 2;
     unsigned int totalInserted = elemsToInsert;
+    unsigned int jn = getJacobNum(jnSeq);
     while (elemsToInsert * elementSize <= pend.size()) {
         while (elemsToInsert > 0) {
             t_it it = pend.begin();
@@ -96,13 +96,13 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
         }
         // TODO: insert remaining pend elemnts
         if (pend.size() > 0) { }
-        pjn = jn;
-        jn = nextJacobNum(jn);
-        elemsToInsert = jn - pjn;
+        jnSeq++;
+        elemsToInsert = getJacobNum(jnSeq) - jn;
+        jn = getJacobNum(jnSeq);
         totalInserted += elemsToInsert;
     }
 
-    // loging
+    // logging
     std::cout << "========" << std::endl;
     std::cout << "main=" << std::endl;
     printContainer(main);
@@ -190,4 +190,9 @@ void printContainer(T container)
 const char* PmergeMe::WrongInput::what() const throw()
 {
     return "Error: input should be a positive integer";
+}
+
+static unsigned int getJacobNum(unsigned int nu)
+{
+    // TODO
 }
