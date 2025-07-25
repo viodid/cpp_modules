@@ -1,5 +1,7 @@
 #include "../include/PmergeMe.hpp"
 
+static unsigned int getJacobNum(unsigned int nu);
+
 PmergeMe::PmergeMe()
     : _executionTime(0)
 {
@@ -82,24 +84,24 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     }
     // Step 3: find nth Jacobsthal number and insert element
     unsigned int jnSeq = 3;
-    unsigned int elemsToInsert = 2;
-    unsigned int totalInserted = elemsToInsert;
     unsigned int jn = getJacobNum(jnSeq);
+    unsigned int elemsToInsert = 2;
+    unsigned int totalElemInsert = 0;
     while (elemsToInsert * elementSize <= pend.size()) {
         while (elemsToInsert > 0) {
             t_it it = pend.begin();
             std::advance(it, elemsToInsert * elementSize - 1);
             // insert element into main starting from bound limit
-            _insertBoundElem(it, elementSize, getBoundElem(jn + totalInserted));
-            pend.erase(it);
+            _insertBoundElem(main, it, elementSize, jn + totalElemInsert + 1); // + 1 for the first {b1} main label
+            _eraseElement(it, pend, elementSize);
             elemsToInsert--;
         }
         // TODO: insert remaining pend elemnts
         if (pend.size() > 0) { }
+        totalElemInsert += elemsToInsert;
         jnSeq++;
-        elemsToInsert = getJacobNum(jnSeq) - jn;
+        elemsToInsert = getJacobNum(jnSeq) - elemsToInsert;
         jn = getJacobNum(jnSeq);
-        totalInserted += elemsToInsert;
     }
 
     // logging
@@ -110,6 +112,32 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     printContainer(pend);
     std::cout << "_vector=" << std::endl;
     printContainer(_vector);
+}
+
+void PmergeMe::_insertBoundElem(std::vector<unsigned int> main, t_it b_it, unsigned int elementSize, unsigned int elemOffset)
+{
+    t_it a_it = main.begin();
+    if (elementSize * elemOffset >= main.size()) {
+        a_it = main.end();
+        a_it--;
+    } else
+        std::advance(a_it, elemOffset * elementSize);
+    while (*b_it < *a_it) {
+        std::advance(a_it, -elementSize);
+    }
+    a_it++;
+    for (unsigned int i = 0; i < elementSize; i++) {
+        a_it = main.insert(a_it, *b_it);
+        b_it--;
+    }
+}
+
+void PmergeMe::_eraseElement(t_it it, std::vector<unsigned int> container, unsigned int elemSize)
+{
+    for (unsigned int i = 0; i < elemSize; i++) {
+        container.erase(it);
+        it--;
+    }
 }
 
 void PmergeMe::_moveLabels(t_it* a, t_it* b, unsigned int elementSize, unsigned int block)
@@ -194,5 +222,5 @@ const char* PmergeMe::WrongInput::what() const throw()
 
 static unsigned int getJacobNum(unsigned int nu)
 {
-    // TODO
+    return std::ceil((std::pow(2, nu) - std::pow(-1, nu)) / 3);
 }
