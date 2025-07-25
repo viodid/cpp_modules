@@ -88,17 +88,19 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     unsigned int elemsToInsert = 2;
     unsigned int totalElemInsert = 0;
     while (elemsToInsert * elementSize <= pend.size()) {
+        unsigned int elemInsert = 0;
         while (elemsToInsert > 0) {
             t_it it = pend.begin();
             std::advance(it, elemsToInsert * elementSize - 1);
             // insert element into main starting from bound limit
-            _insertBoundElem(main, it, elementSize, jn + totalElemInsert + 1); // + 1 for the first {b1} main label
+            _insertBoundElem(main, it, elementSize, (jn - elemInsert) + totalElemInsert + 1); // + 1 for the first {b1} main label
             _eraseElement(it, pend, elementSize);
             elemsToInsert--;
+            totalElemInsert++;
+            elemInsert++;
         }
         // TODO: insert remaining pend elemnts
         if (pend.size() > 0) { }
-        totalElemInsert += elemsToInsert;
         jnSeq++;
         elemsToInsert = getJacobNum(jnSeq) - elemsToInsert;
         jn = getJacobNum(jnSeq);
