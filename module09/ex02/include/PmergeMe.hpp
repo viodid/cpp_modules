@@ -25,8 +25,8 @@ private:
     void _moveLabels(t_it* a, t_it* b, unsigned int elementSize, unsigned int block);
     void _moveBigLabel(t_it* l, unsigned int elementSize, unsigned int block);
     void _moveSmallLabel(t_it* l, unsigned int elementSize, unsigned int block);
-    void _insertBoundElem(std::vector<unsigned int>, t_it, unsigned int, unsigned int);
-    void _eraseElement(t_it it, std::vector<unsigned int> container, unsigned int elemSize);
+    void _insertBoundElem(std::vector<unsigned int>&, t_it, unsigned int, unsigned int);
+    void _eraseElement(t_it it, std::vector<unsigned int>& container, unsigned int elemSize);
 
 public:
     PmergeMe();

@@ -114,7 +114,7 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     printContainer(_vector);
 }
 
-void PmergeMe::_insertBoundElem(std::vector<unsigned int> main, t_it b_it, unsigned int elementSize, unsigned int elemOffset)
+void PmergeMe::_insertBoundElem(std::vector<unsigned int>& main, t_it b_it, unsigned int elementSize, unsigned int elemOffset)
 {
     t_it a_it = main.begin();
     if (elementSize * elemOffset >= main.size()) {
@@ -122,9 +122,8 @@ void PmergeMe::_insertBoundElem(std::vector<unsigned int> main, t_it b_it, unsig
         a_it--;
     } else
         std::advance(a_it, elemOffset * elementSize);
-    while (*b_it < *a_it) {
-        std::advance(a_it, -elementSize);
-    }
+    while (*b_it < *a_it)
+        std::advance(a_it, static_cast<int>(elementSize) * -1);
     a_it++;
     for (unsigned int i = 0; i < elementSize; i++) {
         a_it = main.insert(a_it, *b_it);
@@ -132,7 +131,7 @@ void PmergeMe::_insertBoundElem(std::vector<unsigned int> main, t_it b_it, unsig
     }
 }
 
-void PmergeMe::_eraseElement(t_it it, std::vector<unsigned int> container, unsigned int elemSize)
+void PmergeMe::_eraseElement(t_it it, std::vector<unsigned int>& container, unsigned int elemSize)
 {
     for (unsigned int i = 0; i < elemSize; i++) {
         container.erase(it);
