@@ -81,7 +81,7 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     unsigned int totalElemInsert = 0;
     while (elemsToInsert * elementSize <= pend.size()) {
         unsigned int elemInsert = 0;
-        while (elemsToInsert > 0) {
+        while (elemsToInsert > 0 && std::floor(pend.size() / elementSize) > 0) {
             t_it it = pend.begin();
             std::advance(it, elemsToInsert * elementSize - 1);
             // insert element into main starting from bound limit
@@ -91,11 +91,15 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
             totalElemInsert++;
             elemInsert++;
         }
-        // TODO: insert remaining pend elemnts
-        if (pend.size() > 0) { }
         jnSeq++;
         elemsToInsert = getJacobNum(jnSeq) - jn;
         jn = getJacobNum(jnSeq);
+    }
+    if (pend.size() == elementSize) {
+        t_it it = pend.begin();
+        std::advance(it, elementSize - 1);
+        _insertBoundElem(main, it, elementSize, jn + totalElemInsert + 1);
+        _eraseElement(it, pend, elementSize);
     }
     _cpABToContainer(main, pend);
 
