@@ -116,7 +116,7 @@ void PmergeMe::_insertBoundElem(std::vector<unsigned int>& main, t_it b_it, unsi
         a_it = main.end();
         a_it--;
     } else
-        std::advance(a_it, elemOffset * elementSize);
+        std::advance(a_it, elemOffset * elementSize - 1);
     while (*b_it < *a_it)
         std::advance(a_it, static_cast<int>(elementSize) * -1);
     a_it++;
