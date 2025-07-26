@@ -73,15 +73,7 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     for (t_it it = a; it != _vector.end(); it++) {
         pend.push_back(*it);
     }
-    // cp main and pend to main container
-    // TODO: decouple logic with fn
-    _vector.clear();
-    for (t_it it = main.begin(); it != main.end(); it++) {
-        _vector.push_back(*it);
-    }
-    for (t_it it = pend.begin(); it != pend.end(); it++) {
-        _vector.push_back(*it);
-    }
+    _cpABToContainer(main, pend);
     // Step 3: find nth Jacobsthal number and insert element
     unsigned int jnSeq = 3;
     unsigned int jn = getJacobNum(jnSeq);
@@ -102,9 +94,10 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
         // TODO: insert remaining pend elemnts
         if (pend.size() > 0) { }
         jnSeq++;
-        elemsToInsert = getJacobNum(jnSeq) - elemsToInsert;
+        elemsToInsert = getJacobNum(jnSeq) - jn;
         jn = getJacobNum(jnSeq);
     }
+    _cpABToContainer(main, pend);
 
     // logging
     std::cout << "========" << std::endl;
@@ -138,6 +131,17 @@ void PmergeMe::_eraseElement(t_it it, std::vector<unsigned int>& container, unsi
     for (unsigned int i = 0; i < elemSize; i++) {
         container.erase(it);
         it--;
+    }
+}
+
+void PmergeMe::_cpABToContainer(std::vector<unsigned int>& a, std::vector<unsigned int>& b)
+{
+    _vector.clear();
+    for (t_it it = a.begin(); it != a.end(); it++) {
+        _vector.push_back(*it);
+    }
+    for (t_it it = b.begin(); it != b.end(); it++) {
+        _vector.push_back(*it);
     }
 }
 
