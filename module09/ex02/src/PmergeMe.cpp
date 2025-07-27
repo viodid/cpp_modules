@@ -86,10 +86,8 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     }
     // FIXME: more than one element can be hanging in the pend
     if (pend.size() >= elementSize) {
-        t_it it = pend.begin();
-        std::advance(it, elementSize - 1);
-        _insertBoundElem(main, it, elementSize, jn + 100 + 1);
-        _eraseElement(it, pend, elementSize);
+        elemsToInsert = std::floor(pend.size() / elementSize);
+        _insertElements(main, pend, elemsToInsert, elementSize, jn);
     }
     _cpABToContainer(main, pend);
 
