@@ -95,7 +95,7 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
         elemsToInsert = getJacobNum(jnSeq) - jn;
         jn = getJacobNum(jnSeq);
     }
-    if (pend.size() == elementSize) {
+    if (pend.size() >= elementSize) {
         t_it it = pend.begin();
         std::advance(it, elementSize - 1);
         _insertBoundElem(main, it, elementSize, jn + totalElemInsert + 1);
@@ -121,17 +121,18 @@ void PmergeMe::_insertBoundElem(std::vector<unsigned int>& main, t_it b_it, unsi
         a_it--;
     } else
         std::advance(a_it, elemOffset * elementSize - 1);
-    t_it sentinel = main.begin();
-    std::advance(sentinel, elementSize - 1);
+    // TODO: bug invalid read
+    //  t_it sentinel = main.begin();
+    //  std::advance(sentinel, elementSize - 1);
     while (*b_it < *a_it) {
-        if (*a_it == *sentinel) {
-            a_it = main.begin();
-            break;
-        }
+        // if (*a_it == *sentinel) {
+        //     a_it = main.begin();
+        //     break;
+        // }
         std::advance(a_it, static_cast<int>(elementSize) * -1);
     }
-    if (*a_it != *main.begin())
-        a_it++;
+    // if (*a_it != *main.begin() || *a_it > *main.begin())
+    a_it++;
     for (unsigned int i = 0; i < elementSize; i++) {
         a_it = main.insert(a_it, *b_it);
         b_it--;
