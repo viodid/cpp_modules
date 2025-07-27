@@ -9,6 +9,8 @@
 #include <vector>
 
 typedef std::vector<unsigned int>::iterator t_it;
+typedef std::vector<unsigned int> t_v;
+typedef unsigned int uint;
 
 class PmergeMe {
 private:
@@ -28,6 +30,7 @@ private:
     void _insertBoundElem(std::vector<unsigned int>&, t_it, unsigned int, unsigned int);
     void _eraseElement(t_it it, std::vector<unsigned int>& container, unsigned int elemSize);
     void _cpABToContainer(std::vector<unsigned int>& a, std::vector<unsigned int>& b);
+    void _insertElements(t_v& main, t_v& pend, uint elemsToInsert, uint elementSize, uint jn);
 
 public:
     PmergeMe();

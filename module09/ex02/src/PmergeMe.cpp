@@ -78,27 +78,17 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     unsigned int jnSeq = 3;
     unsigned int jn = getJacobNum(jnSeq);
     unsigned int elemsToInsert = 2;
-    unsigned int totalElemInsert = 0;
     while (elemsToInsert * elementSize <= pend.size()) {
-        unsigned int elemInsert = 0;
-        while (elemsToInsert > 0 && std::floor(pend.size() / elementSize) > 0) {
-            t_it it = pend.begin();
-            std::advance(it, elemsToInsert * elementSize - 1);
-            // insert element into main starting from bound limit
-            _insertBoundElem(main, it, elementSize, (jn - elemInsert) + totalElemInsert + 1); // + 1 for the first {b1} main label
-            _eraseElement(it, pend, elementSize);
-            elemsToInsert--;
-            totalElemInsert++;
-            elemInsert++;
-        }
+        _insertElements(main, pend, elemsToInsert, elementSize, jn);
         jnSeq++;
         elemsToInsert = getJacobNum(jnSeq) - jn;
         jn = getJacobNum(jnSeq);
     }
+    // FIXME: more than one element can be hanging in the pend
     if (pend.size() >= elementSize) {
         t_it it = pend.begin();
         std::advance(it, elementSize - 1);
-        _insertBoundElem(main, it, elementSize, jn + totalElemInsert + 1);
+        _insertBoundElem(main, it, elementSize, jn + 100 + 1);
         _eraseElement(it, pend, elementSize);
     }
     _cpABToContainer(main, pend);
@@ -111,6 +101,22 @@ void PmergeMe::_mergeInsertVector(unsigned int depth)
     printContainer(pend);
     std::cout << "_vector=" << std::endl;
     printContainer(_vector);
+}
+
+void PmergeMe::_insertElements(t_v& main, t_v& pend, uint elemsToInsert, uint elementSize, uint jn)
+{
+    static uint totalElemInsert = 0;
+    uint elemInsert = 0;
+    while (elemsToInsert > 0 && std::floor(pend.size() / elementSize) > 0) {
+        t_it it = pend.begin();
+        std::advance(it, elemsToInsert * elementSize - 1);
+        // insert element into main starting from bound limit
+        _insertBoundElem(main, it, elementSize, (jn - elemInsert) + totalElemInsert + 1); // + 1 for the first {b1} main label
+        _eraseElement(it, pend, elementSize);
+        elemsToInsert--;
+        elemInsert++;
+        totalElemInsert++;
+    }
 }
 
 void PmergeMe::_insertBoundElem(std::vector<unsigned int>& main, t_it b_it, unsigned int elementSize, unsigned int elemOffset)
