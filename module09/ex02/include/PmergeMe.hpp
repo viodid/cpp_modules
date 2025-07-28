@@ -31,6 +31,7 @@ private:
     void _eraseElement(t_it it, std::vector<uint>& container, uint elemSize);
     void _cpABToContainer(std::vector<uint>& a, std::vector<uint>& b);
     void _insertElements(t_v& main, t_v& pend, uint elemsToInsert, uint elementSize, uint jn);
+    uint _getJacobNum(unsigned int nu);
 
 public:
     PmergeMe(); // TODO

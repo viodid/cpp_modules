@@ -1,7 +1,5 @@
 #include "../include/PmergeMe.hpp"
 
-static unsigned int getJacobNum(unsigned int nu);
-
 template <typename T>
 PmergeMe<T>::PmergeMe()
     : _executionTime(0)
@@ -82,13 +80,13 @@ void PmergeMe<T>::_mergeInsert(uint depth)
     _cpABToContainer(main, pend);
     // Step 3: find nth Jacobsthal number and insert element
     unsigned int jnSeq = 3;
-    unsigned int jn = getJacobNum(jnSeq);
+    unsigned int jn = _getJacobNum(jnSeq);
     unsigned int elemsToInsert = 2;
     while (elemsToInsert * elementSize <= pend.size()) {
         _insertElements(main, pend, elemsToInsert, elementSize, jn);
         jnSeq++;
-        elemsToInsert = getJacobNum(jnSeq) - jn;
-        jn = getJacobNum(jnSeq);
+        elemsToInsert = _getJacobNum(jnSeq) - jn;
+        jn = _getJacobNum(jnSeq);
     }
     if (pend.size() >= elementSize) {
         elemsToInsert = std::floor(pend.size() / elementSize);
@@ -244,14 +242,15 @@ void printContainer(T container)
     std::cout << std::endl;
 }
 
+template <typename T>
+uint PmergeMe<T>::_getJacobNum(unsigned int nu)
+{
+    return std::ceil((std::pow(2, nu) - std::pow(-1, nu)) / 3);
+}
+
 // Exceptions
 template <typename T>
 const char* PmergeMe<T>::WrongInput::what() const throw()
 {
     return "Error: input should be a positive integer";
-}
-
-static unsigned int getJacobNum(unsigned int nu)
-{
-    return std::ceil((std::pow(2, nu) - std::pow(-1, nu)) / 3);
 }
