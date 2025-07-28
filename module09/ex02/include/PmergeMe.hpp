@@ -34,7 +34,6 @@ private:
     uint _getJacobNum(unsigned int nu);
 
 public:
-    PmergeMe(); // TODO
     PmergeMe(T container);
     ~PmergeMe();
     PmergeMe(const PmergeMe&);
@@ -49,5 +48,7 @@ public:
 
 template <typename T>
 void printContainer(T container);
+
+#include "PmergeMe.cpp"
 
 #endif

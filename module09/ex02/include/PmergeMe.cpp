@@ -1,10 +1,10 @@
-#include "../include/PmergeMe.hpp"
+#include "PmergeMe.hpp"
 
 template <typename T>
-PmergeMe<T>::PmergeMe()
-    : _executionTime(0)
+PmergeMe<T>::PmergeMe(T container)
+    : _container(container)
+    , _executionTime(0)
 {
-    _container = T();
 }
 
 template <typename T>
