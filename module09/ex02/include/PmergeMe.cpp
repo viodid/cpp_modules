@@ -1,6 +1,13 @@
 #include "PmergeMe.hpp"
 
 template <typename T>
+PmergeMe<T>::PmergeMe()
+    : _container(NULL)
+    , _executionTime(0)
+{
+}
+
+template <typename T>
 PmergeMe<T>::PmergeMe(T container)
     : _container(container)
     , _executionTime(0)

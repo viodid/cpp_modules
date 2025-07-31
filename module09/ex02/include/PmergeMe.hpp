@@ -34,6 +34,7 @@ private:
     uint _getJacobNum(unsigned int nu);
 
 public:
+    PmergeMe();
     PmergeMe(T container);
     ~PmergeMe();
     PmergeMe(const PmergeMe&);
