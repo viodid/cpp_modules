@@ -46,8 +46,8 @@ void PmergeMe<T>::_mergeInsert(uint depth)
     unsigned int elementSize = std::pow(2, depth - 1);
     if (elementSize > _container.size() / 2)
         return;
-    t_it a = _container.begin();
-    t_it b = _container.begin();
+    typename T::iterator a = _container.begin();
+    typename T::iterator b = _container.begin();
     for (unsigned int block = 1; block <= (_container.size() / (elementSize * 2)); block++) {
         _moveLabels(&a, &b, elementSize, block);
         if (*b > *a)
@@ -81,7 +81,7 @@ void PmergeMe<T>::_mergeInsert(uint depth)
             b++;
         }
     }
-    for (t_it it = a; it != _container.end(); it++) {
+    for (typename T::iterator it = a; it != _container.end(); it++) {
         pend.push_back(*it);
     }
     _cpABToContainer(main, pend);
@@ -112,12 +112,12 @@ void PmergeMe<T>::_mergeInsert(uint depth)
 }
 
 template <typename T>
-void PmergeMe<T>::_insertElements(t_v& main, t_v& pend, uint elemsToInsert, uint elementSize, uint jn)
+void PmergeMe<T>::_insertElements(T& main, T& pend, uint elemsToInsert, uint elementSize, uint jn)
 {
     static uint totalElemInsert = 0;
     uint elemInsert = 0;
     while (elemsToInsert > 0 && std::floor(pend.size() / elementSize) > 0) {
-        t_it it = pend.begin();
+        typename T::iterator it = pend.begin();
         std::advance(it, elemsToInsert * elementSize - 1);
         // insert element into main starting from bound limit
         _insertBoundElem(main, it, elementSize, (jn - elemInsert) + totalElemInsert + 1); // + 1 for the first {b1} main label
@@ -129,9 +129,9 @@ void PmergeMe<T>::_insertElements(t_v& main, t_v& pend, uint elemsToInsert, uint
 }
 
 template <typename T>
-void PmergeMe<T>::_insertBoundElem(std::vector<unsigned int>& main, t_it b_it, unsigned int elementSize, unsigned int elemOffset)
+void PmergeMe<T>::_insertBoundElem(T& main, typename T::iterator b_it, unsigned int elementSize, unsigned int elemOffset)
 {
-    t_it a_it = main.begin();
+    typename T::iterator a_it = main.begin();
     if (elementSize * elemOffset >= main.size()) {
         elemOffset = main.size() / elementSize;
         a_it = main.end();
@@ -150,7 +150,7 @@ void PmergeMe<T>::_insertBoundElem(std::vector<unsigned int>& main, t_it b_it, u
 }
 
 template <typename T>
-void PmergeMe<T>::_eraseElement(t_it it, std::vector<unsigned int>& container, unsigned int elemSize)
+void PmergeMe<T>::_eraseElement(typename T::iterator it, T& container, unsigned int elemSize)
 {
     for (unsigned int i = 0; i < elemSize; i++) {
         container.erase(it);
@@ -159,26 +159,26 @@ void PmergeMe<T>::_eraseElement(t_it it, std::vector<unsigned int>& container, u
 }
 
 template <typename T>
-void PmergeMe<T>::_cpABToContainer(std::vector<unsigned int>& a, std::vector<unsigned int>& b)
+void PmergeMe<T>::_cpABToContainer(T& a, T& b)
 {
     _container.clear();
-    for (t_it it = a.begin(); it != a.end(); it++) {
+    for (typename T::iterator it = a.begin(); it != a.end(); it++) {
         _container.push_back(*it);
     }
-    for (t_it it = b.begin(); it != b.end(); it++) {
+    for (typename T::iterator it = b.begin(); it != b.end(); it++) {
         _container.push_back(*it);
     }
 }
 
 template <typename T>
-void PmergeMe<T>::_moveLabels(t_it* a, t_it* b, unsigned int elementSize, unsigned int block)
+void PmergeMe<T>::_moveLabels(typename T::iterator* a, typename T::iterator* b, unsigned int elementSize, unsigned int block)
 {
     _moveBigLabel(a, elementSize, block);
     _moveSmallLabel(b, elementSize, block);
 }
 
 template <typename T>
-void PmergeMe<T>::_moveBigLabel(t_it* l, unsigned int elementSize, unsigned int block)
+void PmergeMe<T>::_moveBigLabel(typename T::iterator* l, unsigned int elementSize, unsigned int block)
 {
     *l = _container.begin();
     unsigned int bigIdx = block * elementSize * 2 - 1;
@@ -186,7 +186,7 @@ void PmergeMe<T>::_moveBigLabel(t_it* l, unsigned int elementSize, unsigned int 
 }
 
 template <typename T>
-void PmergeMe<T>::_moveSmallLabel(t_it* l, unsigned int elementSize, unsigned int block)
+void PmergeMe<T>::_moveSmallLabel(typename T::iterator* l, unsigned int elementSize, unsigned int block)
 {
     *l = _container.begin();
     unsigned int bigIdx = block * elementSize * 2 - 1;
@@ -195,7 +195,7 @@ void PmergeMe<T>::_moveSmallLabel(t_it* l, unsigned int elementSize, unsigned in
 }
 
 template <typename T>
-void PmergeMe<T>::_swapElements(t_it a, t_it b, unsigned int elemntSize)
+void PmergeMe<T>::_swapElements(typename T::iterator a, typename T::iterator b, unsigned int elemntSize)
 {
     for (unsigned int i = 0; i < elemntSize; i++) {
         std::iter_swap(a, b);
@@ -223,7 +223,7 @@ template <typename T>
 void PmergeMe<T>::_printBefore()
 {
     std::cout << "Before:\t";
-    std::vector<unsigned int>::iterator it;
+    typename T::iterator it;
     for (it = _container.begin(); it != _container.end(); it++) {
         std::cout << *it << " ";
     }
