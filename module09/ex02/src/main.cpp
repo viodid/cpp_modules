@@ -10,7 +10,7 @@ int main(int argc, char** argv)
     PmergeMe<t_l> algoList(list);
     try {
         algoVector.sort(argc - 1, &argv[1]);
-        // algoList.sort(argc - 1, &argv[1]);
+        algoList.sort(argc - 1, &argv[1]);
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }

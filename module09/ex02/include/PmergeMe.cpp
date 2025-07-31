@@ -57,8 +57,8 @@ void PmergeMe<T>::_mergeInsert(uint depth)
     printContainer(_container);
     _mergeInsert(depth + 1);
     // Step 2: relabel at each recursion level, create main and pend sequences
-    std::vector<unsigned int> main;
-    std::vector<unsigned int> pend;
+    T main;
+    T pend;
     a = _container.begin();
     // create head main sequence {b1, a1}
     for (unsigned int i = 0; i < elementSize * 2; i++) {
@@ -153,8 +153,10 @@ template <typename T>
 void PmergeMe<T>::_eraseElement(typename T::iterator it, T& container, unsigned int elemSize)
 {
     for (unsigned int i = 0; i < elemSize; i++) {
+        typename T::iterator p_it = it;
+        p_it--; // As list is implemented as a linked list, we need to save the previous node state before deleting the node
         container.erase(it);
-        it--;
+        it = p_it;
     }
 }
 
