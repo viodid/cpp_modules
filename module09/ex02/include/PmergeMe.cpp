@@ -101,6 +101,7 @@ void PmergeMe<T>::_mergeInsert(uint depth)
     }
     _cpABToContainer(main, pend);
 
+#if DEBUG
     // logging
     std::cout << "========" << std::endl;
     std::cout << "main=" << std::endl;
@@ -109,6 +110,7 @@ void PmergeMe<T>::_mergeInsert(uint depth)
     printContainer(pend);
     std::cout << "_container=" << std::endl;
     printContainer(_container);
+#endif
 }
 
 template <typename T>
