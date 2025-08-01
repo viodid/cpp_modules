@@ -31,12 +31,12 @@ PmergeMe<T>& PmergeMe<T>::operator=(const PmergeMe& cp)
 }
 
 template <typename T>
-void PmergeMe<T>::sort(int argc, char** argv)
+void PmergeMe<T>::sort()
 {
-    _parseInput(argc, argv);
-    _printBefore();
+    std::clock_t start_t = std::clock();
     _mergeInsert(1);
-    printContainer(_container);
+    std::clock_t end_t = std::clock();
+    _executionTime = end_t - start_t;
 }
 
 template <typename T>
@@ -53,8 +53,8 @@ void PmergeMe<T>::_mergeInsert(uint depth)
         if (*b > *a)
             _swapElements(a, b, elementSize);
     }
-    std::cout << "depth=" << depth << std::endl;
-    printContainer(_container);
+    // std::cout << "depth=" << depth << std::endl;
+    //  printContainer(_container);
     _mergeInsert(depth + 1);
     // Step 2: relabel at each recursion level, create main and pend sequences
     T main;
@@ -209,7 +209,7 @@ void PmergeMe<T>::_swapElements(typename T::iterator a, typename T::iterator b, 
 }
 
 template <typename T>
-void PmergeMe<T>::_parseInput(int argc, char** argv)
+void PmergeMe<T>::parseInput(int argc, char** argv)
 {
     for (int i = 0; i < argc; i++) {
         if (argv[i] && argv[i][0] == '0') {
@@ -224,17 +224,6 @@ void PmergeMe<T>::_parseInput(int argc, char** argv)
 }
 
 template <typename T>
-void PmergeMe<T>::_printBefore()
-{
-    std::cout << "Before:\t";
-    typename T::iterator it;
-    for (it = _container.begin(); it != _container.end(); it++) {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-}
-
-template <typename T>
 void PmergeMe<T>::_printExecTime(const std::string& container)
 {
     std::cout << "Time to process a range of " << _container.size()
@@ -243,11 +232,11 @@ void PmergeMe<T>::_printExecTime(const std::string& container)
 }
 
 template <typename T>
-void printContainer(T container)
+void PmergeMe<T>::printContainer()
 {
     std::cout << "After:\t";
     typename T::iterator it;
-    for (it = container.begin(); it != container.end(); it++) {
+    for (it = _container.begin(); it != _container.end(); it++) {
         std::cout << *it << " ";
     }
     std::cout << std::endl;

@@ -9,8 +9,14 @@ int main(int argc, char** argv)
     t_l list;
     PmergeMe<t_l> algoList(list);
     try {
-        algoVector.sort(argc - 1, &argv[1]);
-        algoList.sort(argc - 1, &argv[1]);
+        // Vector
+        algoVector.parseInput(argc - 1, &argv[1]);
+        algoVector.printContainer();
+        algoVector.sort();
+        algoVector.printContainer();
+        // List
+        algoList.parseInput(argc - 1, &argv[1]);
+        algoList.sort();
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }

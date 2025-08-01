@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <list>
 #include <string>
@@ -16,11 +17,9 @@ template <typename T>
 class PmergeMe {
 private:
     T _container;
-    uint _executionTime;
+    std::clock_t _executionTime;
     void _printExecTime(const std::string& container);
 
-    void _parseInput(int, char**);
-    void _printBefore();
     void _mergeInsertVector();
     void _mergeInsert(uint depth);
     void _swapElements(typename T::iterator a, typename T::iterator b, uint elemntSize);
@@ -40,7 +39,9 @@ public:
     PmergeMe(const PmergeMe&);
     PmergeMe& operator=(const PmergeMe&);
 
-    void sort(int, char**);
+    void sort();
+    void parseInput(int, char**);
+    void printContainer();
 
     class WrongInput : public std::exception {
         virtual const char* what() const throw();
