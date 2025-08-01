@@ -11,9 +11,9 @@ int main(int argc, char** argv)
     try {
         // Vector
         algoVector.parseInput(argc - 1, &argv[1]);
-        algoVector.printContainer();
+        algoVector.printContainer("Before:\t");
         algoVector.sort();
-        algoVector.printContainer();
+        algoVector.printContainer("After:\t");
         // List
         algoList.parseInput(argc - 1, &argv[1]);
         algoList.sort();

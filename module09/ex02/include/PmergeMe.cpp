@@ -232,9 +232,9 @@ void PmergeMe<T>::_printExecTime(const std::string& container)
 }
 
 template <typename T>
-void PmergeMe<T>::printContainer()
+void PmergeMe<T>::printContainer(const std::string& prefix)
 {
-    std::cout << "After:\t";
+    std::cout << prefix;
     typename T::iterator it;
     for (it = _container.begin(); it != _container.end(); it++) {
         std::cout << *it << " ";
