@@ -105,11 +105,11 @@ void PmergeMe<T>::_mergeInsert(uint depth)
     // logging
     std::cout << "========" << std::endl;
     std::cout << "main=" << std::endl;
-    printContainer(main);
+    printContainer("");
     std::cout << "pend=" << std::endl;
-    printContainer(pend);
+    printContainer("");
     std::cout << "_container=" << std::endl;
-    printContainer(_container);
+    printContainer("");
 #endif
 }
 
