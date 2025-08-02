@@ -42,6 +42,7 @@ public:
     void sort();
     void parseInput(int, char**);
     void printContainer(const std::string& prefix);
+    void printTime(const std::string& container);
 
     class WrongInput : public std::exception {
         virtual const char* what() const throw();

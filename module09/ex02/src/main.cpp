@@ -14,9 +14,11 @@ int main(int argc, char** argv)
         algoVector.printContainer("Before:\t");
         algoVector.sort();
         algoVector.printContainer("After:\t");
+        algoVector.printTime("vector");
         // List
         algoList.parseInput(argc - 1, &argv[1]);
         algoList.sort();
+        algoList.printTime("list");
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }

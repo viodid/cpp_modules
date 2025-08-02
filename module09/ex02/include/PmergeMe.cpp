@@ -241,6 +241,13 @@ void PmergeMe<T>::printContainer(const std::string& prefix)
     }
     std::cout << std::endl;
 }
+template <typename T>
+void PmergeMe<T>::printTime(const std::string& container)
+{
+    std::cout << "Time to process a range of " << _container.size()
+              << " elements with a " << container << ":\t"
+              << _executionTime << "ps" << std::endl;
+}
 
 template <typename T>
 uint PmergeMe<T>::_getJacobNum(unsigned int nu)
