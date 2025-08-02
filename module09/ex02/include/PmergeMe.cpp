@@ -246,7 +246,7 @@ void PmergeMe<T>::printTime(const std::string& container)
 {
     std::cout << "Time to process a range of " << _container.size()
               << " elements with a " << container << ":\t"
-              << _executionTime << "ps" << std::endl;
+              << 1000.0 * _executionTime / CLOCKS_PER_SEC << "ms" << std::endl;
 }
 
 template <typename T>
