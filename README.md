@@ -19,3 +19,5 @@ c++ exercises
 **module_07**: 7h
 
 **module_08**: 9h
+
+**module_09**: 45h
