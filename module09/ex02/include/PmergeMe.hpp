@@ -31,6 +31,7 @@ private:
     void _cpABToContainer(T& a, T& b);
     void _insertElements(T& main, T& pend, uint elemsToInsert, uint elementSize, uint jn);
     uint _getJacobNum(unsigned int nu);
+    void _printContainer(T container);
 
 public:
     PmergeMe();

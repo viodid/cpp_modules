@@ -53,8 +53,10 @@ void PmergeMe<T>::_mergeInsert(uint depth)
         if (*b > *a)
             _swapElements(a, b, elementSize);
     }
-    // std::cout << "depth=" << depth << std::endl;
-    //  printContainer(_container);
+#if DEBUG
+    std::cout << "depth=" << depth << std::endl;
+    _printContainer(_container);
+#endif
     _mergeInsert(depth + 1);
     // Step 2: relabel at each recursion level, create main and pend sequences
     T main;
@@ -85,6 +87,13 @@ void PmergeMe<T>::_mergeInsert(uint depth)
         pend.push_back(*it);
     }
     _cpABToContainer(main, pend);
+#if DEBUG
+    std::cout << "========" << std::endl;
+    std::cout << "main" << std::endl;
+    _printContainer(main);
+    std::cout << "pend" << std::endl;
+    _printContainer(pend);
+#endif
     // Step 3: find nth Jacobsthal number and insert element
     unsigned int jnSeq = 3;
     unsigned int jn = _getJacobNum(jnSeq);
@@ -102,14 +111,8 @@ void PmergeMe<T>::_mergeInsert(uint depth)
     _cpABToContainer(main, pend);
 
 #if DEBUG
-    // logging
-    std::cout << "========" << std::endl;
-    std::cout << "main=" << std::endl;
-    printContainer("");
-    std::cout << "pend=" << std::endl;
-    printContainer("");
-    std::cout << "_container=" << std::endl;
-    printContainer("");
+    std::cout << "_container" << std::endl;
+    _printContainer(_container);
 #endif
 }
 
@@ -232,6 +235,22 @@ void PmergeMe<T>::_printExecTime(const std::string& container)
 }
 
 template <typename T>
+uint PmergeMe<T>::_getJacobNum(unsigned int nu)
+{
+    return std::ceil((std::pow(2, nu) - std::pow(-1, nu)) / 3);
+}
+
+template <typename T>
+void PmergeMe<T>::_printContainer(T container)
+{
+    typename T::iterator it;
+    for (it = container.begin(); it != container.end(); it++) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
+template <typename T>
 void PmergeMe<T>::printContainer(const std::string& prefix)
 {
     std::cout << prefix;
@@ -247,12 +266,6 @@ void PmergeMe<T>::printTime(const std::string& container)
     std::cout << "Time to process a range of " << _container.size()
               << " elements with a " << container << ":\t"
               << 1000.0 * _executionTime / CLOCKS_PER_SEC << "ms" << std::endl;
-}
-
-template <typename T>
-uint PmergeMe<T>::_getJacobNum(unsigned int nu)
-{
-    return std::ceil((std::pow(2, nu) - std::pow(-1, nu)) / 3);
 }
 
 // Exceptions
